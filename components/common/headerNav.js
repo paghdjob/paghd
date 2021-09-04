@@ -14,15 +14,16 @@ function HeaderNav() {
           </li>
 
           <li className="nav-item">
-            <Link href="/search">
-              <a className="nav-link">Search job</a>
+            <Link href="/job?title=software&loc=Mumbai,%20India">
+              <a className="nav-link">Search job in Mumbai, India</a>
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/joblist">
-              <a className="nav-link">joblist</a>
+            <Link href="/job/lead-software-developer">
+              <a className="nav-link">job details</a>
             </Link>
           </li>
+           
         </ul>
       </header>
     </div>
