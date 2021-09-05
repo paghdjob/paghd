@@ -1,9 +1,21 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import Cookies from "universal-cookie";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    /* const cookies = new Cookies();
+    if (
+      cookies.get("isSSR") !== "true" &&
+      ctx.req &&
+      ctx.req.headers["user-agent"].match("Chrome")
+    ) {
+      cookies.set("isSSR", "true", { path: "/" });
+    } else {
+      cookies.set("isSSR", "false", { path: "/" });
+    }
+    console.log("document isSSR value--", cookies.get("isSSR")); */
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
   }
 
   render() {
@@ -15,8 +27,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;

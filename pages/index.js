@@ -8,15 +8,7 @@ export default function Home() {
   const [jobTitleSearch, setJobTitleSearch] = useState("software");
   const [jobLocSearch, setJobLocSearch] = useState("Mumbai, India");
   const [cities, setCities] = useState();
-  const city = ""; //useSelector((state) => state.headerReducer.city);
   const debouncedSearchTerm = useDebounce(jobLocSearch, 750);
-  // const dispatch = useDispatch();
-  useEffect(() => {
-    if (city && city.length !== 0) {
-      setCities(city);
-      // console.log("city list", city.length, city);
-    }
-  }, [city]);
 
   const searchLocation = (location) => {
     fetch("https://www.paghd.com/v2/auto.php?type=CITY&name=" + location)
@@ -63,7 +55,7 @@ export default function Home() {
       <main>
         <div className="text-center pt-5 pb-5 mt-5 mb-5">
           <div className="card-body">
-            <h1>Start Searching for Job</h1>
+            <h1>Start Searching for Job - {process.env.customKey}</h1>
 
             <div className="bg-light">
               <div className="card-body home">
