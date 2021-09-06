@@ -45,7 +45,7 @@ function Job(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>
-        Job list data - {process.env.isSSR} - {process.env.customKey}
+        Job list data
       </h1>
       <div className="row">
         {jobList &&
