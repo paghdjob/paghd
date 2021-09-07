@@ -6,5 +6,3 @@ Allow: /*.js
 Allow: /*.css
 
 Sitemap: https://paghd.vercel.app/sitemap.xml
-Sitemap: https://paghd.vercel.app/sitemap.xml.gz
-Sitemap: https://paghd.vercel.app/sitemap.xml.gz.gz
