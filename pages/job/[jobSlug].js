@@ -56,12 +56,12 @@ export async function getServerSideProps({ req, params }) {
   // Fetch data from external API
   let data = {};
   const cookies = new Cookies(); 
-  if (req.headers["user-agent"].match("Chrome")) {
+  // if (req.headers["user-agent"].match("Chrome")) {
     const res = await fetch(
       "https://www.paghd.com/v2/jobs/about.php?jobSlug=" + params.jobSlug
     );
     data = await res.json();
-  }
+  // }
   return { props: data };
 }
 

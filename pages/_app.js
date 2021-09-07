@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
         <title>Next.js PWA Example</title>
-
+        <meta name="google-site-verification" content="9KpTxLx_hDj7coibO9zklCQP9g0WH2OVYiTfizb2X9g" />
         <link rel="manifest" href="/manifest.json" />
         <link
           href="/icons/favicon-16x16.png"

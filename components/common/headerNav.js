@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 
 const InstallPWA = dynamic(() => import("../installapp/installPWA"));
 
-
 function HeaderNav() {
   return (
     <div className="container">

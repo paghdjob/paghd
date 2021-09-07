@@ -53,7 +53,7 @@ export default function Home() {
       <main>
         <div className="text-center pt-5 pb-5 mt-5 mb-5">
           <div className="card-body">
-            <h1>Start Searching for Job - {process.env.customKey}</h1>
+            <h1>Start Searching for Job - {process.env.NODE_ENV}</h1>
 
             <div className="bg-light">
               <div className="card-body home">

@@ -84,7 +84,7 @@ export async function getServerSideProps(context) {
   let list = {};
   // console.log(" params---", context.query);
   // if (cookies.get("myCat") !== "Pacman") {
-  if (context.req.headers["user-agent"].match("Chrome")) {
+  // if (context.req.headers["user-agent"].match("Chrome | Googlebot")) {
     const res = await fetch(
       "https://www.paghd.com/v2/jobs/jobList.php?title=" +
         context.query.title +
@@ -92,7 +92,7 @@ export async function getServerSideProps(context) {
         context.query.loc
     );
     list = await res.json();
-  }
+  // }
   return { props: list };
 }
 

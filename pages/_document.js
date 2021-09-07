@@ -3,8 +3,6 @@ import Cookies from "universal-cookie";
 // import React from 'react'
 // const InstallPWA = React.lazy(() => import('../components/installapp/installPWA'));
 
-
-
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     /* const cookies = new Cookies();
