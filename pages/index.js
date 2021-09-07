@@ -16,7 +16,6 @@ export default function Home() {
       .then(
         (result) => {
           setCities(result);
-          console.log("result--", result);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -29,7 +28,6 @@ export default function Home() {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      console.log("debouncedSearchTerm true ---", jobLocSearch);
       searchLocation(jobLocSearch);
     }
   }, [debouncedSearchTerm]);

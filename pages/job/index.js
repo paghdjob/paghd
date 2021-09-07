@@ -23,7 +23,6 @@ function Job(props) {
         .then(
           (result) => {
             setJobList(result.jobs);
-            // console.log("job detail result--", result);
           },
           (error) => {
             console.log("error--", error);

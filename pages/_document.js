@@ -1,5 +1,9 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import Cookies from "universal-cookie";
+// import React from 'react'
+// const InstallPWA = React.lazy(() => import('../components/installapp/installPWA'));
+
+
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {

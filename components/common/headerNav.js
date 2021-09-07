@@ -1,4 +1,8 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const InstallPWA = dynamic(() => import("../installapp/installPWA"));
+
 
 function HeaderNav() {
   return (
@@ -26,6 +30,7 @@ function HeaderNav() {
            
         </ul>
       </header>
+      <div><InstallPWA /></div>
     </div>
   );
 }

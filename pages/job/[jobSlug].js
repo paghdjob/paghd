@@ -20,7 +20,6 @@ function JobDetail(props) {
         .then(
           (result) => {
             setJobObj(result);
-            // console.log("job detail result--", result);
           },
           (error) => {
             console.log("error--", error);
