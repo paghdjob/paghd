@@ -1,20 +1,25 @@
-import Head from "next/head";
-import "../styles/globals.css";
+// import Head from "next/head";
+// import "../styles/globals.css";
 import "../styles/bootstrap.min.css";
+
+// const InstallPWA = React.lazy(() => import('../components/installapp/installPWA'));
+
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Head>
+      {/* <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+ 
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
+        /> 
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
-        <title>Next.js PWA Example</title>
+        <title>Paghd job</title>
         <meta name="google-site-verification" content="9KpTxLx_hDj7coibO9zklCQP9g0WH2OVYiTfizb2X9g" />
         <link rel="manifest" href="/manifest.json" />
         <link
@@ -30,8 +35,8 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
         />
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" />
-      </Head>
+        <meta name="theme-color" content="#317EFB" /> 
+      </Head> */}
       <Component {...pageProps} />
     </>
   );
