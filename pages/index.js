@@ -22,9 +22,6 @@ export default function Home() {
         (result) => {
           setCities(result);
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           console.log("error--", error);
         }
@@ -44,9 +41,7 @@ export default function Home() {
   const router = useRouter();
   const handleFilterChange = () => {
     const jobUrl = '/job?title=' + jobTitleSearch + '&loc=' + jobLocSearch;
-    router.push(jobUrl); //title=' + jobTitleSearch + '&loc=' + jobLocSearch
-    // dispatch(jobStackoverflow(jobTitleSearch, jobLocSearch));
-    // dispatch(jobTwitter());
+    router.push(jobUrl);
   };
 
   return (

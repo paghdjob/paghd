@@ -51,21 +51,11 @@ const JobDetails = (jobs) => {
   } else {
     SalaryType = "As per industry standards";
   }
-  let jobSalary;
+  let jobSalary = null;
   if (info && info.job && info.job.jobSalaryStart && info.job.jobSalaryEnd) {
-    jobSalary =
-      info.job.jobSalaryStart +
-      " " +
-      info.job.jobSalaryCurrency +
-      " to " +
-      info.job.jobSalaryEnd +
-      " " +
-      info.job.jobSalaryCurrency +
-      " " +
-      SalaryType;
-  } else {
-    jobSalary = null;
+    jobSalary = info.job.jobSalaryStart + " " + info.job.jobSalaryCurrency + " to " + info.job.jobSalaryEnd + " " + info.job.jobSalaryCurrency + " " + SalaryType;
   }
+
   let jobHrView;
   if (info && info.jobAccess && info.jobAccess.length !== 0) {
     jobHrView = info.jobAccess.map((item) => {

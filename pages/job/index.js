@@ -1,94 +1,78 @@
-import Head from "next/head";
-import dynamic from "next/dynamic";
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import JobList from "../../components/jobs/jobList";
 
 function Job(props) {
   const [jobList, setJobList] = useState(props.jobs);
+  const [mounted, setMounted] = useState(true);
+  const [page, setPage] = useState(0);
+
   useEffect(() => {
     if (Object.keys(props).length === 0) {
-      //     const router = useRouter()
-      console.log(location.search);
       // if (Object.keys(jobList).length === 0) {
       fetch("https://www.paghd.com/v2/jobs/jobList.php" + location.search)
         .then((res) => res.json())
         .then(
           (result) => {
+            // const datas = jobList.concat(result.jobs);
             setJobList(result.jobs);
+            // setPage(0)
           },
           (error) => {
             console.log("error--", error);
           }
         );
     }
-  }, []);
+  }, [props]);
 
-  // console.log("jobList", jobList);
+  const toggle = () => setMounted(!mounted);
 
+  const handleData = (event) => {
+    toggle()
+    fetch("https://www.paghd.com/v2/jobs/jobList.php", {
+      method: "POST",
+      body: JSON.stringify(event),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (event.page === 0) {
+            setJobList(result.jobs);
+          } else {
+            const data = jobList.concat(result.jobs);
+            setJobList(data);
+          }
+          setPage(event.page)
+          setMounted(event.page);
+        },
+        (error) => {
+          console.log("error--", error);
+        }
+      );
+  };
   return (
     <div>
+      <HeadSeo
+        title="Jobs In Bangalore - Job Vacancies In Bangalore - paghd.com"
+        description="Apply To 117134 Job Openings In Bangalore: 818 In Jpmorgan, 701 In Accenture, 525 In Ibm &amp; 511 In Hp On paghd.com. Explore Latest Jobs In Bangalore Across Top Companies Now!"
+        keywords="job in bangalore"
+      />
       <HeaderNav />
-
       <div className="container">
-        <div className="row">
-          {jobList &&
-            jobList.map((data) => (
-              <div
-                className="pl-0 pb-2 col-md-6 col-lg-6 col-xl-4"
-                key={data.jobID}
-              >
-                <div className="card">
-                  <div className="pb-0 card-body">
-                    <div className="float-left mr-3">
-                      <i
-                        className="fa fa-briefcase icon32 disabled"
-                        aria-hidden="true"
-                      ></i>
-                    </div>
-                    <div className="text-left">
-                      <h6 className="card-title text-capitalize mb-1">
-                        <Link
-                          className="text-dark"
-                          href={"/job/" + data.jobSlug}
-                        >
-                          {data.jobTitle}
-                        </Link>
-                      </h6>
-                      <p className="text-capitalize text-muted">
-                        {data.comName}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
+        <JobList pages={0} list={jobList} handlerFromParant={handleData} />
       </div>
       <FooterNav />
     </div>
   );
 }
 
-// export staticParams = ['title', 'loc'];
 export async function getServerSideProps(context) {
-  // export async function getServerSideProps({ req, params }) {
   let list = {};
-  // console.log(" params---", context.query);
-  // if (cookies.get("myCat") !== "Pacman") {
-  // if (context.req.headers["user-agent"].match("Chrome | Googlebot")) {
-  const res = await fetch(
-    "https://www.paghd.com/v2/jobs/jobList.php?title=" +
-      context.query.title +
-      "&loc=" +
-      context.query.loc
-  );
-  list = await res.json();
+  // if (context.req.headers["user-agent"].match("Chrome")) {
+    const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title=" + context.query.title + "&loc=" + context.query.loc);
+    list = await res.json();
   // }
   return { props: list };
 }
