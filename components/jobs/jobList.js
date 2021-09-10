@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 const JobList = (props) => {
-  console.log("JobList props.page -->> ", props.list.length);
-  const [list, SetList] = useState(props.list);
-  const [sorts, SetSorts] = useState(1);
-  const [pages, SetPages] = useState(props.pages);
+  // console.log("JobList props.page -->> ", props.list.length);
+  const [list, setList] = useState(props.list);
+  const [sorts, setSorts] = useState(1);
+  const [pages, setPages] = useState(props.pages);
   // console.log(pages, "=====", pages);
   // useEffect(() => {
   //   SetList(props.list);
@@ -28,12 +28,12 @@ const JobList = (props) => {
     }
   }
   const sortFieldChanges = (event) => {
-    SetSorts(event.target.value);
+    setSorts(event.target.value);
     props.handlerFromParant({ sorts: sorts, page: 0 });
   }
   const handleSubmit = () => {
     const pageNumber = pages + 1;
-    SetPages(pageNumber);
+    setPages(pageNumber);
     props.handlerFromParant({ sorts: sorts, page: pages });
   }
   let loadMore;
@@ -48,8 +48,7 @@ const JobList = (props) => {
   let loadJobMore;
   loadJobMore = list.map((data) => {
     return (
-      <div className="pl-0 pb-2 col-md-6 col-lg-6 col-xl-4" key={data.jobID}>
-      <div className="card">
+      <div className="card" key={data.jobID}>
         <div className="pb-0 card-body">
           <div className="float-left mr-3"><i className="bi bi-briefcase icon32 disabled" aria-hidden="true"></i></div>
           <div className="text-left"><h6 className="card-title text-capitalize mb-1"><Link className="text-dark" href={'/job/' + data.jobSlug}>{data.jobTitle}</Link> {data.jobStatus === "1" && <i title="Verified" className="bi bi-check-circle green"></i>}</h6>
@@ -62,13 +61,12 @@ const JobList = (props) => {
           {salaryTypes(data.jobSalaryType)} &nbsp; <i className="bi bi-clock-o icon" aria-hidden="true"></i> {new Date(data.jobDate).toLocaleDateString()}
         </div>
       </div>
-    </div>
     )
   });
    useEffect(() => {
   // if (list.length < 1) {
-    SetList(props.list);
-    console.log(props.list.length, "props.list with useEffect -->> ", list.length);
+    setList(props.list);
+    // console.log(props.list.length, "props.list with useEffect -->> ", list.length);
     // console.log("=== list-->>> ",list.length);
 
  // }
@@ -110,10 +108,11 @@ const JobList = (props) => {
             ))}
       </div> */}
       <div className="row">
-      {loadJobMore}
+        {loadJobMore}
+      </div>
       {loadMore}
 
-      </div>
+      
     </div>
   );
 };

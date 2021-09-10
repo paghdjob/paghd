@@ -62,7 +62,7 @@ export default function Home() {
       <main>
         <div className="container pt-5 pb-5 mt-5 mb-5">
           <div className="pricing-header p-3 pb-md-4 mx-auto text-center">
-            <h1>India’s Largest Job Platform & Professional Network</h1>
+            <h1>World Largest Job Platform & Professional Network</h1>
             <p className="fs-5 text-muted">
             Paghd is a popular professional networking site and is not a typical job portal, hence it works a bit differently than the traditional job portals.
             </p>

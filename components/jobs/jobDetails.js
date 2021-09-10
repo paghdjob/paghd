@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const JobDetails = (jobs) => {
-  const [info, SetInfo] = useState(jobs.jobObj);
+  const [info, setInfo] = useState(jobs.jobObj);
 
   let skillView, indView, langView, workView, cityView;
   if (info && info.jobSkill && info.jobSkill.length !== 0) {
@@ -78,6 +78,7 @@ const JobDetails = (jobs) => {
         <div className="card-header text-center">
           <h1>{info && info.job.jobTitle}</h1>
           <p className="card-text">{info && info.job.comName}</p>
+          <p><a rel="noreferrer" target="_blank" href={info && info.job.jobRefURL}>job apply</a> </p>
         </div>
       </div>
       <div className="card-body">

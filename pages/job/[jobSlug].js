@@ -9,8 +9,12 @@ function JobDetail(props) {
   const [jobObj, setJobObj] = useState(props);
   const [description, setDescription] = useState("");
 
-  let desc = jobObj.job.jobDesc.replace(/(<([^>]+)>)/gi, "");
-  let jobdesc = desc.substring(0, 155);
+  let jobdesc;
+  if(jobObj.job && jobObj.job.jobDesc) {
+    let desc = jobObj.job.jobDesc.replace(/(<([^>]+)>)/gi, "");
+    jobdesc = desc.substring(0, 155);  
+  }
+
   
   useEffect(() => {
     setDescription(jobdesc);
