@@ -38,12 +38,10 @@ const JobList = (props) => {
   }
   let loadMore;
   if (list.length > 1) {
-    loadMore = <div className="card-body">
+    loadMore =  
     <div className="rows align-items-center">
-      <button className="col btn btn-outline-warning" onClick={handleSubmit}> Result: {list.length}, page : {pages}, Load more...   </button>
+      <button className="col btn btn-info" onClick={handleSubmit}> Result: {list.length}, page : {pages}, Load more...   </button>
     </div>
-  </div>
-
   }
   let loadJobMore;
   loadJobMore = list.map((data) => {
@@ -75,7 +73,7 @@ const JobList = (props) => {
 
 
   return (
-    <div className="card">
+    <div className="">
       <div className="rows bg-light col-2">
         <div className="col-md">
           <div className="form-floating">
@@ -88,31 +86,8 @@ const JobList = (props) => {
           </div>
         </div>
       </div>
-      {/* <div className="row">
-        {list && list.map((data) => (
-            <div className="pl-0 pb-2 col-md-6 col-lg-6 col-xl-4" key={data.jobID}>
-              <div className="card">
-                <div className="pb-0 card-body">
-                  <div className="float-left mr-3"><i className="bi bi-briefcase icon32 disabled" aria-hidden="true"></i></div>
-                  <div className="text-left"><h6 className="card-title text-capitalize mb-1"><Link className="text-dark" href={'/job/' + data.jobSlug}>{data.jobTitle}</Link> {data.jobStatus === "1" && <i title="Verified" className="bi bi-check-circle green"></i>}</h6>
-                    <p className="text-capitalize text-muted">{data.comName}</p></div>
-                </div>
-                <div className="card-footer">
-                  {data.cityName && <span className="text-capitalize"> <i className="bi bi-map-marker" aria-hidden="true"></i> {data.cityName} {data.countryCode}</span>}
-                  {data.workTypeName && <span className="text-capitalize"> <i className="bi bi-briefcase" aria-hidden="true"></i> {data.workTypeName}</span>}
-                  {data.jobSalaryStart && <span className="text-capitalize"> <i className="bi bi-inr" aria-hidden="true"></i> {data.jobSalaryStart} - {data.jobSalaryEnd}</span>}
-                  {salaryTypes(data.jobSalaryType)} &nbsp; <i className="bi bi-clock-o icon" aria-hidden="true"></i> {new Date(data.jobDate).toLocaleDateString()}
-                </div>
-              </div>
-            </div>
-            ))}
-      </div> */}
-      <div className="row">
-        {loadJobMore}
-      </div>
+      {loadJobMore}
       {loadMore}
-
-      
     </div>
   );
 };

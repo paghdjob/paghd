@@ -68,6 +68,15 @@ const JobDetails = (jobs) => {
       );
     });
   }
+
+  const onApply = () => {
+    // let body = { jobID: this.props.info.job.jobID };
+    // this.props.onApplyJob(body);
+    if (info.job.jobRefURL) {
+      window.open(info.job.jobRefURL, '_blank');
+    }
+  };
+
   // useEffect(() => {
   //   SetJob(jobs.jobObj.job);
   // }, [jobs]);
@@ -78,8 +87,8 @@ const JobDetails = (jobs) => {
         <div className="card-header text-center">
           <h1>{info && info.job.jobTitle}</h1>
           <p className="card-text">{info && info.job.comName}</p>
-          <p><a rel="noreferrer" target="_blank" href={info && info.job.jobRefURL}>job apply</a> </p>
-        </div>
+          <p><button type="submit" className="btn btn-info ml-1 float-right" onClick={onApply}>Job Apply </button></p>
+         </div>
       </div>
       <div className="card-body">
         {info && info.job && info.job.jobYearStart && (
