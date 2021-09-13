@@ -23,7 +23,7 @@ const ForgotPassword = () => {
         .then((res) => res.json())
         .then(
           (result) => {
-            console.log("result--", result);
+            // console.log("result--", result);
             setMessage(result.msg);
           },
           (error) => {

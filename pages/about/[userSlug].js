@@ -7,7 +7,7 @@ import UserDetails from "../../components/about/userDetails";
 import Cookies from "universal-cookie";
 
 function UserDetail(props) {
-  console.log("about ", props);
+  // console.log("about ", props);
   const [userObj, setUserObj] = useState(props);
    
 //   const [description, setDescription] = useState("");

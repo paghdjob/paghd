@@ -61,7 +61,7 @@ const JobDetails = (jobs) => {
     jobHrView = info.jobAccess.map((item) => {
       return (
         <span key={item.jobAccessID} className="mr-3 badge badge-secondary">
-          <a className="text-white1" href={item.userID}>
+          <a className="text-white1" href={'/about/' + item.userID}>
             {item.userName}
           </a>
         </span>
@@ -115,7 +115,7 @@ const JobDetails = (jobs) => {
         )}
         {jobHrView && (
           <p className="card-text">
-            <b>Post By :</b> {jobHrView}{" "}
+            <b>Post By :</b> {jobHrView}
           </p>
         )}
       </div>

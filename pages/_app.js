@@ -1,42 +1,21 @@
-// import Head from "next/head";
+import Head from "next/head";
+import Script from 'next/script'
 // import "../styles/globals.css";
 import "../styles/bootstrap.min.css";
 
 // const InstallPWA = React.lazy(() => import('../components/installapp/installPWA'));
 
-
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/* <Head>
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
- 
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        /> 
-        <meta name="description" content="Description" />
-        <meta name="keywords" content="Keywords" />
-        <title>Paghd job</title>
-        <meta name="google-site-verification" content="9KpTxLx_hDj7coibO9zklCQP9g0WH2OVYiTfizb2X9g" />
-        <link rel="manifest" href="/manifest.json" />
-        <link
-          href="/icons/favicon-16x16.png"
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-        />
-        <link
-          href="/icons/favicon-32x32.png"
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-        />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" /> 
-      </Head> */}
+      <Head>
+      {/* <Script
+        src="https://www.googletagmanager.com/gtag/js?id=UA-140663137-1"
+        strategy="lazyOnload"
+      /> */}
+       
+        
+      </Head>
       <Component {...pageProps} />
     </>
   );

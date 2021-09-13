@@ -19,9 +19,13 @@ const HeadSeo = (props) => {
       <meta name="Author" content="PaghdJobs" />
       <meta name="Keywords" content={keywords} />
       <meta name="Description" content={description} />
-      <meta
+      {/* <meta
         name="google-site-verification"
         content="9KpTxLx_hDj7coibO9zklCQP9g0WH2OVYiTfizb2X9g"
+      /> */}
+      <meta
+        name="google-site-verification"
+        content="ex9yog2KxDL8n5rmK89waTIMkTHAZl9s8cgiOabLgu0"
       />
       <link
         href="/icons/favicon-16x16.png"

@@ -32,13 +32,13 @@ function HeaderNav() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/job?title=software&loc=Mumbai,%20India">
-              <a className="nav-link">People</a>
+            <Link href="/job?title=&loc=">
+              <a className="nav-link">jobs</a>
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/job/lead-software-developer">
-              <a className="nav-link">Company</a>
+            <Link href="/about/paghd1">
+              <a className="nav-link">Resume</a>
             </Link>
           </li>
           <li className="nav-item">
