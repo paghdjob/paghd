@@ -51,7 +51,7 @@ export default function Home() {
           "Jobs Search | Recruitment | Employment | Job Vacancies | PaghdJobs"
         }
         description={
-          "Search for latest Jobs posted by top companies & consultants as per your skills, industry & locations. Post Resume & apply online for latest vacancy from PaghdJobs."
+          "Search for latest Jobs posted by top companies & consultants as per your skills, industry & locations. Post Resume & apply online for latest vacancy from PaghdJob."
         }
         keywords={
           "jobs, online jobs, recruitment, job search, employment, job vacancies, vacancy, vacancies, job vacancy, job opportunities, latest vacancy"

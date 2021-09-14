@@ -40,8 +40,8 @@ function UserDetail(props) {
     <div>
       <HeadSeo
         title={userObj.users.userName}
-        description={userObj.userInfo.userAbout}
-        keywords={userObj.userInfo.userHeadline}
+        description={userObj.userInfo !== null ? userObj.userInfo.userAbout : userObj.users.userName}
+        keywords={userObj.userInfo !== null ? userObj.userInfo.userHeadline : userObj.users.userName}
       />
       <HeaderNav />
       <div className="container">

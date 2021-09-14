@@ -61,7 +61,7 @@ const JobDetails = (jobs) => {
     jobHrView = info.jobAccess.map((item) => {
       return (
         <span key={item.jobAccessID} className="mr-3 badge badge-secondary">
-          <a className="text-white1" href={'/about/' + item.userID}>
+          <a className="text-white1" href={'/about/' + item.userSlug}>
             {item.userName}
           </a>
         </span>

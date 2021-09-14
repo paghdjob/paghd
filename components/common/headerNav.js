@@ -37,7 +37,7 @@ function HeaderNav() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/about/paghd1">
+            <Link href="/about/paghd">
               <a className="nav-link">Resume</a>
             </Link>
           </li>

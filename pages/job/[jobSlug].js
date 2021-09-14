@@ -7,7 +7,6 @@ import JobDetails from "../../components/jobs/jobDetails";
 
 function JobDetail(props) {
   const [jobObj, setJobObj] = useState(props);
-  const [description, setDescription] = useState("");
 
   let jobdesc;
   if(jobObj.job && jobObj.job.jobDesc) {
@@ -17,7 +16,6 @@ function JobDetail(props) {
 
   
   useEffect(() => {
-    setDescription(jobdesc);
     if (Object.keys(props).length === 0) {
       fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
         .then((res) => res.json())
