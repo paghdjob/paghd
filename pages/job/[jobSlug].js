@@ -36,7 +36,7 @@ function JobDetail(props) {
     <div>
       <HeadSeo
         title={jobObj.job.jobTitle}
-        description={description}
+        description={jobdesc}
         keywords={jobObj.job.comName}
       />
       <HeaderNav />

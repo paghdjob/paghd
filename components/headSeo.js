@@ -39,12 +39,12 @@ const HeadSeo = (props) => {
         type="image/png"
         sizes="32x32"
       />
-      <meta property="og:url" content="https://www.paghd.com/" />
+      <meta property="og:url" content="https://paghd.vercel.app/" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:site_name" content="paghd.com " />
+      <meta property="og:site_name" content="paghd.vercel.app" />
       <meta property="og:updated_time" content="2021-06-09T05:10:01+05:30" />
       <meta property="og:see_also" content="https://www.paghd.com.com/" />
       <meta property="article:section" content="Jobs" />
@@ -53,14 +53,14 @@ const HeadSeo = (props) => {
       <meta name="twitter:creator" content="@paghd.com" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:url" content="https://www.paghd.com/" />
-      <meta property="og:image" content="https://www.paghd.com/" />
+      <meta name="twitter:url" content="https://paghd.vercel.app/" />
+      <meta property="og:image" content="https://paghd.vercel.app/" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="675" />
-      <meta name="twitter:image" content="https://www.paghd.com/" />
+      <meta name="twitter:image" content="https://paghd.vercel.app/" />
       <meta property="twitter:image:width" content="1200" />
       <meta property="twitter:image:height" content="675" />
-      <meta name="article:author" content="paghd.com" />
+      <meta name="article:author" content="paghd.vercel.app" />
       <meta name="fo-verify" content="21acbd92-fc17-4196-9a65-16614f08f125" />
     </Head>
   );
