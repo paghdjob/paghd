@@ -19,7 +19,7 @@ function PeopleSkill(props) {
     if (debouncedSearchTerm) {
       searchSkill(addSkill);
     }
-  }, [debouncedSearchTerm]);
+  }, [addSkill]);
 
   const searchSkill = (skill) => {
     fetch("https://www.paghd.com/v2/auto.php?type=SKILL&name=" + skill)

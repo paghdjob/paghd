@@ -65,7 +65,7 @@ const PeopleWorkType = (props) => {
   let addWorkTypeForm = (
     <form className="mb-12 row">
       <div className="col-md-2 mb-3 mt-1 row">
-        <label for="inputPassword" className="col-form-label">
+        <label className="col-form-label">
           Job Type
         </label>
       </div>

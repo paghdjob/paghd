@@ -14,7 +14,7 @@ function PeopleLanguage(props) {
     if (debouncedSearchTerm) {
       searchLanguage(addLanguage);
     }
-  }, [debouncedSearchTerm]);
+  }, [addLanguage]);
 
   const searchLanguage = (language) => {
     fetch("/v2/auto.php?type=LANGUAGES&name=" + language)

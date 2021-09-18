@@ -11,7 +11,7 @@ function HeaderNav() {
     <div className="container">
       <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <div className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-          <Link href="/">
+          <Link href="/" passHref>
             <span className="fs-4">
               <Image
                 src={Logo}
@@ -33,17 +33,21 @@ function HeaderNav() {
           </li>
           <li className="nav-item">
             <Link href="/job?title=&loc=">
-              <a className="nav-link">jobs</a>
+              <a className="nav-link">Jobs</a>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link href="/about/paghd">
+          {userIds &&  <li className="nav-item">
+            <Link href="/report">
+              <a className="nav-link">Report</a>
+            </Link>
+          </li>}
+          {userIds && <li className="nav-item">
+            <Link href="/about">
               <a className="nav-link">Resume</a>
             </Link>
-          </li>
+          </li> }
           <li className="nav-item">
-            {userIds && <Link href="/login/logout"><a className="nav-link">Log Out</a></Link>}
-            {!userIds && <Link href="/login"><a className="nav-link">Log In</a></Link>}
+            {userIds ? <Link href="/login/logout"><a className="nav-link">Log Out</a></Link> : <Link href="/login"><a className="nav-link">Log In</a></Link> }
           </li>
         </ul>
       </header>

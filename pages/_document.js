@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 // import React from 'react'
 // const InstallPWA = React.lazy(() => import('../components/installapp/installPWA'));
 
@@ -42,7 +42,6 @@ class MyDocument extends Document {
       `,
             }}
           />
-
           <script
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
