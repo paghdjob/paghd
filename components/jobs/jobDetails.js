@@ -93,8 +93,8 @@ const JobDetails = (jobs) => {
       <div className="card-body">
         {info && info.job && info.job.jobYearStart && (
           <p className="card-text">
-            <b>Experience :</b> {info && info.job && info.job.jobYearStart} to{" "}
-            {info && info.job && info.job.jobYearEnd} Years{" "}
+            <b>Experience :</b> {info && info.job && info.job.jobYearStart} to
+            {info && info.job && info.job.jobYearEnd} Years
           </p>
         )}
         {cityView && (
@@ -104,12 +104,12 @@ const JobDetails = (jobs) => {
         )}
         {jobSalary && (
           <p className="card-text">
-            <b>Salary :</b> {jobSalary}{" "}
+            <b>Salary :</b> {jobSalary}
           </p>
         )}
         {info && info.job && info.job.jobPosition && (
           <p className="card-text">
-            <b>Position :</b> {info && info.job && info.job.jobPosition}{" "}
+            <b>Position :</b> {info && info.job && info.job.jobPosition}
             Position
           </p>
         )}
@@ -134,7 +134,7 @@ const JobDetails = (jobs) => {
         )}
         {indView && (
           <p className="card-text">
-            <b>Industry :</b> {indView}{" "}
+            <b>Industry :</b> {indView}
           </p>
         )}
         {langView && (
@@ -149,7 +149,7 @@ const JobDetails = (jobs) => {
         )}
         {jobDate && (
           <p className="card-text">
-            <b>Job Post Date :</b> {jobDate}{" "}
+            <b>Job Post Date :</b> {jobDate}
           </p>
         )}
       </div>

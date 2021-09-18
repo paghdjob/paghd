@@ -48,7 +48,7 @@ export default function Home() {
     <div>
       <HeadSeo
         title={
-          "Jobs Search | Recruitment | Employment | Job Vacancies | PaghdJobs"
+          "Jobs Search | Recruitment | Employment | Job Vacancies | PaghdJob"
         }
         description={
           "Search for latest Jobs posted by top companies & consultants as per your skills, industry & locations. Post Resume & apply online for latest vacancy from PaghdJob."

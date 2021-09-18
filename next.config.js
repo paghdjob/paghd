@@ -2,6 +2,14 @@ const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPWA({
+  async rewrites() {
+    return [
+      {
+        source: '/v2/:path*',
+        destination: 'https://www.paghd.com/v2/:path*',
+      },
+    ]
+  },
   reactStrictMode: true,
   pwa: {
     dest: 'public',

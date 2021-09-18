@@ -10,7 +10,7 @@ function Login() {
       <HeadSeo
         title="Log Out - paghd.com"
         description="Apply To 117134 Job Openings In Bangalore: 818 In Jpmorgan, 701 In Accenture, 525 In Ibm &amp; 511 In Hp On paghd.com. Explore Latest Jobs In Bangalore Across Top Companies Now!"
-        keywords="Log out | paghd.com"
+        keywords="Log out, paghd.com"
       />
       <HeaderNav />
       <div className="container">

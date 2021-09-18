@@ -90,7 +90,7 @@ const UserDetails = (props) => {
           </p>
           {/* <div className="row">
               {user && user.userPrivate && user.userPrivate.userPrimaryEmail &&  
-                <p className="col-sm-6 text-left">Email ID : {user && user.userPrivate && user.userPrivate.userPrimaryEmail && <span><i class="fa fa fa-envelope"></i><a href={"mailto:"+ user.userPrivate.userPrimaryEmail}> {user.userPrivate.userPrimaryEmail}</a></span>}</p>
+                <p className="col-sm-6 text-left">Email ID : {user && user.userPrivate && user.userPrivate.userPrimaryEmail && <span><i className="fa fa fa-envelope"></i><a href={"mailto:"+ user.userPrivate.userPrimaryEmail}> {user.userPrivate.userPrimaryEmail}</a></span>}</p>
               }
               {user && user.userPrivate && user.userPrivate.userPrimaryNumber &&  
                 <p className="col-sm-6 text-left">Phone No. : {user && user.userPrivate && user.userPrivate.userPrimaryNumber}</p>
