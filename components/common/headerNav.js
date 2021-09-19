@@ -36,6 +36,11 @@ function HeaderNav() {
               <a className="nav-link">Jobs</a>
             </Link>
           </li>
+          <li className="nav-item">
+            <Link href="/job/postjob">
+              <a className="nav-link">Post Job</a>
+            </Link>
+          </li>
           {userIds &&  <li className="nav-item">
             <Link href="/report">
               <a className="nav-link">Report</a>

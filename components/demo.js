@@ -5,7 +5,7 @@ class Demo extends React.Component {
     const res = await fetch('https://api.github.com/repos/vercel/next.js')
     console.log("res", res);
     const json = await res.json()
-    console.log("-----res----", json);
+    console.log("res", json);
     return { stars: json.stargazers_count }
   }
 

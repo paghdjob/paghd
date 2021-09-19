@@ -83,7 +83,7 @@ const ReportJobAccess = (props) => {
               {item.userCount}
             </a>
           </td>
-          <td>{item.jobStatus === "1" ? "Open" : "closed"}</td>
+          <td>{item.jobStatus === "2" ? "Closed" : "Open"}</td>
           <td>{jobDate}</td>
           <td
             className={

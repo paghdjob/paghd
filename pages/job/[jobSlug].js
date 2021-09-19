@@ -6,6 +6,8 @@ import HeadSeo from "../../components/headSeo";
 import JobDetails from "../../components/jobs/jobDetails";
 
 function JobDetail(props) {
+  console.log(props.error);
+  const [jobError, setJobError] = useState(props.error);
   const [jobObj, setJobObj] = useState(props);
 
   let jobdesc;
@@ -14,10 +16,9 @@ function JobDetail(props) {
     jobdesc = desc.substring(0, 155);  
   }
 
-  
   useEffect(() => {
     if (Object.keys(props).length === 0) {
-      fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
+      fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
         .then((res) => res.json())
         .then(
           (result) => {
@@ -32,15 +33,16 @@ function JobDetail(props) {
 
   return (
     <div>
+      {!jobError &&
       <HeadSeo
         title={jobObj.job.jobTitle}
         description={jobdesc}
         keywords={jobObj.job.comName}
-      />
+      /> }
       <HeaderNav />
-      <div className="container">
+      {jobError ? 'No record found' : <div className="container">
         <JobDetails jobObj={jobObj} />
-      </div>
+      </div>}
       <FooterNav />
     </div>
   );
@@ -48,11 +50,16 @@ function JobDetail(props) {
 
 export async function getServerSideProps({ req, params }) {
   // Fetch data from external API
+  // const router = useRouter();
   let data = {};
   // if (req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + params.jobSlug);
-  data = await res.json();
-  // }
+  if (params && params.jobSlug) {
+    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + params.jobSlug); 
+    data = await res.json();
+    if (data.job === null) { data.error = 200; }
+  } else {
+    data.error = 200;
+  }  
   return { props: data };
 }
 
