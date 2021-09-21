@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
 
-function PeopleSkill(props) {
+function JobSkill(props) {
   const [skill, setSkill] = useState(props.skill);
   const [addSkill, setAddSkill] = useState("");
   const [autoSkill, setautoSkill] = useState("");
   const cookies = new Cookies();
   const auth = cookies.get("auth");
+  const userID = cookies.get("userID");
   const debouncedSearchTerm = useDebounce(addSkill, 750);
 
   const selectSkill = (skillName) => {
@@ -35,9 +36,8 @@ function PeopleSkill(props) {
   };
 
   const addSkills = () => {
-    let body = { skillName: addSkill };
-
-    fetch("/v2/people/aboutSet.php?type=ADDSKILL", {
+    let body = { skillName: addSkill, jobID: props.jobID, userID: userID };
+    fetch("/v2/jobs/aboutSet.php?type=ADDSKILL", {
       method: "POST",
       headers: {
         Authorization: auth,
@@ -57,9 +57,8 @@ function PeopleSkill(props) {
   };
 
   const removeSkill = (skiID) => {
-    let body = { skiID: skiID };
-
-    fetch("/v2/people/aboutSet.php?type=DELETESKILL", {
+    let body = { skiID: skiID, jobID: props.jobID, userID: userID };
+    fetch("/v2/jobs/aboutSet.php?type=DELETESKILL", {
       method: "POST",
       headers: {
         Authorization: auth,
@@ -138,7 +137,7 @@ function PeopleSkill(props) {
   return (
     <div className="rows">
       <div className="card mb-1">
-        <div className="card-header">Skills</div>
+        <div className="card-header">Job Skill</div>
         <div className="card-body">
           {skillView}
           {addSkillForm}
@@ -148,4 +147,4 @@ function PeopleSkill(props) {
   );
 }
 
-export default PeopleSkill;
+export default JobSkill;

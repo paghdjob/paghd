@@ -3,8 +3,6 @@ import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
 import Link from "next/link";
-
-//import WebApi from "../../components/webApi";
 import Cookies from "universal-cookie";
 
 function Verify() {
@@ -14,49 +12,6 @@ function Verify() {
   useEffect(() => {
     const id = location.search.replace("?id=", "") + "-U";
 
-    // let res = WebApi.postCall('/v2/auth/verify.php?pppppppp', id).then(response => response.json());
-
-    // if(res){
-    //   console.log('------res:-----------------------', res);
-    //   res.then(data => {
-    //     console.log('------Success:-----------------------', data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('-------Error:---------------', error);
-    //   });
-    // }
-
-    //  //let aaa = res.then((res) => res.json());
-    //  console.log("aaaaaaaa---",res)
-    //  res.then(data => {
-    //             console.log('------Success:-----------------------', data);
-    //           })
-    //           .catch((error) => {
-    //             console.error('-------Error:---------------', error);
-    //           });
-
-    // .then(response => response.json())
-    // .then(json => ))
-    // .catch(err => dispatch({ type: "ERROR", msg: "Unable to fetch data" }))
-
-    /*
-   fetch('/v2/auth/verify.php?pppppppp', {
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer xxxxxxx', 
-  }, 
-  body: JSON.stringify(id),
-})
-.then(response => response.json())
-.then(data => {
-  console.log('Success:', data);
-})
-.catch((error) => {
-  console.error('Error:', error);
-}); 
-*/
     const cookies = new Cookies();
     //const userIds = cookies.get('userID');
     const auth = cookies.get("auth");

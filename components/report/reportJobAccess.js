@@ -68,7 +68,7 @@ const ReportJobAccess = (props) => {
               className="text-info"
               rel="noopener noreferrer"
               target="_blank"
-              href={"job/" + item.jobSlug}
+              href={"job/about/" + item.jobSlug}
             >
               {item.applyCount}
             </a>
@@ -78,7 +78,7 @@ const ReportJobAccess = (props) => {
               className="text-info"
               rel="noopener noreferrer"
               target="_blank"
-              href={"job/" + item.jobSlug}
+              href={"job/about/" + item.jobSlug}
             >
               {item.userCount}
             </a>

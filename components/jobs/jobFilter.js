@@ -9,11 +9,6 @@ const JobFilter = (props) => {
   const [skillFilter, setSkillFilter] = useState([]);
   const [languageFilter, setLanguageFilter] = useState([]);
   const [industryFilter, setIndustryFilter] = useState([]);
- // let cityFilter = [];
-//  let workTypeFilter = [];
-//  let skillFilter = [];
-//  let languageFilter = [];
-//  let industryFilter = [];
 
   const handleFilterChange = (event) => {
     if (event.target.name === 'city') {

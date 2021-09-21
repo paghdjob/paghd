@@ -46,7 +46,7 @@ const HeadSeo = (props) => {
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content="paghd.vercel.app" />
       <meta property="og:updated_time" content="2021-06-09T05:10:01+05:30" />
-      <meta property="og:see_also" content="https://www.paghd.com.com/" />
+      <meta property="og:see_also" content="https://paghd.vercel.app/" />
       <meta property="article:section" content="Jobs" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@paghd.com" />

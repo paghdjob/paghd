@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 
-const PeopleIndustry = (props) => {
+const JobIndustry = (props) => {
   const [industry, setIndustry] = useState(props.industry);
   const [industryList, setIndustryList] = useState("");
   const [indID, setIndID] = useState("");
   const cookies = new Cookies();
   const auth = cookies.get("auth");
+  const userID = cookies.get("userID");
 
   useEffect(() => {
     fetch("/v2/auto.php?type=INDUSTRY")
@@ -22,8 +23,8 @@ const PeopleIndustry = (props) => {
   }, []);
 
   const addIndustries = () => {
-    let body = { IndID: indID };
-    fetch("/v2/people/aboutSet.php?type=ADDINDUSTRY", {
+    let body = { IndID: indID, jobID: props.jobID, userID: userID };
+    fetch("/v2/jobs/aboutSet.php?type=ADDINDUSTRY", {
       method: "POST",
       headers: {
         Authorization: auth,
@@ -42,9 +43,9 @@ const PeopleIndustry = (props) => {
   };
 
   const removeIndustry = (IndID) => {
-    let body = { IndID: IndID };
+    let body = { indId: IndID, jobID: props.jobID, userID: userID };
 
-    fetch("/v2/people/aboutSet.php?type=DELETEINDUSTRY", {
+    fetch("/v2/jobs/aboutSet.php?type=DELETEINDUSTRY", {
       method: "POST",
       headers: {
         Authorization: auth,
@@ -81,7 +82,7 @@ const PeopleIndustry = (props) => {
   let addIndustryForm = (
     <form className="mb-12 row">
       <div className="col-md-2 mb-3 mt-1 row">
-        <label className="my-1 mr-2">Industry</label>
+        <label className="my-1 mr-2">Job Industry</label>
       </div>
       <div className="col-md-6">
         <select
@@ -99,13 +100,9 @@ const PeopleIndustry = (props) => {
         </select>
       </div>
       <div className="col-md-3">
-      <button
-        type="button"
-        onClick={addIndustries}
-        className="btn btn-info"
-      >
-        Add Industry
-      </button>
+        <button type="button" onClick={addIndustries} className="btn btn-info">
+          Add Industry
+        </button>
       </div>
     </form>
   );
@@ -122,5 +119,4 @@ const PeopleIndustry = (props) => {
     </div>
   );
 };
-
-export default PeopleIndustry;
+export default JobIndustry;
