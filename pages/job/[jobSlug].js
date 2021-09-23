@@ -6,7 +6,6 @@ import HeadSeo from "../../components/headSeo";
 import JobDetails from "../../components/jobs/jobDetails";
 
 function JobDetail(props) {
-  console.log(props.error);
   const [jobError, setJobError] = useState(props.error);
   const [jobObj, setJobObj] = useState(props);
 
@@ -17,7 +16,7 @@ function JobDetail(props) {
   }
 
   useEffect(() => {
-    if (Object.keys(props).length === 0) {
+    if (!jobObj) {
       fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
         .then((res) => res.json())
         .then(

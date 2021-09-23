@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
 
 const JobDetails = (jobs) => {
   const [info, setInfo] = useState(jobs.jobObj);
+  const cookies = new Cookies();
+  const auth = cookies.get("auth");
+
+  useEffect(() => {
+    if(auth){
+      let body = { jobID: info.job.jobID};
+      fetch("/v2/jobs/aboutSet.php?type=VIEWJOB", {
+        method: "POST",
+        headers: {
+          Authorization: auth,
+        },
+        body: JSON.stringify(body),
+      })  
+    }
+  });
 
   let skillView, indView, langView, workView, cityView;
   if (info && info.jobSkill && info.jobSkill.length !== 0) {

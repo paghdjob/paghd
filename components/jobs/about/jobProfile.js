@@ -8,7 +8,6 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
 import "react-quill/dist/quill.snow.css";
 
 const JobProfile = (props) => {
-  console.log("JobProfile-----", props);
   const [jobInfo, setJobInfo] = useState(props.jobObj);
   const [jobTitle, setJobTitle] = useState(jobInfo.jobTitle);
   const [comName, setComName] = useState(jobInfo.comName);

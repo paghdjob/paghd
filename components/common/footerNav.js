@@ -13,7 +13,7 @@ function FooterNav() {
         <a
           rel="noreferrer"
           target="_blank"
-          href="https://www.paghd.com/page/privacy-policy.html"
+          href="/legal/privacy-policy"
         >
           Privacy Policy
         </a>
@@ -21,7 +21,7 @@ function FooterNav() {
         <a
           rel="noreferrer"
           target="_blank"
-          href="https://www.paghd.com/page/terms-conditions.html"
+          href="/legal/terms-conditions"
         >
           Terms & Conditions
         </a>

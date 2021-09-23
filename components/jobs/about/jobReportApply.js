@@ -19,13 +19,13 @@ const JobReportApply = (props) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setJobApplyUser(result);
+          setJobApplyUser(result.jobApply);
         },
         (error) => {
           console.log("error--", error);
         }
       );
-  });
+    }, []);
 
   let reportApply =
     jobApplyUser &&
@@ -38,7 +38,7 @@ const JobReportApply = (props) => {
               className="btn btn-outline-warning"
               rel="noopener noreferrer"
               target="_blank"
-              href={"about/" + item.userSlug}
+              href={"/about/" + item.userSlug}
             >
               {item.userName}
             </a>

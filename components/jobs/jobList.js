@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 const JobList = (props) => {
-  // console.log("JobList props.page -->> ", props.list.length);
   const [list, setList] = useState(props.list);
   const [sorts, setSorts] = useState(1);
   const [pages, setPages] = useState(props.pages);
-  // console.log(pages, "=====", pages);
-  // useEffect(() => {
-  //   SetList(props.list);
-  //    console.log(props.list.length, "props.list with useEffect -->> ", list.length);
-  // }, [props]);
 
   const salaryTypes = (id) => {
     switch (id) {
@@ -34,7 +28,7 @@ const JobList = (props) => {
   const handleSubmit = () => {
     const pageNumber = pages + 1;
     setPages(pageNumber);
-    props.handlerFromParant({ sorts: sorts, page: pages });
+    props.handlerFromParant({ sorts: sorts, page: pageNumber });
   }
   let loadMore;
   if (list.length > 1) {

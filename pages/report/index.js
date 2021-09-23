@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import HeaderNav from "../../components/common/headerNav";
-import FooterNav from "../../components/common/footerNav";
-import ReportJobAccess from "../../components/report/reportJobAccess";
-import ReportJobApply from "../../components/report/reportJobApply";
-import ReportUserView from "../../components/report/reportUserView";
- 
+import dynamic from 'next/dynamic'
+const HeaderNav = dynamic(() => import('../../components/common/headerNav'))
+const FooterNav = dynamic(() => import('../../components/common/footerNav'))
+const ReportJobAccess = dynamic(() => import('../../components/report/reportJobAccess'))
+const ReportJobApply = dynamic(() => import('../../components/report/reportJobApply'))
+const ReportUserView = dynamic(() => import('../../components/report/reportUserView'))
+
 function Report(props) {
   return (
     <div>

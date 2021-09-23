@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Cookies from 'universal-cookie'
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
+import Cookies from "universal-cookie";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [message, setMessage] = useState(""); 
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (event) => {
     let userDetails = {
@@ -16,12 +18,38 @@ const LoginPage = () => {
     userIdentify(userDetails);
     event.preventDefault();
   };
+  const responseGoogle = (response) => {
+    if (response.profileObj !== undefined) {
+      let userDetails = {
+        name: response.profileObj.name,
+        email: response.profileObj.email,
+        profile: response.profileObj.imageUrl,
+        web: 2
+      }
+      userIdentify(userDetails);
+    }
+  }
+  const responseFacebook = (response) => {
+    if (response.email) {
+      localStorage.setItem('facebook_access_token', response.accessToken);
+      let userDetails = {
+        name: response.name,
+        email: response.email,
+        profile: '',
+        web: 2
+      }
+      userIdentify(userDetails);
+    } else {
+      console.log(response);
+    }
+  }
+
   const userWebSetting = (userID, auth) => {
     const cookies = new Cookies();
-    cookies.set('userID', userID, { path: '/', maxAge: 25929999 });
-    cookies.set('auth', auth, { path: '/', maxAge: 25929999 });
-    window.location.href = '/';
-  }
+    cookies.set("userID", userID, { path: "/", maxAge: 25929999 });
+    cookies.set("auth", auth, { path: "/", maxAge: 25929999 });
+    window.location.href = "/";
+  };
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("https://www.paghd.com/v2/auth/login.php", {
@@ -33,7 +61,7 @@ const LoginPage = () => {
           (result) => {
             // console.log("result--", result);
             setMessage(result.msg);
-            if(result.userID && result.auth) {
+            if (result.userID && result.auth) {
               userWebSetting(result.userID, result.auth);
             }
           },
@@ -90,6 +118,24 @@ const LoginPage = () => {
               >
                 Sign in
               </button>
+            </div>
+            <div className="form-group rows  text-center">
+              <GoogleLogin
+                // clientId="342562917774-o2l9cnfv8uj3csa9lqqmf44lbuhdciae.apps.googleusercontent.com"
+                clientId="388495122825-7oh1fhvhdj2tok66blngln5v6rco50ms.apps.googleusercontent.com"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                buttonText="Login with google"
+                className="btn btn-info mr-1 mb-1"
+              />
+              <FacebookLogin
+                appId="194157765833233"
+                autoLoad={false}
+                fields="name,email,picture"
+                onClick={responseFacebook}
+                callback={responseFacebook}
+                cssClass="btn btn-info col-sm-5 mr-1 mb-1"
+              />
             </div>
           </form>
         </div>

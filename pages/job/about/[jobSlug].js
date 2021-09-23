@@ -9,13 +9,13 @@ import JobSkill from "../../../components/jobs/about/jobSkill";
 import JobLanguage from "../../../components/jobs/about/jobLanguage";
 import JobAccess from "../../../components/jobs/about/jobAccess";
 import JobReportView from "../../../components/jobs/about/jobReportView";
-import JobReportApply from "../../../components/jobs/about/jobReportView";
+import JobReportApply from "../../../components/jobs/about/jobReportApply";
  
 function JobAbout(props) {
   const [jobObj, setJobObj] = useState("");
 
   useEffect(() => {
-    if (Object.keys(props).length === 0) {
+    if (!jobObj) {
       fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/about/", ""))
         .then((res) => res.json())
         .then(
