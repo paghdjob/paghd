@@ -9,6 +9,7 @@ import PeopleWorkType from "../../components/about/profile/peopleWorkType";
 import PeopleLanguage from "../../components/about/profile/peopleLanguage";
 import PeopleSkill from "../../components/about/profile/peopleSkill";
 import PeopleIndustry from "../../components/about/profile/peopleIndustry";
+import ProfileResume from "../../components/about/profile/peopleResume";
 import Cookies from "universal-cookie";
 
 function About(props) {
@@ -45,6 +46,7 @@ function About(props) {
 
         {userObj.users && (
           <>
+            <ProfileResume />
             <PeopleProfile
               userInfo={userObj.users}
               userID={userObj.users.userID}
