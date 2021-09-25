@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 const InstallPWA = () => {
   console.log("Install app");
   const [supportsPWA, setSupportsPWA] = useState(false);
@@ -36,7 +35,7 @@ const InstallPWA = () => {
       title="Install app"
       onClick={onClick}
     >
-      Install app
+      Install Lite App at Paghd Jobs
     </button>
   );
 };
