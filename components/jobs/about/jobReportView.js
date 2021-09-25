@@ -25,7 +25,7 @@ const JobReportView = (props) => {
           console.log("error--", error);
         }
       );
-  });
+    }, []);
 
 
   let reportView = jobView && jobView.map((item) => {

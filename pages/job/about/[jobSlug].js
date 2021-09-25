@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../../components/common/headerNav";
 import FooterNav from "../../../components/common/footerNav";
@@ -10,9 +11,14 @@ import JobLanguage from "../../../components/jobs/about/jobLanguage";
 import JobAccess from "../../../components/jobs/about/jobAccess";
 import JobReportView from "../../../components/jobs/about/jobReportView";
 import JobReportApply from "../../../components/jobs/about/jobReportApply";
- 
+import Cookies from "universal-cookie";
+
 function JobAbout(props) {
   const [jobObj, setJobObj] = useState("");
+  const [noAccess, setNoAccess] = useState(false);
+  const cookies = new Cookies();
+  const auth = cookies.get("auth");
+  const userID = cookies.get("userID");
 
   useEffect(() => {
     if (!jobObj) {
@@ -20,8 +26,12 @@ function JobAbout(props) {
         .then((res) => res.json())
         .then(
           (result) => {
-            console.log("result----", result);
-            setJobObj(result);
+            const access = result.jobAccess.find(u => u.userID === userID);
+            if(access && access.userID === userID) {
+              setJobObj(result);
+            } else {
+              setNoAccess(true);
+            }
           },
           (error) => {
             console.log("error--", error);
@@ -29,14 +39,21 @@ function JobAbout(props) {
         );
     }
   }, []);
-
+// let a = jobObj && jobObj.jobAccess.find(u => u.userID === userIds);
   return (
     <div>
       <HeaderNav />
       <div className="container">
-        <h1>Edit your job </h1>
         {jobObj && 
         <>
+        <div className="row">
+          <h1>Edit Job : {jobObj.job.jobTitle} </h1>
+          <div className="float-end">
+          <Link href={'/job/'+ jobObj.job.jobSlug}>
+            <a className="float-end btn btn-primary">Preview this job</a>
+          </Link>
+          </div>
+        </div>
           <JobProfile jobObj={jobObj.job} />
           <JobSkill skill={jobObj.jobSkill} jobID={jobObj.job.jobID} />
           <JobIndustry industry={jobObj.jobIndustry} jobID={jobObj.job.jobID} />
@@ -47,6 +64,7 @@ function JobAbout(props) {
           <JobReportView jobID={jobObj.job.jobID} />
         </>
         }
+        {noAccess && <h2>No Access</h2>}
         {/* <JobCity city={info && info.jobCity} jobID={info && info.job.jobID} userID={b} /> */}
       </div>
       <FooterNav />

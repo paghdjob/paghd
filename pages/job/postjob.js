@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
@@ -6,6 +7,7 @@ import Cookies from "universal-cookie";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import useDebounce from "../../components/jobs/use-debounce";
+
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -21,6 +23,7 @@ function Postjob(props) {
   const [massage, setMassage] = useState("");
   const [comList, setComList] = useState("");
   const debouncedSearchTerm = useDebounce(comName, 750);
+  const router = useRouter();
 
   const cookies = new Cookies();
   const userID = cookies.get("userID");
@@ -48,6 +51,7 @@ function Postjob(props) {
         .then((res) => res.json())
         .then(
           (result) => {
+            router.push('/job/about/'+ result.jobID)
             setMassage(result);
           },
           (error) => {

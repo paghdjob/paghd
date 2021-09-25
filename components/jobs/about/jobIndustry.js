@@ -80,7 +80,7 @@ const JobIndustry = (props) => {
   });
 
   let addIndustryForm = (
-    <form className="mb-12 row">
+    <form className="mb-12 row g-2">
       <div className="col-md-2 mb-3 mt-1 row">
         <label className="my-1 mr-2">Job Industry</label>
       </div>
@@ -110,7 +110,7 @@ const JobIndustry = (props) => {
   return (
     <div className="rows">
       <div className="card mb-1">
-        <div className="card-header">Industry</div>
+        <div className="card-header">Job Industry</div>
         <div className="card-body">
           {industryView}
           {addIndustryForm}

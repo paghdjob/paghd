@@ -10,15 +10,17 @@ function JobLanguage(props) {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
   const debouncedSearchTerm = useDebounce(addLanguage, 750);
+  const [isAutoSearch, setIsAutoSearch] = useState(false);
 
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && setIsAutoSearch) {
       searchLanguage(addLanguage);
     }
   }, [addLanguage]);
 
   const searchLanguage = (language) => {
-    fetch("/v2/auto.php?type=LANGUAGES&name=" + language)
+    if(language){
+      fetch("/v2/auto.php?type=LANGUAGES&name=" + language)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -28,6 +30,7 @@ function JobLanguage(props) {
           console.log("error--", error);
         }
       );
+    }
   };
 
   const addLanguages = () => {
@@ -74,6 +77,7 @@ function JobLanguage(props) {
   const selectLanguage = (langName) => {
     setAddLanguage(langName);
     setAutoLanguage("");
+    setIsAutoSearch(false)
   };
 
   let skillView, addLanguageForm;
@@ -89,7 +93,7 @@ function JobLanguage(props) {
             name="addLanguage"
             placeholder="Type to search language..."
             className="autocomplete form-control p-2"
-            onChange={(e) => setAddLanguage(e.target.value)}
+            onChange={(e) => {setIsAutoSearch(true), setAddLanguage(e.target.value)}}
             type="text"
             value={addLanguage}
           />
