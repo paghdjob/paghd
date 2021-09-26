@@ -52,7 +52,7 @@ const LoginPage = () => {
   };
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
-      fetch("https://www.paghd.com/v2/auth/login.php", {
+      fetch("/v2/auth/login.php", {
         method: "POST",
         body: JSON.stringify(userDetails),
       })
@@ -126,7 +126,7 @@ const LoginPage = () => {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 buttonText="Login with google"
-                className="btn btn-info mr-1 mb-1"
+                className="btn btn-info m-2"
               />
               <FacebookLogin
                 appId="194157765833233"
@@ -134,7 +134,7 @@ const LoginPage = () => {
                 fields="name,email,picture"
                 onClick={responseFacebook}
                 callback={responseFacebook}
-                cssClass="btn btn-info col-sm-5 mr-1 mb-1"
+                cssClass="btn btn-info m-2"
               />
             </div>
           </form>

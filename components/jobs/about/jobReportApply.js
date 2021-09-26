@@ -33,7 +33,6 @@ const JobReportApply = (props) => {
         .then((res) => res.json())
         .then(
           (result) => {
-            console.log("setJobApplyStatusList--", result);
             setJobApplyStatusList(result);
           },
           (error) => {

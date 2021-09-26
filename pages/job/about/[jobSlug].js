@@ -11,6 +11,7 @@ import JobLanguage from "../../../components/jobs/about/jobLanguage";
 import JobAccess from "../../../components/jobs/about/jobAccess";
 import JobReportView from "../../../components/jobs/about/jobReportView";
 import JobReportApply from "../../../components/jobs/about/jobReportApply";
+import JobCity from '../../../components/jobs/about/jobCity';
 import Cookies from "universal-cookie";
 
 function JobAbout(props) {
@@ -56,6 +57,7 @@ function JobAbout(props) {
         </div>
           <JobProfile jobObj={jobObj.job} />
           <JobSkill skill={jobObj.jobSkill} jobID={jobObj.job.jobID} />
+          <JobCity city={jobObj.jobCity} jobID={jobObj.job.jobID} />
           <JobIndustry industry={jobObj.jobIndustry} jobID={jobObj.job.jobID} />
           <JobWorkType workType={jobObj.jobWorkType} jobID={jobObj.job.jobID} />
           <JobLanguage languages={jobObj.jobLanguage} jobID={jobObj.job.jobID} />
@@ -65,7 +67,6 @@ function JobAbout(props) {
         </>
         }
         {noAccess && <h2>No Access</h2>}
-        {/* <JobCity city={info && info.jobCity} jobID={info && info.job.jobID} userID={b} /> */}
       </div>
       <FooterNav />
     </div>

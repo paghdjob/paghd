@@ -4,13 +4,43 @@ import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
 import JobList from "../../components/jobs/jobList";
 import JobFilter from "../../components/jobs/jobFilter";
+import { useRouter } from 'next/router';
 
 function Job(props) {
   // console.log("job list props.list ---", props.list.jobs);
   const [jobList, setJobList] = useState(props.list.jobs);
   const [filt, setFilt] = useState("");
   const [pages, setPages] = useState(0);
+  const [searchJob, setSearchJob] = useState("");
+  const router = useRouter();
+
   useEffect(() => {
+
+    console.log("location router---", router);
+if(router.query && router.query.loc) {
+    fetch("/v2/autopost/careerjet/careerjet.php?title="+ router.query.title +"&loc="+ router.query.loc)
+    .then((res) => res.json())
+    .then(
+      (result) => {
+       console.log("result--", result);
+      },
+      (error) => {
+        console.log("error--", error);
+      }
+    );
+  }
+
+   fetch("/v2/jobs/stackoverflowPostJob.php?q="+ router.query.title +"&l="+ router.query.loc +"&u=Km&d=100")
+   .then((res) => res.json())
+   .then(
+     (result) => {
+      console.log("result--", result);
+     },
+     (error) => {
+       console.log("error--", error);
+     }
+   );
+
     if (!filt) {
       fetch("/v2/jobs/filterJob.php" + location.search)
         .then((res) => res.json())

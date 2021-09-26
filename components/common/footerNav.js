@@ -10,9 +10,13 @@ const InstallPWA = dynamic(() => import("../installapp/installPWA"), {
 function FooterNav() {
   const cookies = new Cookies();
   const isSocial = cookies.get("socialPostSend");
+  // const rndInt1 = Math.floor(Math.random() * 400);
+  // console.log("autoPost start -  ", rndInt1);
   useEffect(() => {
     if (!isSocial) {
-      cookies.set("socialPostSend", 1, { path: "/", maxAge: 60 });
+      const rndInt = Math.floor(Math.random() * 400);
+      console.log("autoPost start -  ", rndInt);
+      cookies.set("socialPostSend", 1, { path: "/", maxAge: rndInt });
       fetch("/v2/autopost/linkedin/postJobLinkedin.php")
     .then((res) => res.json())
     // .then(
