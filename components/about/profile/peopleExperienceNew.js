@@ -7,6 +7,7 @@ const PeopleExperienceNew = (props) => {
   const [isAddExp, setIsAddExp] = useState(false);
   const [isAddEdu, setIsAddEdu] = useState(false);
   const [isAddPro, setIsAddPro] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const cookies = new Cookies();
   const auth = cookies.get("auth");
 
@@ -41,7 +42,7 @@ const PeopleExperienceNew = (props) => {
       .then(
         (result) => {
           console.log("result--", result);
-          // setMessage(result.msg);
+          setUserExp(result.employment);
         },
         (error) => {
           // setMessage(error);
@@ -205,6 +206,11 @@ const PeopleExperienceNew = (props) => {
       );
     });
   }
+  const handleData = (obj) => {
+    console.log("---handleData -data obj----", obj);
+    setUserExp(obj);
+    setIsVisible(false);
+  }
 
   return (
     <div className="card mb-1">
@@ -222,7 +228,7 @@ const PeopleExperienceNew = (props) => {
         </button>
       </div>
       <div className="card-body">
-        {isAddExp && <PeopleAddExperience userExp={newObj} isVisible={true} />}
+        {isAddExp && <PeopleAddExperience userExp={newObj} isVisible={isVisible} handlerFromParant={handleData} />}
         {empView}
       </div>
       <div className="card-header">
@@ -239,7 +245,7 @@ const PeopleExperienceNew = (props) => {
         </button>
       </div>
       <div className="card-body">
-        {isAddEdu && <PeopleAddExperience userExp={newObj} isVisible={true} />}
+        {isAddEdu && <PeopleAddExperience userExp={newObj} isVisible={isVisible} handlerFromParant={handleData} />}
         {eduView}
       </div>
       <div className="card-header">
@@ -256,7 +262,7 @@ const PeopleExperienceNew = (props) => {
         </button>
       </div>
       <div className="card-body">
-        {isAddPro && <PeopleAddExperience userExp={newObj} isVisible={true} />}
+        {isAddPro && <PeopleAddExperience userExp={newObj} isVisible={isVisible} handlerFromParant={handleData} />}
         {proView}
       </div>
     </div>

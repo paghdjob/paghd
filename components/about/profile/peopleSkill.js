@@ -5,28 +5,28 @@ import Cookies from "universal-cookie";
 function PeopleSkill(props) {
   const [skill, setSkill] = useState(props.skill);
   const [addSkill, setAddSkill] = useState("");
-  const [autoSkill, setautoSkill] = useState("");
+  const [autoSkill, setAutoSkill] = useState("");
   const cookies = new Cookies();
   const auth = cookies.get("auth");
   const debouncedSearchTerm = useDebounce(addSkill, 750);
 
   const selectSkill = (skillName) => {
     setAddSkill(skillName);
-    setautoSkill("");
+    setAutoSkill("");
   };
 
   useEffect(() => {
     if (debouncedSearchTerm) {
       searchSkill(addSkill);
     }
-  }, [addSkill]);
+  }, [debouncedSearchTerm]);
 
   const searchSkill = (skill) => {
     fetch("/v2/auto.php?type=SKILL&name=" + skill)
       .then((res) => res.json())
       .then(
         (result) => {
-          setautoSkill(result);
+          setAutoSkill(result);
         },
         (error) => {
           console.log("error--", error);

@@ -18,26 +18,10 @@ function FooterNav() {
       console.log("autoPost start -  ", rndInt);
       cookies.set("socialPostSend", 1, { path: "/", maxAge: rndInt });
       fetch("/v2/autopost/linkedin/postJobLinkedin.php")
-    .then((res) => res.json())
-    // .then(
-    //   (result) => {
-    //     console.log("result--", result);
-    //   },
-    //   (error) => {
-    //     console.log("error--", error);
-    //   }
-    // );
-    fetch("/v2/autopost/twitter/tweet.php")
-    .then((res) => res.json())
-    // .then(
-    //   (result) => {
-    //     console.log("result--", result);
-    //   },
-    //   (error) => {
-    //     console.log("error--", error);
-    //   }
-    // );
-    }
+      .then((res) => res.json())
+      fetch("/v2/autopost/twitter/tweet.php")
+      .then((res) => res.json())
+      }
   }, []);
 
   return (

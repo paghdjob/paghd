@@ -64,7 +64,7 @@ function About(props) {
             <PeopleIndustry industry={userObj.userIndustry} />
             <PeopleSkill skill={userObj.userSkill} />
             <PeopleLanguage languages={userObj.userLanguages} />
-            <PeopleWorkType workType={userObj.userWorkType} />
+            <PeopleWorkType workType={userObj.userWorkType} /> 
           </>
         )}
       </div>

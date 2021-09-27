@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 
 const ProfileInfo = (props) => {
-  console.log("---ProfileInfo--", props);
   const [userName, setUserName] = useState(props.userInfo.userName);
   const [userSlug, setUserSlug] = useState(props.userInfo.userSlug);
   const [message, setMessage] = useState("");
