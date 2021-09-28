@@ -53,11 +53,12 @@ function UserDetail(props) {
 }
 
 
-export async function getServerSideProps({ req, params }) {
+export async function getServerSideProps(context) {
   // Fetch data from external API
   let data = {};
+  const { userSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch("https://www.paghd.com/v2/people/aboutNew.php?userSlug=" + params.userSlug);
+  const res = await fetch(`https://www.paghd.com/v2/people/aboutNew.php?userSlug=${userSlug}`);
   data = await res.json();
   // }
   return { props: data };
