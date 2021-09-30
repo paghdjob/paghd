@@ -47,14 +47,18 @@ function JobDetail(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-
+export async function getServerSideProps({ req, params }) {
+  // Fetch data from external API
+  // const router = useRouter();
   let data = {};
-  const { jobSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
-    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug="+jobSlug); 
+  if (params && params.jobSlug) {
+    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + params.jobSlug); 
     data = await res.json();
     if (data.job === null) { data.error = 200; }
+  } else {
+    data.error = 200;
+  }  
   return { props: data };
 }
 
