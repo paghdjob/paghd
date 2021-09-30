@@ -13,12 +13,11 @@ function Job(props) {
   const [pages, setPages] = useState(0);
   const [searchJob, setSearchJob] = useState("");
   const router = useRouter();
-
+  const { loc, title } = router.query;
+  
   useEffect(() => {
-
-    console.log("location router---", router);
-if(router.query && router.query.loc) {
-    fetch("/v2/autopost/careerjet/careerjet.php?title="+ router.query.title +"&loc="+ router.query.loc)
+if(loc) {
+    fetch("/v2/autopost/careerjet/careerjet.php?title="+title+"&loc="+loc)
     .then((res) => res.json())
     .then(
       (result) => {
@@ -30,7 +29,7 @@ if(router.query && router.query.loc) {
     );
   }
 
-   fetch("/v2/jobs/stackoverflowPostJob.php?q="+ router.query.title +"&l="+ router.query.loc +"&u=Km&d=100")
+   fetch("/v2/jobs/stackoverflowPostJob.php?q="+title+"&l="+loc+"&u=Km&d=100")
    .then((res) => res.json())
    .then(
      (result) => {
@@ -42,7 +41,7 @@ if(router.query && router.query.loc) {
    );
 
     if (!filt) {
-      fetch("/v2/jobs/filterJob.php" + location.search)
+      fetch("/v2/jobs/filterJob.php?title="+title+"&loc="+loc)
         .then((res) => res.json())
         .then(
           (result) => {
@@ -53,8 +52,8 @@ if(router.query && router.query.loc) {
           }
         );
     }
-    if (!jobList) {
-      fetch("/v2/jobs/jobList.php" + location.search)
+    if (jobList.length === 0) {
+      fetch("/v2/jobs/jobList.php?title="+title+"&loc="+loc)
         .then((res) => res.json())
         .then(
           (result) => {
@@ -68,7 +67,7 @@ if(router.query && router.query.loc) {
   }, [props]);
 
   const handleData = (moredata) => {
-    fetch("/v2/jobs/jobList.php" + location.search, {
+    fetch("/v2/jobs/jobList.php?title="+title+"&loc="+loc, {
       method: "POST",
       body: JSON.stringify(moredata),
     })
@@ -93,9 +92,9 @@ if(router.query && router.query.loc) {
   return (
     <div>
       <HeadSeo
-        title="Jobs In Bangalore - Job Vacancies In Bangalore - paghd.com"
-        description="Apply To 117134 Job Openings In Bangalore: 818 In Jpmorgan, 701 In Accenture, 525 In Ibm &amp; 511 In Hp On paghd.com. Explore Latest Jobs In Bangalore Across Top Companies Now!"
-        keywords="job in bangalore"
+        title={`Jobs In ${loc} - Job Vacancies In ${loc} - paghd.com`}
+        description={`Apply To 117134 Job Openings In ${loc}: 818 In Jpmorgan, 701 In Accenture, 525 In Ibm &amp; 511 In Hp On paghd.com. Explore Latest Jobs In ${loc} Across Top Companies Now!`}
+        keywords={`job in ${loc}, Job Vacancies In ${loc}, ${loc}, ${title}`}
       />
       <HeaderNav />
       <div className="container">
@@ -103,7 +102,7 @@ if(router.query && router.query.loc) {
           <div className="d-none d-lg-block col-xs-3 col-md-3 left-panel pl-0">
             {filt && <JobFilter filt={filt} handlerFromParant={handleData} />}
           </div>
-          <div className="col mt-md-2 m-0 p-0">
+          <div className="col">
             {jobList && (
               <JobList
                 pages={pages}
@@ -122,17 +121,12 @@ if(router.query && router.query.loc) {
 export async function getServerSideProps(context) {
   let list = {};
   let filterRes = {};
+  const { loc, title } = context.query;
   // if (context.req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch(
-    "https://www.paghd.com/v2/jobs/jobList.php?title=" +
-      context.query.title +
-      "&loc=" +
-      context.query.loc
-  );
+  const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title="+title+"&loc="+loc);
   list = await res.json();
   // const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
   // filterRes = await resFil.json();
-
   // }
   return { props: { list, filterRes } };
 }
