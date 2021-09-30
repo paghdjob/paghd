@@ -33,9 +33,9 @@ const JobList = (props) => {
   let loadMore;
   if (list.length > 1) {
     loadMore = (
-      <div className="rows align-items-center">
+      <div className="clearfix mt-3">
         <button className="col btn btn-info" onClick={handleSubmit}>
-          Result: {list.length}, page : {pages}, Load more...
+          Click here to Load more job...
         </button>
       </div>
     );
@@ -103,9 +103,9 @@ const JobList = (props) => {
 
   return (
     <>
-      <div className="rows bg-light">
+      <div className="bg-light clearfix">
         <div className="float-start col-8">
-          <h1>Remote Jobs in Canada, 2222 jobs</h1>
+          <h1 className="h5">Remote Jobs in Canada, 2222 jobs</h1>
         </div>
         <div className="float-end form-floating  col-2">
           <select

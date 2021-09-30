@@ -102,7 +102,7 @@ if(loc) {
           <div className="d-none d-lg-block col-xs-3 col-md-3 left-panel pl-0">
             {filt && <JobFilter filt={filt} handlerFromParant={handleData} />}
           </div>
-          <div className="col mt-md-2 m-0 p-0">
+          <div className="col">
             {jobList && (
               <JobList
                 pages={pages}
@@ -123,7 +123,7 @@ export async function getServerSideProps(context) {
   let filterRes = {};
   const { loc, title } = context.query;
   // if (context.req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch(`https://www.paghd.com/v2/jobs/jobList.php?title=${title}&loc=${loc}`);
+  const res = await fetch('https://www.paghd.com/v2/jobs/jobList.php?title=${title}&loc=${loc}');
   list = await res.json();
   // const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
   // filterRes = await resFil.json();
