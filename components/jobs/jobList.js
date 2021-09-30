@@ -70,6 +70,10 @@ const JobList = (props) => {
     <div className="">
       <div className="rows bg-light col-2">
         <div className="col-md">
+        <div className="form-floating">
+             
+            <h1>Remote Jobs in Canada,  2222 jobs</h1>
+          </div>
           <div className="form-floating">
             <select onChange={sortFieldChanges} name="sorts" value={sorts} className="form-select">
               <option value="1">Reletive</option>
