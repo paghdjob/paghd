@@ -52,7 +52,7 @@ export async function getServerSideProps(context) {
   let data = {};
   const { jobSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
-    const res = await fetch(`https://www.paghd.com/v2/jobs/about.php?jobSlug=${jobSlug}`); 
+    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug="+jobSlug); 
     data = await res.json();
     if (data.job === null) { data.error = 200; }
   return { props: data };

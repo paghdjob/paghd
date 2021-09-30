@@ -58,7 +58,7 @@ export async function getServerSideProps(context) {
   let data = {};
   const { userSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch(`https://www.paghd.com/v2/people/aboutNew.php?userSlug=${userSlug}`);
+  const res = await fetch("https://www.paghd.com/v2/people/aboutNew.php?userSlug="+userSlug);
   data = await res.json();
   // }
   return { props: data };

@@ -17,7 +17,7 @@ function Job(props) {
   
   useEffect(() => {
 if(loc) {
-    fetch(`/v2/autopost/careerjet/careerjet.php?title=${title}&loc=${loc}`)
+    fetch("/v2/autopost/careerjet/careerjet.php?title="+title+"&loc="+loc)
     .then((res) => res.json())
     .then(
       (result) => {
@@ -29,7 +29,7 @@ if(loc) {
     );
   }
 
-   fetch(`/v2/jobs/stackoverflowPostJob.php?q=${title}&l=${loc}&u=Km&d=100`)
+   fetch("/v2/jobs/stackoverflowPostJob.php?q="+title+"&l="+loc+"&u=Km&d=100")
    .then((res) => res.json())
    .then(
      (result) => {
@@ -41,7 +41,7 @@ if(loc) {
    );
 
     if (!filt) {
-      fetch(`/v2/jobs/filterJob.php?title=${title}&loc=${loc}`)
+      fetch("/v2/jobs/filterJob.php?title="+title+"&loc="+loc)
         .then((res) => res.json())
         .then(
           (result) => {
@@ -53,7 +53,7 @@ if(loc) {
         );
     }
     if (jobList.length === 0) {
-      fetch(`/v2/jobs/jobList.php?title=${title}&loc=${loc}`)
+      fetch("/v2/jobs/jobList.php?title="+title+"&loc="+loc)
         .then((res) => res.json())
         .then(
           (result) => {
@@ -67,7 +67,7 @@ if(loc) {
   }, [props]);
 
   const handleData = (moredata) => {
-    fetch(`/v2/jobs/jobList.php?title=${title}&loc=${loc}`, {
+    fetch("/v2/jobs/jobList.php?title="+title+"&loc="+loc, {
       method: "POST",
       body: JSON.stringify(moredata),
     })
@@ -123,7 +123,7 @@ export async function getServerSideProps(context) {
   let filterRes = {};
   const { loc, title } = context.query;
   // if (context.req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch('https://www.paghd.com/v2/jobs/jobList.php?title=${title}&loc=${loc}');
+  const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title="+title+"&loc="+loc);
   list = await res.json();
   // const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
   // filterRes = await resFil.json();
