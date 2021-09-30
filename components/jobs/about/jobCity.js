@@ -110,7 +110,7 @@ const JobCity = (props) => {
             className="close"
             aria-label="Close"
           >
-            <span aria-hidden="true">&times;</span>{" "}
+            <span aria-hidden="true">&times;</span>
           </button>
         </span>
       );

@@ -123,8 +123,7 @@ export async function getServerSideProps(context) {
   let filterRes = {};
   const { loc, title } = context.query;
   // if (context.req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title=" + context.query.title + "&loc=" + context.query.loc);
-  // const res = await fetch(`https://www.paghd.com/v2/jobs/jobList.php?title=${title}&loc=${loc}`);
+  const res = await fetch(`https://www.paghd.com/v2/jobs/jobList.php?title=${title}&loc=${loc}`);
   list = await res.json();
   // const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
   // filterRes = await resFil.json();
