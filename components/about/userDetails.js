@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
 
 const UserDetails = (props) => {
-  // console.log("UserDetails---> ", props);
   const [user, setUser] = useState(props.userObj);
+  const cookies = new Cookies();
+  const auth = cookies.get("auth");
+
+  useEffect(() => {
+    if(auth){
+      let body = { userID: user.users.userID };
+      fetch("/v2/people/aboutSet.php?type=VIEWJOB", {
+        method: "POST",
+        headers: {
+          Authorization: auth,
+        },
+        body: JSON.stringify(body),
+      })  
+    }
+  });
+
   let birth;
   if (user && user.userInfo) {
     birth = new Date(user.userInfo.userBirth).toDateString("yyyy-MM-dd");

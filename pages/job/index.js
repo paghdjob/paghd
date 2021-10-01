@@ -4,23 +4,60 @@ import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
 import JobList from "../../components/jobs/jobList";
 import JobFilter from "../../components/jobs/jobFilter";
+import { useRouter } from 'next/router';
 
 function Job(props) {
   // console.log("job list props.list ---", props.list.jobs);
   const [jobList, setJobList] = useState(props.list.jobs);
-  const [filt, setFilt] = useState(props.filterRes);
-  // const [mounted, setMounted] = useState(true);
-  const [page, setPage] = useState(0);
+  const [filt, setFilt] = useState("");
+  const [pages, setPages] = useState(0);
+  const [searchJob, setSearchJob] = useState("");
+  const router = useRouter();
+  const { loc, title } = router.query;
+  
   useEffect(() => {
-    if (Object.keys(props).length === 0) {
-      // if (Object.keys(jobList).length === 0) {
-      fetch("https://www.paghd.com/v2/jobs/jobList.php" + location.search)
+if(loc) {
+    fetch("/v2/autopost/careerjet/careerjet.php?title="+title+"&loc="+loc)
+    .then((res) => res.json())
+    .then(
+      (result) => {
+       console.log("result--", result);
+      },
+      (error) => {
+        console.log("error--", error);
+      }
+    );
+  }
+
+   fetch("/v2/jobs/stackoverflowPostJob.php?q="+title+"&l="+loc+"&u=Km&d=100")
+   .then((res) => res.json())
+   .then(
+     (result) => {
+      console.log("result--", result);
+     },
+     (error) => {
+       console.log("error--", error);
+     }
+   );
+
+    if (!filt) {
+      fetch("/v2/jobs/filterJob.php?title="+title+"&loc="+loc)
         .then((res) => res.json())
         .then(
           (result) => {
-            // const datas = jobList.concat(result.jobs);
+            setFilt(result);
+          },
+          (error) => {
+            console.log("error--", error);
+          }
+        );
+    }
+    if (jobList.length === 0) {
+      fetch("/v2/jobs/jobList.php?title="+title+"&loc="+loc)
+        .then((res) => res.json())
+        .then(
+          (result) => {
             setJobList(result.jobs);
-            // setPage(0)
           },
           (error) => {
             console.log("error--", error);
@@ -29,46 +66,50 @@ function Job(props) {
     }
   }, [props]);
 
-  // const toggle = () => setMounted(!mounted);
-
-  const handleData = (event) => {
-    // toggle()
-    fetch("https://www.paghd.com/v2/jobs/jobList.php", {
+  const handleData = (moredata) => {
+    fetch("/v2/jobs/jobList.php?title="+title+"&loc="+loc, {
       method: "POST",
-      body: JSON.stringify(event),
+      body: JSON.stringify(moredata),
     })
       .then((res) => res.json())
       .then(
         (result) => {
-          if (event.page === 0) {
+          console.log("data--->", moredata.page);
+          setPages(moredata.page);
+          if (moredata.page === 0) {
             setJobList(result.jobs);
           } else {
             const data = jobList.concat(result.jobs);
             setJobList(data);
-          }
-          setPage(event.page)
-          // setMounted(event.page);
+          }          
         },
         (error) => {
           console.log("error--", error);
         }
-      ); 
+      );
   };
+
   return (
     <div>
       <HeadSeo
-        title="Jobs In Bangalore - Job Vacancies In Bangalore - paghd.com"
-        description="Apply To 117134 Job Openings In Bangalore: 818 In Jpmorgan, 701 In Accenture, 525 In Ibm &amp; 511 In Hp On paghd.com. Explore Latest Jobs In Bangalore Across Top Companies Now!"
-        keywords="job in bangalore"
+        title={`Jobs In ${loc} - Job Vacancies In ${loc} - paghd.com`}
+        description={`Apply To 117134 Job Openings In ${loc}: 818 In Jpmorgan, 701 In Accenture, 525 In Ibm &amp; 511 In Hp On paghd.com. Explore Latest Jobs In ${loc} Across Top Companies Now!`}
+        keywords={`job in ${loc}, Job Vacancies In ${loc}, ${loc}, ${title}`}
       />
       <HeaderNav />
       <div className="container">
         <div className="row m-0 p-0">
           <div className="d-none d-lg-block col-xs-3 col-md-3 left-panel pl-0">
-            <JobFilter filt={filt} handlerFromParant={handleData} />
+            {filt && <JobFilter filt={filt} handlerFromParant={handleData} />}
           </div>
-          <div className="col mt-md-2 m-0 p-0">
-            <JobList pages={page} list={jobList} handlerFromParant={handleData} />
+          <div className="col">
+            {jobList && (
+              <JobList
+                pages={pages}
+                list={jobList}
+                handlerFromParant={handleData}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -80,12 +121,12 @@ function Job(props) {
 export async function getServerSideProps(context) {
   let list = {};
   let filterRes = {};
+  const { loc, title } = context.query;
   // if (context.req.headers["user-agent"].match("Chrome")) {
-    const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title=" + context.query.title + "&loc=" + context.query.loc);
-    list = await res.json();
-    const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
-    filterRes = await resFil.json();
-    
+  const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title="+title+"&loc="+loc);
+  list = await res.json();
+  // const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
+  // filterRes = await resFil.json();
   // }
   return { props: { list, filterRes } };
 }

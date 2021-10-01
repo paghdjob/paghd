@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import HeaderNav from "../../components/common/headerNav";
-import FooterNav from "../../components/common/footerNav";
-import ProfileInfo from "../../components/about/profile/peopleInfo";
-import PeoplePrivate from "../../components/about/profile/peoplePrivate";
-import PeopleProfile from "../../components/about/profile/peopleProfile";
-import PeopleExperienceNew from "../../components/about/profile/peopleExperienceNew";
-import PeopleWorkType from "../../components/about/profile/peopleWorkType";
-import PeopleLanguage from "../../components/about/profile/peopleLanguage";
-import PeopleSkill from "../../components/about/profile/peopleSkill";
-import PeopleIndustry from "../../components/about/profile/peopleIndustry";
+import dynamic from 'next/dynamic'
+const HeaderNav = dynamic(() => import('../../components/common/headerNav'))
+const FooterNav = dynamic(() => import('../../components/common/footerNav'))
+const ProfileInfo = dynamic(() => import('../../components/about/profile/peopleInfo'))
+const PeoplePrivate = dynamic(() => import('../../components/about/profile/peoplePrivate'))
+const PeopleProfile = dynamic(() => import('../../components/about/profile/peopleProfile'))
+const PeopleExperienceNew = dynamic(() => import('../../components/about/profile/peopleExperienceNew'))
+const PeopleWorkType = dynamic(() => import('../../components/about/profile/peopleWorkType'))
+const PeopleLanguage = dynamic(() => import('../../components/about/profile/peopleLanguage'))
+const PeopleSkill = dynamic(() => import('../../components/about/profile/peopleSkill'))
+const PeopleIndustry = dynamic(() => import('../../components/about/profile/peopleIndustry'))
+const ProfileResume = dynamic(() => import('../../components/about/profile/peopleResume'))
 import Cookies from "universal-cookie";
 
 function About(props) {
@@ -45,6 +47,7 @@ function About(props) {
 
         {userObj.users && (
           <>
+            <ProfileResume />
             <PeopleProfile
               userInfo={userObj.users}
               userID={userObj.users.userID}
@@ -61,7 +64,7 @@ function About(props) {
             <PeopleIndustry industry={userObj.userIndustry} />
             <PeopleSkill skill={userObj.userSkill} />
             <PeopleLanguage languages={userObj.userLanguages} />
-            <PeopleWorkType workType={userObj.userWorkType} />
+            <PeopleWorkType workType={userObj.userWorkType} /> 
           </>
         )}
       </div>

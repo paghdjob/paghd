@@ -8,7 +8,6 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
 import "react-quill/dist/quill.snow.css";
 
 const JobProfile = (props) => {
-  console.log("JobProfile-----", props);
   const [jobInfo, setJobInfo] = useState(props.jobObj);
   const [jobTitle, setJobTitle] = useState(jobInfo.jobTitle);
   const [comName, setComName] = useState(jobInfo.comName);
@@ -24,7 +23,8 @@ const JobProfile = (props) => {
   const [jobPosition, setJobPosition] = useState(jobInfo.jobPosition);
   const [jobStatus, setJobStatus] = useState(jobInfo.jobStatus);
   const [comList, setComList] = useState("");
-
+  const [message, setMessage] = useState("");
+  const [isAutoSearch, setIsAutoSearch] = useState(false);
   const debouncedSearchTerm = useDebounce(comName, 750);
   const cookies = new Cookies();
   const userID = cookies.get("userID");
@@ -44,14 +44,15 @@ const JobProfile = (props) => {
   };
 
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && isAutoSearch) {
       searchCompany(comName);
     }
-  }, [debouncedSearchTerm]);
+  }, [comName]);
 
   const selectCompany = (company) => {
     setComName(company);
     setComList("");
+    setIsAutoSearch(false);
   };
 
   const modules = {
@@ -119,6 +120,7 @@ const JobProfile = (props) => {
         .then((res) => res.json())
         .then(
           (result) => {
+            setMessage(result.msg);
             setJobInfo(result.job);
           },
           (error) => {
@@ -132,7 +134,7 @@ const JobProfile = (props) => {
 
   return (
     <div className="card" key={0}>
-      <div className="card-body" key={jobInfo.jobID}>
+      <div className="card-body" key={1}>
         <form>
           <div className="row">
             <div className="form-group col-md-6">
@@ -151,7 +153,7 @@ const JobProfile = (props) => {
               <input
                 type="text"
                 className="autocomplete form-control"
-                onChange={(e) => setComName(e.target.value)}
+                onChange={(e) => {setIsAutoSearch(true), setComName(e.target.value)}}
                 name="comName"
                 value={comName}
                 required
@@ -284,6 +286,7 @@ const JobProfile = (props) => {
                   </select>
                 </div>
                 <div className="form-group col-md-3">
+                  {message}
                   <button
                     type="button"
                     onClick={handleSubmit}

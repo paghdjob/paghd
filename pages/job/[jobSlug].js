@@ -6,7 +6,6 @@ import HeadSeo from "../../components/headSeo";
 import JobDetails from "../../components/jobs/jobDetails";
 
 function JobDetail(props) {
-  console.log(props.error);
   const [jobError, setJobError] = useState(props.error);
   const [jobObj, setJobObj] = useState(props);
 
@@ -17,7 +16,7 @@ function JobDetail(props) {
   }
 
   useEffect(() => {
-    if (Object.keys(props).length === 0) {
+    if (!jobObj) {
       fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
         .then((res) => res.json())
         .then(
@@ -48,18 +47,14 @@ function JobDetail(props) {
   );
 }
 
-export async function getServerSideProps({ req, params }) {
-  // Fetch data from external API
-  // const router = useRouter();
+export async function getServerSideProps(context) {
+
   let data = {};
+  const { jobSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
-  if (params && params.jobSlug) {
-    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + params.jobSlug); 
+    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug="+jobSlug); 
     data = await res.json();
     if (data.job === null) { data.error = 200; }
-  } else {
-    data.error = 200;
-  }  
   return { props: data };
 }
 

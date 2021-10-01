@@ -59,7 +59,7 @@ const JobAccess = (props) => {
     if (debouncedSearchTerm) {
       searchUsers(addAccess);
     }
-  }, [addAccess]);
+  }, [debouncedSearchTerm]);
 
   const searchUsers = (skill) => {
     fetch("/v2/auto.php?type=USER&name=" + skill)

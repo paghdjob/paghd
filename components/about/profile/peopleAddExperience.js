@@ -3,31 +3,65 @@ import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
 
 const PeopleAddExperience = (props) => {
+  console.log("---PeopleAddExperience---", props.isVisible)
   const [userExp, setUserExp] = useState(props.userExp);
   const [isVisible, setIsVisible] = useState(props.isVisible);
+  console.log("---PeopleAddExperience ====---", isVisible)
   const [expDesignation, setExpDesignation] = useState(
     props.userExp.expDesignation
   );
   const [comName, setComName] = useState(props.userExp.comName);
+  const [autoCompany, setAutoCompany] = useState("");
   const [expDescribe, setExpDescribe] = useState(props.userExp.expDescribe);
   const [expRes, setExpRes] = useState(props.userExp.expRes);
   const [expStart, setExpStart] = useState(props.userExp.expStart);
   const [expEnd, setExpEnd] = useState(props.userExp.expEnd);
   const [message, setMessage] = useState("");
+  const debouncedSearchTerm = useDebounce(comName, 750);
   const cookies = new Cookies();
   const auth = cookies.get("auth");
+
+  useEffect(() => {
+    setIsVisible(props.isVisible);
+  }, [props]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      searchCompany(comName);
+    }
+  }, [debouncedSearchTerm]);
+
+  const selectCompany = (com) => {
+    setComName(com);
+    setAutoCompany("");
+  };
+
+  const searchCompany = (skill) => {
+    fetch("/v2/auto.php?type=COMPANY&name=" + skill)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setAutoCompany(result);
+        },
+        (error) => {
+          console.log("error--", error);
+        }
+      );
+  };
+
 
   const handleSubmit = (event) => {
     let users = {
       expID: props.userExp.expID,
       userID: props.userExp.userID,
       expDesignation: expDesignation,
-      expStart: expStart,
+      expStart:  expStart,
       expEnd: expEnd,
       expDescribe: expDescribe,
+      expNotice: 0,
       expRes: expRes,
       comName: comName,
-      jobFor: props.userExp.jobFor, // jobFor.toString()
+      jobFor: (props.userExp.jobFor).toString(), // jobFor.toString()
     };
 
     fetch("/v2/people/aboutSet.php?type=EMPUPDATE", {
@@ -40,6 +74,8 @@ const PeopleAddExperience = (props) => {
       .then((res) => res.json())
       .then(
         (result) => {
+          props.handlerFromParant(result.employment);
+          console.log("result--", result);
           setMessage(result.msg);
         },
         (error) => {
@@ -61,10 +97,6 @@ const PeopleAddExperience = (props) => {
     expNotice: 0,
     comName: "",
     jobFor: "",
-  };
-  let boxModel;
-  const closed = () => {
-    setIsVisible(false);
   };
 
   let boxTitle, boxDes, boxCom, boxRes;
@@ -126,6 +158,20 @@ const PeopleAddExperience = (props) => {
                   value={comName}
                   required
                 />
+                <ul className="list-group autocomplete-items">
+            {autoCompany &&
+              autoCompany.map((langName) => {
+                return (
+                  <li
+                    onClick={(e) => selectCompany(langName.label)}
+                    className="list-group-item text-start"
+                    key={langName.label}
+                  >
+                    {langName.label}
+                  </li>
+                );
+              })}
+          </ul>
               </div>
             </div>
             <div className="form-group">
@@ -152,7 +198,7 @@ const PeopleAddExperience = (props) => {
               <div className="form-group col-md-5">
                 <label>Starting Date</label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   onChange={(e) => setExpStart(e.target.value)}
                   name="expStart"
@@ -163,7 +209,7 @@ const PeopleAddExperience = (props) => {
               <div className="form-group col-md-5">
                 <label>Ending Date</label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   onChange={(e) => setExpEnd(e.target.value)}
                   name="expEnd"
@@ -190,6 +236,7 @@ const PeopleAddExperience = (props) => {
     </div>
   );
 
+  console.log("isVisible====>>>>>", isVisible)
   return (
     <>{isVisible && <div className="card mb-1"> {boxModelForEdit}</div>}</>
   );

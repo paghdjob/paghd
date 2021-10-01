@@ -105,7 +105,7 @@ const JobFilter = (props) => {
     );
   });
  return(
-    <div className="">
+    <>
       <div className="card-header">City</div>
       <div className="card-body">{cities}</div>
       <div className="card-header">Industry</div>
@@ -116,7 +116,7 @@ const JobFilter = (props) => {
       <div className="card-body">{skills}</div>
       <div className="card-header">Language</div>
       <div className="card-body">{languages}</div>
-    </div>
+    </>
  )
 }
 

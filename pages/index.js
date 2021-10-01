@@ -16,7 +16,7 @@ export default function Home() {
   const debouncedSearchTerm = useDebounce(jobLocSearch, 750);
 
   const searchLocation = (location) => {
-    fetch("https://www.paghd.com/v2/auto.php?type=CITY&name=" + location)
+    fetch("/v2/auto.php?type=CITY&name=" + location)
       .then((res) => res.json())
       .then(
         (result) => {

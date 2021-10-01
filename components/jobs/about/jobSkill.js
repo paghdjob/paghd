@@ -10,14 +10,16 @@ function JobSkill(props) {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
   const debouncedSearchTerm = useDebounce(addSkill, 750);
+  const [isAutoSearch, setIsAutoSearch] = useState(false);
 
   const selectSkill = (skillName) => {
     setAddSkill(skillName);
     setautoSkill("");
+    setIsAutoSearch(false);
   };
 
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && isAutoSearch) {
       searchSkill(addSkill);
     }
   }, [addSkill]);
@@ -92,8 +94,8 @@ function JobSkill(props) {
     );
   });
   let addSkillForm = (
-    <form className="form-inline row mt-2">
-      <div className="row g-3">
+    <form className="form-inline row mt-1">
+      <div className="row g-2">
         <div className="col-md-1">
           <label className="text-left pl-0">Skills </label>
         </div>
@@ -102,7 +104,7 @@ function JobSkill(props) {
             name="addSkill"
             placeholder="Type to search skill..."
             className="autocomplete form-control p-2"
-            onChange={(e) => setAddSkill(e.target.value)}
+            onChange={(e) => {setIsAutoSearch(true), setAddSkill(e.target.value)}}
             type="text"
             value={addSkill}
           />
