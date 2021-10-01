@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 function Job(props) {
   // console.log("job list props.list ---", props.list.jobs);
   const [jobList, setJobList] = useState(props.list.jobs);
+  const [jobTotal, setJobTotal] = useState(props.list.total);
   const [filt, setFilt] = useState("");
   const [pages, setPages] = useState(0);
   const [searchJob, setSearchJob] = useState("");
@@ -103,10 +104,13 @@ if(loc) {
             {filt && <JobFilter filt={filt} handlerFromParant={handleData} />}
           </div>
           <div className="col">
+            <div className="float-start col-8">
+              <h1 className="h5">{jobTotal} jobs {title && title+ ' in'}  {loc} </h1>
+            </div>
             {jobList && (
               <JobList
                 pages={pages}
-                list={jobList}
+                list={jobList}                
                 handlerFromParant={handleData}
               />
             )}
@@ -122,8 +126,13 @@ export async function getServerSideProps(context) {
   let list = {};
   let filterRes = {};
   const { loc, title } = context.query;
+  let jobListReq = 'https://www.paghd.com/v2/jobs/jobList.php';
+  if (loc || title) {
+    jobListReq = jobListReq + '?title='+title+'&loc='+loc;
+  }
+  console.log('jobListReq--->', jobListReq)
   // if (context.req.headers["user-agent"].match("Chrome")) {
-  const res = await fetch("https://www.paghd.com/v2/jobs/jobList.php?title="+title+"&loc="+loc);
+  const res = await fetch(jobListReq);
   list = await res.json();
   // const resFil = await fetch("https://www.paghd.com/v2/jobs/filterJob.php");
   // filterRes = await resFil.json();

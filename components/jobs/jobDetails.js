@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useRouter } from 'next/router';
 
-
 const JobDetails = (jobs) => {
   const [info, setInfo] = useState(jobs.jobObj);
   const [jobApplyText, setJobApplyText] = useState("");
@@ -110,9 +109,9 @@ const JobDetails = (jobs) => {
         }
       );
     } else { 
-      router.push('/login')
+      router.push('/login?url='+ router.asPath)
      }
-    if (info.job.jobRefURL) {
+    if (userID && info.job.jobRefURL) {
       window.open(info.job.jobRefURL, '_blank');
     }
   };

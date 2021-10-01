@@ -14,7 +14,7 @@ function FooterNav() {
   // console.log("autoPost start -  ", rndInt1);
   useEffect(() => {
     if (!isSocial) {
-      const rndInt = Math.floor(Math.random() * 400);
+      const rndInt = Math.floor(Math.random() * 300);
       console.log("autoPost start -  ", rndInt);
       cookies.set("socialPostSend", 1, { path: "/", maxAge: rndInt });
       fetch("/v2/autopost/linkedin/postJobLinkedin.php")

@@ -4,6 +4,8 @@ const JobList = (props) => {
   const [list, setList] = useState(props.list);
   const [sorts, setSorts] = useState(1);
   const [pages, setPages] = useState(props.pages);
+  // const [jobTotal, setJobTotal] = useState(props.jobTotal);
+  
 
   const salaryTypes = (id) => {
     switch (id) {
@@ -104,9 +106,9 @@ const JobList = (props) => {
   return (
     <>
       <div className="bg-light clearfix">
-        <div className="float-start col-8">
-          <h1 className="h5">Remote Jobs in Canada, 2222 jobs</h1>
-        </div>
+        {/* <div className="float-start col-8">
+          <h1 className="h5">Remote Jobs in Canada, {jobTotal} jobs</h1>
+        </div> */}
         <div className="float-end form-floating  col-2">
           <select
             onChange={sortFieldChanges}

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import Cookies from "universal-cookie";
+import { useRouter } from 'next/router';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (event) => {
     let userDetails = {
@@ -48,7 +50,7 @@ const LoginPage = () => {
     const cookies = new Cookies();
     cookies.set("userID", userID, { path: "/", maxAge: 25929999 });
     cookies.set("auth", auth, { path: "/", maxAge: 25929999 });
-    window.location.href = "/";
+    router.push(router.query.url ? router.query.url : '/')
   };
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
