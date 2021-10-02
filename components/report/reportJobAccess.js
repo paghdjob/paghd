@@ -50,7 +50,6 @@ const ReportJobAccess = (props) => {
   let userView;
   if (jobAccess) {
     userView = jobAccess.map((item) => {
-      let jobDate = new Date(item.jobDate).toDateString("yyyy-MM-dd");
       return (
         <tr key={item.jobAccessID}>
           <td>
@@ -84,7 +83,7 @@ const ReportJobAccess = (props) => {
             </a>
           </td>
           <td>{item.jobStatus === "2" ? "Closed" : "Open"}</td>
-          <td>{jobDate}</td>
+          <td>{new Date(item.jobDate.replace(/-/g, '/')).toLocaleDateString()}</td>
           <td
             className={
               item.jobVerify === "0" ? "alert-danger" : "alert-success"

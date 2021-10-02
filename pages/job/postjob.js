@@ -174,9 +174,9 @@ function Postjob(props) {
       />
       <HeaderNav />
       <div className="container">
-        <div className="card m-2">
+        <div className="card">
           <div className="card-header">
-            <h1> Post New Job - Hire the right fit for your business. </h1>
+            <h1 className="h5"> Post New Job - Hire the right fit for your business. </h1>
           </div>
           <div className="card-body">
             <form className="form-group">
@@ -236,7 +236,7 @@ function Postjob(props) {
                 <button
                   type="button"
                   onClick={handleData}
-                  className="btn btn-primary"
+                  className="btn btn-info mt-2"
                 >
                   Post Job
                 </button>
@@ -244,7 +244,7 @@ function Postjob(props) {
             </form>
           </div>
           <div className="card-body">
-            <h2>Better candidates. Better hires.</h2>
+            <h2 className="h5">Better candidates. Better hires.</h2>
             <p className="card-text">
               Job seekers make better decisions about where to work. That means
               better results for employers

@@ -28,9 +28,6 @@ const ReportUserView = (props) => {
     let View;
     if (userView) {
       View = userView.map((item) => {
-        let userViewDate = new Date(item.userViewDate).toDateString(
-          "yyyy-MM-dd"
-        );
         return (
           <tr key={item.userID}>
             <td>{item.userID}</td>
@@ -44,7 +41,7 @@ const ReportUserView = (props) => {
                 {item.userName}
               </a>
             </td>
-            <td>{userViewDate}</td>
+            <td>{new Date(item.userViewDate.replace(/-/g, '/')).toLocaleDateString()}</td>
           </tr>
         );
       });
