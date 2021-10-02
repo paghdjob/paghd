@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9                                 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
    <url>
       <loc>https://paghd.vercel.app/sitemap/2021-10-02-job.xml</loc>
-      <lastmod>2021-10-02T07:35:12+00:00</lastmod>
+      <lastmod>2021-10-02T10:46:26+00:00</lastmod>
       <changefreq>daily</changefreq>
       <priority>1</priority>
    </url>
    <url>
       <loc>https://paghd.vercel.app/sitemap/2021-10-01-job.xml</loc>
-      <lastmod>>2021-10-01T07:35:12+00:00</lastmod>
+      <lastmod>2021-10-02T10:46:26+00:00</lastmod>
       <changefreq>daily</changefreq>
       <priority>1</priority>
    </url>
    <url>
-      <loc>https://paghd.vercel.app//sitemap/2021-09-30-job.xml</loc>
-      <lastmod>2021-09-30T07:35:12+00:00</lastmod>
+      <loc>https://paghd.vercel.app/sitemap/2021-09-30-job.xml</loc>
+      <lastmod>2021-10-02T10:46:26+00:00</lastmod>
       <changefreq>daily</changefreq>
       <priority>1</priority>
    </url>
    <url>
-      <loc>https://paghd.vercel.app//sitemap/2021-09-29-job.xml</loc>
-      <lastmod>2021-09-29T07:35:12+00:00</lastmod>
+      <loc>https://paghd.vercel.app/sitemap/2021-09-29-job.xml</loc>
+      <lastmod>2021-10-02T10:46:26+00:00</lastmod>
       <changefreq>daily</changefreq>
       <priority>1</priority>
    </url>
    <url>
-      <loc>https://paghd.vercel.app//sitemap/2021-09-28-job.xml</loc>
-      <lastmod>2021-09-28T07:35:12+00:00</lastmod>
+      <loc>https://paghd.vercel.app/sitemap/2021-09-28-job.xml</loc>
+      <lastmod>2021-10-02T10:46:26+00:00</lastmod>
       <changefreq>daily</changefreq>
       <priority>1</priority>
    </url>
    <url>
-      <loc>https://paghd.vercel.app//sitemap/2021-09-27-job.xml</loc>
-      <lastmod>2021-09-27T07:35:12+00:00</lastmod>
+      <loc>https://paghd.vercel.app/sitemap/2021-09-27-job.xml</loc>
+      <lastmod>2021-10-02T10:46:26+00:00</lastmod>
       <changefreq>daily</changefreq>
       <priority>1</priority>
    </url>

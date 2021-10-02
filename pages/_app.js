@@ -2,6 +2,7 @@ import Head from "next/head";
 import Script from 'next/script'
 // import "../styles/globals.css";
 import "../styles/bootstrap.min.css";
+import "../styles/globals.css";
 // import "../styles/bootstrap-icons.min.css";
 
 // const InstallPWA = React.lazy(() => import('../components/installapp/installPWA'));

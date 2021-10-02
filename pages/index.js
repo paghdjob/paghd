@@ -109,7 +109,7 @@ export default function Home() {
                   onClick={handleFilterChange}
                   href={"/job?title=" + jobTitleSearch + "&loc=" + jobLocSearch}
                 >
-                  Find jobs
+                  Search
                 </button>
               </div>
             </div>

@@ -34,7 +34,7 @@ const JobList = (props) => {
   if (list.length > 1) {
     loadMore = (
       <div className="clearfix mt-3">
-        <button className="col btn btn-outline-dark" onClick={handleSubmit}>
+        <button className="col btn btn-info" onClick={handleSubmit}>
           Click here to Load more job...
         </button>
       </div>
