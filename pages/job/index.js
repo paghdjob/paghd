@@ -99,19 +99,20 @@ if(loc) {
       />
       <HeaderNav />
       <div className="container">
-        <div className="row m-0 p-0">
+        <div className="row">
           <div className="d-none d-lg-block col-xs-3 col-md-3 left-panel pl-0">
             {filt && <JobFilter filt={filt} handlerFromParant={handleData} />}
           </div>
           <div className="col">
             <div className="float-start col-8">
-              <h1 className="h5">{jobTotal} jobs {title && title+ ' in'}  {loc} </h1>
+              <h1 className="h5 pt-3">{jobTotal} jobs {title && title+ ' in'}  {loc} </h1>
             </div>
             {jobList && (
               <JobList
                 pages={pages}
                 list={jobList}                
                 handlerFromParant={handleData}
+                isFeature={true}
               />
             )}
           </div>
@@ -130,7 +131,6 @@ export async function getServerSideProps(context) {
   if (loc || title) {
     jobListReq = jobListReq + '?title='+title+'&loc='+loc;
   }
-  console.log('jobListReq--->', jobListReq)
   // if (context.req.headers["user-agent"].match("Chrome")) {
   const res = await fetch(jobListReq);
   list = await res.json();

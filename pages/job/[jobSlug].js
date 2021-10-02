@@ -4,10 +4,12 @@ import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
 import JobDetails from "../../components/jobs/jobDetails";
+import JobList from "../../components/jobs/jobList";
 
 function JobDetail(props) {
   const [jobError, setJobError] = useState(props.error);
   const [jobObj, setJobObj] = useState(props);
+  const [jobList, setJobList] = useState("");
 
   let jobdesc;
   if(jobObj.job && jobObj.job.jobDesc) {
@@ -16,7 +18,7 @@ function JobDetail(props) {
   }
 
   useEffect(() => {
-    if (!jobObj) {
+    // if (!jobObj) {
       fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
         .then((res) => res.json())
         .then(
@@ -27,8 +29,20 @@ function JobDetail(props) {
             console.log("error--", error);
           }
         );
+   //  }
+    if (jobList.length === 0) {
+      fetch("/v2/jobs/jobList.php")
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setJobList(result.jobs);
+          },
+          (error) => {
+            console.log("error--", error);
+          }
+        );
     }
-  }, []);
+  }, [props]);
 
   return (
     <div>
@@ -42,6 +56,13 @@ function JobDetail(props) {
       {jobError ? 'No record found' : <div className="container">
         <JobDetails jobObj={jobObj} />
       </div>}
+      {jobList && (
+              <div className="container"><JobList
+                pages={0}
+                list={jobList}         
+                isFeature={false}
+              /></div>
+            )}
       <FooterNav />
     </div>
   );

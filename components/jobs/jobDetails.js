@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-const JobDetails = (jobs) => {
-  const [info, setInfo] = useState(jobs.jobObj);
+const JobDetails = (props) => {
+  const [info, setInfo] = useState(props.jobObj);
   const [jobApplyText, setJobApplyText] = useState("");
   const cookies = new Cookies();
   const auth = cookies.get("auth");
@@ -11,17 +11,18 @@ const JobDetails = (jobs) => {
   const router = useRouter();
 
   useEffect(() => {
-    if(auth){
-      let body = { jobID: info.job.jobID};
+    if (auth) {
+      let body = { jobID: info.job.jobID };
       fetch("/v2/jobs/aboutSet.php?type=VIEWJOB", {
         method: "POST",
         headers: {
           Authorization: auth,
         },
         body: JSON.stringify(body),
-      })  
+      });
     }
-  });
+    setInfo(props.jobObj);
+  }, [props]);
 
   let skillView, indView, langView, workView, cityView;
   if (info && info.jobSkill && info.jobSkill.length !== 0) {
@@ -53,10 +54,6 @@ const JobDetails = (jobs) => {
       );
     });
   }
-  let jobDate;
-  if (info && info.job && info.job.jobDate != null) {
-    jobDate = new Date(info.job.jobDate).toDateString("yyyy-MM-dd");
-  }
   let SalaryType;
   if (info && info.job && info.job.jobSalaryType === "1") {
     SalaryType = "Per Year";
@@ -73,7 +70,16 @@ const JobDetails = (jobs) => {
   }
   let jobSalary = null;
   if (info && info.job && info.job.jobSalaryStart && info.job.jobSalaryEnd) {
-    jobSalary = info.job.jobSalaryStart + " " + info.job.jobSalaryCurrency + " to " + info.job.jobSalaryEnd + " " + info.job.jobSalaryCurrency + " " + SalaryType;
+    jobSalary =
+      info.job.jobSalaryStart +
+      " " +
+      info.job.jobSalaryCurrency +
+      " to " +
+      info.job.jobSalaryEnd +
+      " " +
+      info.job.jobSalaryCurrency +
+      " " +
+      SalaryType;
   }
 
   let jobHrView;
@@ -81,7 +87,7 @@ const JobDetails = (jobs) => {
     jobHrView = info.jobAccess.map((item) => {
       return (
         <span key={item.jobAccessID} className="mr-3 badge badge-secondary">
-          <a className="text-white1" href={'/about/' + item.userSlug}>
+          <a className="text-white1" href={"/about/" + item.userSlug}>
             {item.userName}
           </a>
         </span>
@@ -90,71 +96,80 @@ const JobDetails = (jobs) => {
   }
 
   const onApply = () => {
-     if(userID) {
-      let body = { jobID: info.job.jobID};
+    if (userID) {
+      let body = { jobID: info.job.jobID };
       fetch("/v2/jobs/aboutSet.php?type=APPLYJOB", {
         method: "POST",
         headers: {
           Authorization: auth,
         },
         body: JSON.stringify(body),
-      }).then((res) => res.json())
-      .then(
-        (result) => {
-          setJobApplyText(result.jobApplyText);
-          console.log("result--", result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-    } else { 
-      router.push('/login?url='+ router.asPath)
-     }
+      })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setJobApplyText(result.jobApplyText);
+            console.log("result--", result);
+          },
+          (error) => {
+            console.log("error--", error);
+          }
+        );
+    } else {
+      router.push("/login?url=" + router.asPath);
+    }
     if (userID && info.job.jobRefURL) {
-      window.open(info.job.jobRefURL, '_blank');
+      window.open(info.job.jobRefURL, "_blank");
     }
   };
-
 
   return (
     <div className="text-left">
       <div className="card">
-        <div className="card-header text-center">
-          <h1>{info && info.job.jobTitle}</h1>
-          <p className="card-text">{info && info.job.comName}</p>
-          <p className="card-text">{jobApplyText}</p>
-          <p><button type="submit" className="btn btn-info ml-1 float-right" onClick={onApply}>Job Apply </button></p>
-         </div>
-      </div>
-      <div className="card-body">
-        {info && info.job && info.job.jobYearStart && (
-          <p className="card-text">
-            <b>Experience :</b> {info && info.job && info.job.jobYearStart} to
-            {info && info.job && info.job.jobYearEnd} Years
-          </p>
-        )}
-        {cityView && (
-          <p className="card-text">
-            <b>City :</b> {cityView}
-          </p>
-        )}
-        {jobSalary && (
-          <p className="card-text">
-            <b>Salary :</b> {jobSalary}
-          </p>
-        )}
-        {info && info.job && info.job.jobPosition && (
-          <p className="card-text">
-            <b>Position :</b> {info && info.job && info.job.jobPosition}
-            Position
-          </p>
-        )}
-        {jobHrView && (
-          <p className="card-text">
-            <b>Post By :</b> {jobHrView}
-          </p>
-        )}
+        <div className="card-body">
+          <div className="row">
+            <div className="col-8">
+              <h1 className="h4">{info && info.job.jobTitle}</h1>
+              <p className="card-text">{info && info.job.comName}</p>
+              {info && info.job && info.job.jobYearStart && (
+                <p className="card-text">
+                  <b>Experience : </b>
+                  {info && info.job && info.job.jobYearStart} to {info && info.job && info.job.jobYearEnd} Years
+                </p>
+              )}
+              {cityView && (
+                <p className="card-text">
+                  <b>City : </b> {cityView}
+                </p>
+              )}
+              {jobSalary && (
+                <p className="card-text">
+                  <b>Salary : </b> {jobSalary}
+                </p>
+              )}
+              {info && info.job && info.job.jobPosition && (
+                <p className="card-text">
+                  <b>Position : </b> {info && info.job && info.job.jobPosition} Position
+                </p>
+              )}
+              {jobHrView && (
+                <p className="card-text">
+                  <b>Post By : </b> {jobHrView}
+                </p>
+              )}
+            </div>
+            <div className="col-4">
+              <button
+                type="submit"
+                className="btn btn-info ml-1 float-end"
+                onClick={onApply}
+              >
+                Job Apply
+              </button>
+              <p className="card-text float-end">{jobApplyText}</p>
+            </div>
+          </div>
+        </div>
       </div>
       {info && info.job && (
         <div className="card-body">
@@ -162,7 +177,7 @@ const JobDetails = (jobs) => {
           <div dangerouslySetInnerHTML={{ __html: info.job.jobDesc }} />
         </div>
       )}
-      
+
       <div className="card-body">
         {skillView && (
           <p className="card-text">
@@ -184,14 +199,13 @@ const JobDetails = (jobs) => {
             <b>Work Type :</b> {workView}
           </p>
         )}
-        {jobDate && (
+        {info.job.jobDate && (
           <p className="card-text">
-            <b>Job Post Date :</b> {jobDate}
+            <b>Job Post Date :</b> {new Date(info.job.jobDate.replace(/-/g, '/')).toLocaleDateString()}
           </p>
         )}
       </div>
 
-     
       <div className="card-body">
         <h3>Safety Tips</h3>
         <ul>

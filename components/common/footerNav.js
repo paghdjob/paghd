@@ -25,7 +25,7 @@ function FooterNav() {
   }, []);
 
   return (
-    <footer className="container">
+    <footer className="container mt-3">
       <p>
         &copy; 2020–2021 Paghd jobs. &nbsp;
         <Link href="/legal/privacy-policy">

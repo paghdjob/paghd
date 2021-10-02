@@ -4,8 +4,6 @@ const JobList = (props) => {
   const [list, setList] = useState(props.list);
   const [sorts, setSorts] = useState(1);
   const [pages, setPages] = useState(props.pages);
-  // const [jobTotal, setJobTotal] = useState(props.jobTotal);
-  
 
   const salaryTypes = (id) => {
     switch (id) {
@@ -36,7 +34,7 @@ const JobList = (props) => {
   if (list.length > 1) {
     loadMore = (
       <div className="clearfix mt-3">
-        <button className="col btn btn-info" onClick={handleSubmit}>
+        <button className="col btn btn-outline-dark" onClick={handleSubmit}>
           Click here to Load more job...
         </button>
       </div>
@@ -45,16 +43,10 @@ const JobList = (props) => {
   let loadJobMore;
   loadJobMore = list.map((data) => {
     return (
-      <div className="card" key={data.jobID}>
-        <div className="pb-0 card-body">
-          <div className="float-left mr-3">
-            <i
-              className="bi bi-briefcase icon32 disabled"
-              aria-hidden="true"
-            ></i>
-          </div>
+      <div className="card mt-3" key={data.jobID}>
+        <div className="card-body">
           <div className="text-left">
-            <h6 className="card-title text-capitalize mb-1">
+            <h6 className="card-title text-capitalize">
               <Link className="text-dark" href={"/job/" + data.jobSlug}>
                 {data.jobTitle}
               </Link>
@@ -62,33 +54,32 @@ const JobList = (props) => {
                 <i title="Verified" className="bi bi-check-circle green"></i>
               )}
             </h6>
-            <p className="text-capitalize text-muted">{data.comName}</p>
+            <p className="text-capitalize">{data.comName}</p>
           </div>
-        </div>
-        <div className="card-footer">
+        
+          <div className="row">
           {data.cityName && (
-            <span className="text-capitalize">
-              <i className="bi bi-map-marker" aria-hidden="true"></i>
-              {data.cityName} {data.countryCode}
+            <span className="col-6 pb-1 text-capitalize">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
+              &nbsp; {data.cityName} {data.countryCode}
             </span>
           )}
           {data.workTypeName && (
-            <span className="text-capitalize">
-              
-              <i className="bi bi-briefcase" aria-hidden="true"></i>
-              {data.workTypeName}
+            <span className="col-6 pb-1 text-capitalize">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.23 15.5c-6.801 0-10.367-1.221-12.23-2.597v9.097h24v-8.949c-3.218 2.221-9.422 2.449-11.77 2.449zm1.77 2.532c0 1.087-.896 1.968-2 1.968s-2-.881-2-1.968v-1.032h4v1.032zm-14-8.541v-2.491h24v2.605c0 5.289-24 5.133-24-.114zm9-7.491c-1.104 0-2 .896-2 2v2h2v-1.5c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v1.5h2v-2c0-1.104-.896-2-2-2h-6z"/></svg>              
+              &nbsp; {data.workTypeName}
             </span>
           )}
-          {data.jobSalaryStart && (
-            <span className="text-capitalize">
-              
-              <i className="bi bi-inr" aria-hidden="true"></i>
-              {data.jobSalaryStart} - {data.jobSalaryEnd}
-            </span>
-          )}
-          {salaryTypes(data.jobSalaryType)} &nbsp;
-          <i className="bi bi-clock-o icon" aria-hidden="true"></i>
-          {new Date(data.jobDate).toLocaleDateString()}
+          <span className="col-6 pb-1 text-capitalize">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 4h-20c-1.104 0-2 .896-2 2v12c0 1.104.896 2 2 2h20c1.104 0 2-.896 2-2v-12c0-1.104-.896-2-2-2zm0 13.5c0 .276-.224.5-.5.5h-19c-.276 0-.5-.224-.5-.5v-6.5h20v6.5zm0-9.5h-20v-1.5c0-.276.224-.5.5-.5h19c.276 0 .5.224.5.5v1.5zm-9 6h-9v-1h9v1zm-3 2h-6v-1h6v1zm10-2h-3v-1h3v1z"/></svg>
+            &nbsp;{data.jobSalaryStart && (<>{data.jobSalaryStart} - {data.jobSalaryEnd}</>)}
+            &nbsp; {salaryTypes(data.jobSalaryType)}
+          </span>
+          <span className="col-6 pb-1 text-capitalize">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 20h-4v-4h4v4zm-6-10h-4v4h4v-4zm6 0h-4v4h4v-4zm-12 6h-4v4h4v-4zm6 0h-4v4h4v-4zm-6-6h-4v4h4v-4zm16-8v22h-24v-22h3v1c0 1.103.897 2 2 2s2-.897 2-2v-1h10v1c0 1.103.897 2 2 2s2-.897 2-2v-1h3zm-2 6h-20v14h20v-14zm-2-7c0-.552-.447-1-1-1s-1 .448-1 1v2c0 .552.447 1 1 1s1-.448 1-1v-2zm-14 2c0 .552-.447 1-1 1s-1-.448-1-1v-2c0-.552.447-1 1-1s1 .448 1 1v2z"/></svg>
+            &nbsp; {new Date(data.jobDate.replace(/-/g, '/')).toLocaleDateString()}
+          </span>
+        </div>
         </div>
       </div>
     );
@@ -101,15 +92,11 @@ const JobList = (props) => {
 
     // }
   }, [props]);
-  //  console.log("props.list -->> ", loadJobMore);
 
   return (
     <>
-      <div className="bg-light clearfix">
-        {/* <div className="float-start col-8">
-          <h1 className="h5">Remote Jobs in Canada, {jobTotal} jobs</h1>
-        </div> */}
-        <div className="float-end form-floating  col-2">
+      {props.isFeature && <div className="bg-light clearfix">
+        <div className="float-end form-floating  col-md-2">
           <select
             onChange={sortFieldChanges}
             name="sorts"
@@ -122,9 +109,9 @@ const JobList = (props) => {
           </select>
           <label>Sort by :</label>
         </div>
-      </div>
+      </div>} 
       {loadJobMore}
-      {loadMore}
+      {props.isFeature && <div className="float-start form-floating  col-md-4">{loadMore}</div>}
     </>
   );
 };
