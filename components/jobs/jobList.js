@@ -33,7 +33,7 @@ const JobList = (props) => {
   let loadMore;
   if (list.length > 1) {
     loadMore = (
-      <div className="clearfix mt-3">
+      <div className="clearfix text-center mt-3">
         <button className="col btn btn-info" onClick={handleSubmit}>
           Click here to Load more job...
         </button>
@@ -72,8 +72,8 @@ const JobList = (props) => {
           )}
           <span className="col-6 pb-1 text-capitalize">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 4h-20c-1.104 0-2 .896-2 2v12c0 1.104.896 2 2 2h20c1.104 0 2-.896 2-2v-12c0-1.104-.896-2-2-2zm0 13.5c0 .276-.224.5-.5.5h-19c-.276 0-.5-.224-.5-.5v-6.5h20v6.5zm0-9.5h-20v-1.5c0-.276.224-.5.5-.5h19c.276 0 .5.224.5.5v1.5zm-9 6h-9v-1h9v1zm-3 2h-6v-1h6v1zm10-2h-3v-1h3v1z"/></svg>
-            &nbsp;{data.jobSalaryStart && (<>{data.jobSalaryStart} - {data.jobSalaryEnd}</>)}
-            &nbsp; {salaryTypes(data.jobSalaryType)}
+            &nbsp;{data.jobSalaryStart && (<>{data.jobSalaryStart} - {data.jobSalaryEnd} {data.jobSalaryCurrency} </>)}
+            &nbsp;{salaryTypes(data.jobSalaryType)}
           </span>
           <span className="col-6 pb-1 text-capitalize">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 20h-4v-4h4v4zm-6-10h-4v4h4v-4zm6 0h-4v4h4v-4zm-12 6h-4v4h4v-4zm6 0h-4v4h4v-4zm-6-6h-4v4h4v-4zm16-8v22h-24v-22h3v1c0 1.103.897 2 2 2s2-.897 2-2v-1h10v1c0 1.103.897 2 2 2s2-.897 2-2v-1h3zm-2 6h-20v14h20v-14zm-2-7c0-.552-.447-1-1-1s-1 .448-1 1v2c0 .552.447 1 1 1s1-.448 1-1v-2zm-14 2c0 .552-.447 1-1 1s-1-.448-1-1v-2c0-.552.447-1 1-1s1 .448 1 1v2z"/></svg>
@@ -111,7 +111,7 @@ const JobList = (props) => {
         </div>
       </div>} 
       {loadJobMore}
-      {props.isFeature && <div className="float-start form-floating  col-md-4">{loadMore}</div>}
+      {props.isFeature && <div className="row">{loadMore}</div>}
     </>
   );
 };
