@@ -84,33 +84,6 @@ const ReportJobAccess = (props) => {
           </td>
           <td>{item.jobStatus === "2" ? "Closed" : "Open"}</td>
           <td>{new Date(item.jobDate.replace(/-/g, '/')).toLocaleDateString()}</td>
-          <td
-            className={
-              item.jobVerify === "0" ? "alert-danger" : "alert-success"
-            }
-          >
-            {item.jobVerify === "0" ? (
-              <a
-                className="text-info"
-                rel="noopener noreferrer"
-                target="_blank"
-                href={
-                  "job/" +
-                  item.jobSlug +
-                  "?-" +
-                  item.userpin +
-                  "-J-" +
-                  item.userID +
-                  "-" +
-                  item.jobID
-                }
-              >
-                Verify your job
-              </a>
-            ) : (
-              "Verified"
-            )}
-          </td>
           {userID === "258" && (
             <td>
               <button
@@ -139,7 +112,6 @@ const ReportJobAccess = (props) => {
               <th scope="col">View</th>
               <th scope="col">Status</th>
               <th scope="col">Date</th>
-              <th scope="col">Verify</th>
               {userID === "258" && <th scope="col">FB post</th>}
             </tr>
           </thead>
