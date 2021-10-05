@@ -11,6 +11,8 @@ const HeadSeo = (props) => {
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <link rel="icon" href="/favicon.ico" />
+      {/* <meta name="robots" content="all" /> */}
+      <meta name="robots" content="index,follow" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#FFFFFF" />
       <link rel="apple-touch-icon" href="/apple-icon.png" />
