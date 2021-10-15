@@ -12,8 +12,7 @@ a {
 }
 .nav-link {
   text-align: center;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0 10px;
 }
 svg {
   fill: #42a3b9;

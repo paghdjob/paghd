@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9                                 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-15-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-14-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-13-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-12-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-11-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-10-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-09-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-08-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+    <url>
+      <loc>https://paghd.vercel.app/sitemap/2021-10-07-job.xml</loc>
+      <lastmod>2021-10-15T07:30:53+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
    <url>
       <loc>https://paghd.vercel.app/sitemap/2021-10-06-job.xml</loc>
       <lastmod>2021-10-06T09:00:09+00:00</lastmod>
