@@ -15,14 +15,14 @@ function HeaderNav() {
             {/* <span className="fs-4">
               
             </span> */}
-            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <a href="/" className="d-flex align-items-center text-dark text-decoration-none">
             <Image
                 className="logo"
                 src={Logo}
                 alt="paghd jobs"
                
               />
-        <span class="fs-4 paghd">Paghd Jobs</span>
+        <span className="fs-4 paghd">Paghd Jobs</span>
       </a>
           </Link>
         </div>

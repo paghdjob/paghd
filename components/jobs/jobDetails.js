@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
+import ProfileResume from '../about/profile/peopleResume';
 
 const JobDetails = (props) => {
   const [info, setInfo] = useState(props.jobObj);
   const [jobApplyText, setJobApplyText] = useState("");
+  const [isProfileResume, setIsProfileResume] = useState(false);
   const cookies = new Cookies();
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
@@ -109,7 +111,11 @@ const JobDetails = (props) => {
         .then(
           (result) => {
             setJobApplyText(result.jobApplyText);
-            console.log("result--", result);
+            if (result.valid === "false") {
+              setIsProfileResume(true);
+            } else if (result.valid === "true" && userID && info.job.jobRefURL) {
+              window.open(info.job.jobRefURL, "_blank");
+            }
           },
           (error) => {
             console.log("error--", error);
@@ -118,11 +124,8 @@ const JobDetails = (props) => {
     } else {
       router.push("/login?url=" + router.asPath);
     }
-    if (userID && info.job.jobRefURL) {
-      window.open(info.job.jobRefURL, "_blank");
-    }
   };
-
+  let resume = isProfileResume ?  <ProfileResume /> : '';
   return (
     <div className="text-left">
       <div className="card">
@@ -171,6 +174,7 @@ const JobDetails = (props) => {
           </div>
         </div>
       </div>
+      {resume}
       {info && info.job && (
         <div className="card-body">
           <p className="card-text">Job Description</p>
