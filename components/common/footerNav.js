@@ -33,10 +33,10 @@ function FooterNav() {
           <p>
             &copy; 2020–2021 Paghd jobs. &nbsp;
             <Link href="/legal/privacy-policy">
-              <a>Privacy Policy</a>
+              <a className="pe-2">Privacy Policy</a>
             </Link>
             <Link href="/legal/terms-conditions">
-              <a> Terms & Conditions</a>
+             <a>Terms & Conditions</a>
             </Link>
           </p>
         </div>

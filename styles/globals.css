@@ -1,2 +1,31 @@
-.nav-link, a { color: #42a3b9 !important; }
-.btn-info { color: #ffffff !important; background: #42a3b9 !important; }
+.nav-link,
+a {
+  color: #42a3b9 !important;
+}
+.btn-info {
+  color: #ffffff !important;
+  background: #42a3b9 !important;
+}
+.logo {
+  width: 250px;
+  height: 48px;
+}
+.nav-link {
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+svg {
+  fill: #42a3b9;
+}
+svg:hover {
+  fill: #25cff2;
+}
+.menuLabel {
+  display: block;
+}
+.nav-pills {
+    /* position: fixed;
+    bottom: 0; */
+    background: #ffffff;
+}
