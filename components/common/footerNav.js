@@ -29,7 +29,7 @@ function FooterNav() {
   return (
     <footer className="container mt-3">
       <div className="row">
-        <div className="col-6">
+        <div className="col">
           <p>
             &copy; 2020–2021 Paghd jobs. &nbsp;
             <Link href="/legal/privacy-policy">
@@ -40,9 +40,7 @@ function FooterNav() {
             </Link>
           </p>
         </div>
-        <div className="col-6">
           <InstallPWA />
-        </div>
       </div>
     </footer>
   );

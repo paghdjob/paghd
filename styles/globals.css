@@ -6,9 +6,9 @@ a {
   color: #ffffff !important;
   background: #42a3b9 !important;
 }
-.logo {
-  width: 250px;
-  height: 48px;
+.paghd {
+ padding-left: 5px;
+ color: #42a3b9;
 }
 .nav-link {
   text-align: center;

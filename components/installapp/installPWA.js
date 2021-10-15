@@ -5,7 +5,7 @@ const InstallPWA = () => {
   const [promptInstall, setPromptInstall] = useState(null);
 
   useEffect(() => {
-    const handler = e => {
+    const handler = (e) => {
       e.preventDefault();
       console.log("we are being triggered :D");
       setSupportsPWA(true);
@@ -16,7 +16,7 @@ const InstallPWA = () => {
     return () => window.removeEventListener("transitionend", handler);
   }, []);
 
-  const onClick = evt => {
+  const onClick = (evt) => {
     evt.preventDefault();
     if (!promptInstall) {
       return;
@@ -27,15 +27,17 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <button
-      className="btn link-info float-end"
-      id="setup_button"
-      aria-label="Install app"
-      title="Install app"
-      onClick={onClick}
-    >
-      Click here to install Lite App
-    </button>
+    <div className="col">
+      <button
+        className="btn link-info float-end"
+        id="setup_button"
+        aria-label="Install app"
+        title="Install app"
+        onClick={onClick}
+      >
+        Click here to install Lite App
+      </button>
+    </div>
   );
 };
 

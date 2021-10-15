@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import Logo from "../../public/icons/logo.png";
+import Logo from "../../public/icons/icon-32x32.png";
 import Cookies from "universal-cookie";
 
 function HeaderNav() {
@@ -9,18 +9,21 @@ function HeaderNav() {
   let userID = cookies.get("userID");
   return (
     <div className="container">
-       <header className="d-flex flex-wrap mb-1 mt-1 border-bottom"> 
+       <header className="d-flex flex-wrap d-flex flex-column flex-md-row align-items-center  mb-1 mt-1 border-bottom"> 
         <div className="d-flex align-items-center mb-md-0 me-md-auto text-dark text-decoration-none">
           <Link href="/" passHref>
-            <span className="fs-4">
-              <Image
+            {/* <span className="fs-4">
+              
+            </span> */}
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <Image
                 className="logo"
                 src={Logo}
                 alt="paghd jobs"
-                width="250px"
-                height="48px"
+               
               />
-            </span>
+        <span class="fs-4 paghd">Paghd Jobs</span>
+      </a>
           </Link>
         </div>
 
