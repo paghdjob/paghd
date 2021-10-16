@@ -27,7 +27,7 @@ function FooterNav() {
   }, []);
 
   return (
-    <footer className="container mt-3">
+    <footer className="container mt-3 mb-5">
       <div className="row">
         <div className="col">
           <p>

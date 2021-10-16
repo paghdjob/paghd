@@ -9,21 +9,13 @@ function HeaderNav() {
   let userID = cookies.get("userID");
   return (
     <div className="container">
-       <header className="d-flex flex-wrap d-flex flex-column flex-md-row align-items-center  mb-1 mt-1 border-bottom"> 
+      <header className="d-flex flex-wrap d-flex flex-column flex-md-row align-items-center  mb-1 mt-1 border-bottom">
         <div className="d-flex align-items-center mb-md-0 me-md-auto text-dark text-decoration-none">
           <Link href="/" passHref>
-            {/* <span className="fs-4">
-              
-            </span> */}
-            <a href="/" className="d-flex align-items-center text-dark text-decoration-none">
-            <Image
-                className="logo"
-                src={Logo}
-                alt="paghd jobs"
-               
-              />
-        <span className="fs-4 paghd">Paghd Jobs</span>
-      </a>
+            <a className="d-flex align-items-center text-dark text-decoration-none">
+              <Image className="logo" src={Logo} alt="paghd jobs" />
+              <span className="fs-4 paghd">Paghd Jobs</span>
+            </a>
           </Link>
         </div>
 
@@ -68,7 +60,14 @@ function HeaderNav() {
               <li className="nav-item">
                 <Link href="/report">
                   <a className="nav-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 19h-4v-4h4v4zm6 0h-4v-8h4v8zm6 0h-4v-13h4v13zm6 0h-4v-19h4v19zm1 2h-24v2h24v-2z"/></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M5 19h-4v-4h4v4zm6 0h-4v-8h4v8zm6 0h-4v-13h4v13zm6 0h-4v-19h4v19zm1 2h-24v2h24v-2z" />
+                    </svg>
                     <label className="menuLabel">Report</label>
                   </a>
                 </Link>
@@ -91,9 +90,16 @@ function HeaderNav() {
               <li className="nav-item">
                 <Link href="/login/logout">
                   <a className="nav-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14 12h-4v-12h4v12zm4.213-10.246l-1.213 1.599c2.984 1.732 5 4.955 5 8.647 0 5.514-4.486 10-10 10s-10-4.486-10-10c0-3.692 2.016-6.915 5-8.647l-1.213-1.599c-3.465 2.103-5.787 5.897-5.787 10.246 0 6.627 5.373 12 12 12s12-5.373 12-12c0-4.349-2.322-8.143-5.787-10.246z"/></svg>
-                  <label className="menuLabel">Log Out</label> 
-                    </a>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M14 12h-4v-12h4v12zm4.213-10.246l-1.213 1.599c2.984 1.732 5 4.955 5 8.647 0 5.514-4.486 10-10 10s-10-4.486-10-10c0-3.692 2.016-6.915 5-8.647l-1.213-1.599c-3.465 2.103-5.787 5.897-5.787 10.246 0 6.627 5.373 12 12 12s12-5.373 12-12c0-4.349-2.322-8.143-5.787-10.246z" />
+                    </svg>
+                    <label className="menuLabel">Logout</label>
+                  </a>
                 </Link>
               </li>
             </>
