@@ -22,6 +22,7 @@ function FooterNav() {
       fetch("/v2/autopost/linkedin/postJobLinkedin.php").then((res) =>
         res.json()
       );
+      fetch("/v2/autopost/fb/postJobFacebook.php").then((res) => res.json());
       fetch("/v2/autopost/twitter/tweet.php").then((res) => res.json());
     }
   }, []);

@@ -32,7 +32,6 @@ const LoginPage = () => {
     }
   }
   const responseFacebook = (response) => {
-    console.log("responseFacebook---", response)
     if (response.email) {
       localStorage.setItem('facebook_access_token', response.accessToken);
       let userDetails = {
@@ -41,7 +40,7 @@ const LoginPage = () => {
         profile: '',
         web: 2
       }
-      // userIdentify(userDetails);
+      userIdentify(userDetails);
     } else {
       console.log(response);
     }
