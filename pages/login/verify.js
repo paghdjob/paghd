@@ -62,7 +62,7 @@ function Verify() {
                   <div className="alert alert-danger">{res}</div>
                 )}
                 <div className="col-sm-10">
-                  <Link className="btn btn-primary" href="/login">
+                  <Link className="btn btn-info" href="/login">
                     Login
                   </Link>
                 </div>

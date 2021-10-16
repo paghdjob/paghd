@@ -290,7 +290,7 @@ const JobProfile = (props) => {
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    className="mt-4 btn btn-primary"
+                    className="mt-4 btn btn-info"
                   >
                     Save
                   </button>

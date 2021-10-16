@@ -51,7 +51,7 @@ function JobAbout(props) {
           <h1>Edit Job : {jobObj.job.jobTitle} </h1>
           <div className="float-end">
           <Link href={'/job/'+ jobObj.job.jobSlug}>
-            <a className="float-end btn btn-primary">Preview this job</a>
+            <a className="float-end btn btn-info">Preview Job</a>
           </Link>
           </div>
         </div>

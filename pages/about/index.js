@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
+import Link from "next/link";
 const HeaderNav = dynamic(() => import('../../components/common/headerNav'))
 const FooterNav = dynamic(() => import('../../components/common/footerNav'))
 const ProfileInfo = dynamic(() => import('../../components/about/profile/peopleInfo'))
@@ -43,6 +44,12 @@ function About(props) {
       <div className="container">
         <div className="row m-0 p-0">
           <h1>Profile</h1>
+          <div className="float-end">
+          {userObj.users && ( 
+          <Link href={'/about/'+ userObj.users.userSlug }>
+            <a className="float-end btn btn-info">Preview Resume</a>
+          </Link> )}
+          </div>
         </div>
 
         {userObj.users && (
