@@ -29,6 +29,7 @@ svg:hover {
     position: fixed;
     bottom: 0;
     background: #ffffff;
+    z-index: 999;
   }
   .nav-link {
     padding: 0 7px;
