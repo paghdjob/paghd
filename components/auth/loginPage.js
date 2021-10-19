@@ -52,6 +52,9 @@ const LoginPage = () => {
     cookies.set("auth", auth, { path: "/", maxAge: 25929999 });
     router.push(router.query.url ? router.query.url : '/')
   };
+  const verifyEmail = (userID) => {
+    fetch("v2/auth/EmailTemplate.php?type=EMAILVERIFY&userID="+ userID).then((res) => res.json());
+  }
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("/v2/auth/login.php", {
@@ -65,6 +68,9 @@ const LoginPage = () => {
             setMessage(result.msg);
             if (result.userID && result.auth) {
               userWebSetting(result.userID, result.auth);
+            }
+            if(result.valid === false && result.userID) {
+              verifyEmail(result.userID);
             }
           },
           (error) => {

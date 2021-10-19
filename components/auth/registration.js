@@ -19,6 +19,10 @@ const Registration = () => {
     event.preventDefault();
   };
 
+  const regEmail = (userID) => {
+    fetch("v2/auth/EmailTemplate.php?type=REGISTRATION&userID="+ userID).then((res) => res.json());
+  }
+  
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("https://www.paghd.com/v2/auth/registration.php", {
@@ -30,6 +34,7 @@ const Registration = () => {
           (result) => {
             // console.log("result--", result);
             setMessage(result.msg);
+            regEmail(result.userID);
           },
           (error) => {
             setMessage(error);

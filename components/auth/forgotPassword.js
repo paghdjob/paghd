@@ -13,7 +13,9 @@ const ForgotPassword = () => {
     userIdentify(userDetails);
     event.preventDefault();
   };
-
+  const forgotPwd = (userID) => {
+    fetch("v2/auth/EmailTemplate.php?type=FORGOTPASSWORD&userID="+ userID).then((res) => res.json());
+  }
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("https://www.paghd.com/v2/auth/forgot-password.php", {
@@ -25,6 +27,7 @@ const ForgotPassword = () => {
           (result) => {
             // console.log("result--", result);
             setMessage(result.msg);
+            forgotPwd(result.userID)
           },
           (error) => {
             setMessage(error);
