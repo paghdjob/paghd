@@ -16,7 +16,10 @@ const ChangePassword = () => {
     userIdentify(userDetails);
     event.preventDefault();
   };
-
+  
+  const pwdEmail = (userID) => {
+    fetch("v2/auth/EmailTemplate.php?type=PASSWORDSET&userID="+ userID).then((res) => res.json());
+  }
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("https://www.paghd.com/v2/auth/change-password.php", {
@@ -28,6 +31,9 @@ const ChangePassword = () => {
           (result) => {
             // console.log("result--", result);
             setMessage(result.msg);
+            if(result.valid === true && result.userID) {
+              pwdEmail(result.userID);
+            }
           },
           (error) => {
             setMessage(error);
