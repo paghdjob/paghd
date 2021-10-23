@@ -163,11 +163,11 @@ const JobProfile = (props) => {
                   comList.map((city) => {
                     return (
                       <li
-                        onClick={(e) => selectCompany(city.label)}
+                        onClick={(e) => selectCompany(city.cityName)}
                         className="list-group-item text-start"
                         key={city.value}
                       >
-                        {city.label}
+                        {city.cityName}
                       </li>
                     );
                   })}

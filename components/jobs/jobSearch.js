@@ -72,11 +72,11 @@ const JobSearch = (props) => {
               cities.map((city) => {
                 return (
                   <li
-                    onClick={(e) => selectCity(city.label)}
+                    onClick={(e) => selectCity(city.cityName)}
                     className="list-group-item text-start"
                     key={city.value}
                   >
-                    {city.label}
+                    {city.cityName}
                   </li>
                 );
               })}

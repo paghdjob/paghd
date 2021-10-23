@@ -17,7 +17,7 @@ function JobsIn(props) {
   const checkTitle = router.query.title ? router.query.title : '';
   const [titleSearch, setTitleSearch] = useState(checkTitle);
   const checkLoc = (router.query.loc).replace('jobs-in-', '');
-  const [locSearch, setLocSearch] = useState(checkLoc);
+  const [locSearch, setLocSearch] = useState(checkLoc.replace('-', ' '));
 
   useEffect(() => {
     if (!jobList) {
@@ -92,7 +92,7 @@ function JobsIn(props) {
           <div className="col">
             <div className="float-start col-8">
               <h1 className="h5 pt-3">
-                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in"}
+                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in "}
                 {locSearch}
               </h1>
             </div>
@@ -117,7 +117,7 @@ export async function getServerSideProps(context) {
   let filterRes = {};
   if (
     context.req.headers["user-agent"].match(
-      "Chromes",
+      "Chrome",
       "Googlebot",
       "Bingbot",
       "Slurp",
@@ -133,7 +133,8 @@ export async function getServerSideProps(context) {
     const { loc = '', title ='' } = context.query;
     let jobListReq = "https://www.paghd.com/v2/jobs/jobListNew.php";
     if (loc || title) {
-      jobListReq = jobListReq + "?title=" + title + "&loc=" + loc.replace('jobs-in-','');
+      let cityName = loc.replace('jobs-in-','');
+      jobListReq = jobListReq + "?title=" + title + "&loc=" + cityName.replace('-',' ');
     }
     const res = await fetch(jobListReq);
     list = await res.json();

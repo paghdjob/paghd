@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
-// import Cities from './categoryList';
 
 //const InstallPWA = React.lazy(() => import('../installapp/installPWA'));
 

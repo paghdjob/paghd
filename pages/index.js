@@ -40,7 +40,7 @@ export default function Home() {
   };
   const router = useRouter();
   const handleFilterChange = () => {
-    const jobUrl = '/job?title=' + jobTitleSearch + '&loc=' + jobLocSearch;
+    const jobUrl = '/jobs/jobs-in-'+ jobLocSearch+ '?title=' + jobTitleSearch;
     router.push(jobUrl);
   };
 
@@ -92,11 +92,11 @@ export default function Home() {
                     cities.map((city) => {
                       return (
                         <li
-                          onClick={(e) => selectCity(city.label)}
+                          onClick={(e) => selectCity(city.cityName)}
                           className="list-group-item text-start"
                           key={city.value}
                         >
-                          {city.label}
+                          {city.cityName}
                         </li>
                       );
                     })}
