@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+// import Cities from './categoryList';
 
 //const InstallPWA = React.lazy(() => import('../installapp/installPWA'));
 
@@ -37,11 +38,11 @@ function FooterNav() {
               <a className="pe-2">Privacy Policy</a>
             </Link>
             <Link href="/legal/terms-conditions">
-             <a>Terms & Conditions</a>
+              <a>Terms & Conditions</a>
             </Link>
           </p>
         </div>
-          <InstallPWA />
+        <InstallPWA />
       </div>
     </footer>
   );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
@@ -208,6 +209,23 @@ const JobDetails = (props) => {
             <b>Job Post Date :</b> {new Date(info.job.jobDate.replace(/-/g, '/')).toLocaleDateString()}
           </p>
         )}
+      </div>
+
+      <div className="rows">
+        <ul className="nav">
+          {info && info.allCity  &&
+            info.allCity.map((city) => {
+              return (
+                <li className="float-start m-2" key={city.cityID}>
+                  <Link href={'/jobs/jobs-in-' + (city.cityName).replace(' ','-')}>
+                  <a className="p-1">
+                      Job In {city.cityName}
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
+        </ul>
       </div>
 
       <div className="card-body">

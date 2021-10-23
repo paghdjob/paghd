@@ -32,8 +32,8 @@ function JobDetail(props) {
         }
       );
     //  }
-    if (jobList.length === 0) {
-      fetch("/v2/jobs/jobList.php")
+    if (jobList.length === 0 && jobObj && jobObj.job) {
+      fetch("/v2/jobs/jobListNew.php?title="+ jobObj.job.jobTitle)
         .then((res) => res.json())
         .then(
           (result) => {
