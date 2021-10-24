@@ -64,7 +64,7 @@ function JobDetail(props) {
               "value": jobObj.job.jobID
             },
             "datePosted" : jobObj.job.jobDate,
-            "validThrough" : "",
+            "validThrough" : "2021-12-31T00:00",
             "employmentType" : jobObj.jobWorkType ? jobObj.jobWorkType[0].workTypeName : '',
             "hiringOrganization" : {
               "@type" : "Organization",
