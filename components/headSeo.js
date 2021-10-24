@@ -7,6 +7,7 @@ const HeadSeo = (props) => {
   const [description, setDescription] = useState(props.description);
   const [keywords, setKeywords] = useState(props.keywords);
   const router = useRouter();
+  const [structuredData, setStructuredData] = useState(props.structuredData);
 
   return (
     <Head>
@@ -68,6 +69,10 @@ const HeadSeo = (props) => {
       <meta property="twitter:image:height" content="675" />
       <meta name="article:author" content="paghd.com" />
       <meta name="fo-verify" content="21acbd92-fc17-4196-9a65-16614f08f125" />
+      {structuredData && <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      /> }
     </Head>
   );
 };
