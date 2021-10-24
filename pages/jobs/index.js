@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 function Jobs(props) {
   const [jobList, setJobList] = useState(props.list.jobs);
-  const [jobTotal, setJobTotal] = useState("");
+  const [jobTotal, setJobTotal] = useState(props.list.total);
   const [filt, setFilt] = useState("");
   const [pages, setPages] = useState(0);
   const router = useRouter();
@@ -89,8 +89,8 @@ function Jobs(props) {
           <div className="col">
             <div className="float-start col-8">
               <h1 className="h5 pt-3">
-                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in"}{" "}
-                {locSearch}{" "}
+                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in"}
+                {locSearch}
               </h1>
             </div>
             {jobList && (

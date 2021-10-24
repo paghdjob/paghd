@@ -219,7 +219,7 @@ const JobDetails = (props) => {
                 <li className="float-start m-2" key={city.cityID}>
                   <Link href={'/jobs/jobs-in-' + (city.cityName).replace(' ','-')}>
                   <a className="p-1">
-                      Job In {city.cityName}
+                       {'Job In '+city.cityName}
                     </a>
                   </Link>
                 </li>

@@ -89,8 +89,8 @@ function Job(props) {
           <div className="col">
             <div className="float-start col-8">
               <h1 className="h5 pt-3">
-                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in"}{" "}
-                {locSearch}{" "}
+                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in"}
+                {locSearch}
               </h1>
             </div>
             {jobList && (

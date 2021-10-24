@@ -107,7 +107,6 @@ export default function Home() {
                   title="Search"
                   className="btn btn-info pt-3 pb-3"
                   onClick={handleFilterChange}
-                  href={"/job?title=" + jobTitleSearch + "&loc=" + jobLocSearch}
                 >
                   Search
                 </button>
