@@ -96,7 +96,7 @@ export default function Home() {
                           className="list-group-item text-start"
                           key={city.value}
                         >
-                          {city.cityName}
+                          {city.cityName +', '+ city.countryName +' ('+ city.jobCount +')'}
                         </li>
                       );
                     })}

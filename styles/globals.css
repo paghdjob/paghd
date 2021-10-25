@@ -23,6 +23,10 @@ svg:hover {
 .menuLabel {
   display: block;
 }
+.no-underline {
+  text-decoration: none;
+}
+
 
 @media only screen and (max-width: 600px) {
   .nav-pills {
