@@ -53,46 +53,7 @@ function JobDetail(props) {
           title={jobObj.job.jobTitle}
           description={jobdesc}
           keywords={jobObj.job.comName}
-          // structuredData={{
-          //   "@context" : "https://schema.org/",
-          //   "@type" : "JobPosting",
-          //   "title" : jobObj.job.jobTitle,
-          //   "description" : jobObj.job.jobDesc,
-          //   "identifier": {
-          //     "@type": "PropertyValue",
-          //     "name": jobObj.job.comName,
-          //     "value": jobObj.job.jobID
-          //   },
-          //   "datePosted" : jobObj.job.jobDate,
-          //   "validThrough" : "2021-12-31T00:00",
-          //   "employmentType" : jobObj.jobWorkType ? jobObj.jobWorkType[0].workTypeName : '',
-          //   "hiringOrganization" : {
-          //     "@type" : "Organization",
-          //     "name" : jobObj.job.comName,
-          //     "sameAs" : "https://paghd.vercel.app/"+ jobObj.job.jobSlug,
-          //     "logo" : "https://paghd.vercel.app/icons/icon-32x32.png"
-          //   },
-          //   "jobLocation": {
-          //   "@type": "Place",
-          //     "address": {
-          //     "@type": "PostalAddress",
-          //     "streetAddress": jobObj.jobCity ? jobObj.jobCity[0].cityName : '',
-          //     "addressLocality": jobObj.jobCity ? jobObj.jobCity[0].cityName : '',
-          //     "addressRegion": jobObj.jobCity ? jobObj.jobCity[0].cityName : '',
-          //     "addressCountry": jobObj.jobCity ? jobObj.jobCity[0].countryCode : ''
-          //     }
-          //   },
-          //   "baseSalary": {
-          //     "@type": "MonetaryAmount",
-          //     "currency": jobObj.job.jobSalaryCurrency,
-          //     "value": {
-          //       "@type": "QuantitativeValue",
-          //       "minValue": jobObj.job.jobSalaryStart,
-          //       "maxValue": jobObj.job.jobSalaryEnd,
-          //       "unitText": "HOUR"
-          //     }
-          //   }
-          // }}
+          structuredData={jobObj.googleObj}
         />
       )}
       <HeaderNav />
