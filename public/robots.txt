@@ -6,3 +6,4 @@ Allow: /*.js
 Allow: /*.css
 
 Sitemap: https://paghd.vercel.app/sitemap.xml
+Sitemap: https://paghd.vercel.app/country-jobs.xml
