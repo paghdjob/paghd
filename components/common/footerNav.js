@@ -37,7 +37,10 @@ function FooterNav() {
               <a className="pe-2">Privacy Policy</a>
             </Link>
             <Link href="/legal/terms-conditions">
-              <a>Terms & Conditions</a>
+              <a className="pe-2">Terms & Conditions</a>
+            </Link>
+            <Link href="/legal/about-us">
+              <a>About Us</a>
             </Link>
           </p>
         </div>
