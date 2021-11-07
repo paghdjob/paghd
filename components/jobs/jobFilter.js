@@ -67,7 +67,7 @@ const JobFilter = (props) => {
     return (
       <div key={data.cityID}>
         <label><input className="checkbox-control" onChange={handleFilterChange} type="checkbox" name="city" value={data.cityID} />
-          &nbsp; {data.cityName}, {data.countryCode}</label>
+          &nbsp; {data.cityName}, {data.countryCode} ({data.jobCount})</label>
       </div>
     );
   });
