@@ -117,7 +117,7 @@ export async function getServerSideProps(context) {
   let filterRes = {};
   if (
     context.req.headers["user-agent"].match(
-      "Chromes",
+      "Chrome",
       "Googlebot",
       "Bingbot",
       "Slurp",
