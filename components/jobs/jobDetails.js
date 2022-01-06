@@ -73,16 +73,7 @@ const JobDetails = (props) => {
   }
   let jobSalary = null;
   if (info && info.job && info.job.jobSalaryStart && info.job.jobSalaryEnd) {
-    jobSalary =
-      info.job.jobSalaryStart +
-      " " +
-      info.job.jobSalaryCurrency +
-      " to " +
-      info.job.jobSalaryEnd +
-      " " +
-      info.job.jobSalaryCurrency +
-      " " +
-      SalaryType;
+    jobSalary = `${info.job.jobSalaryStart} ${info.job.jobSalaryCurrency} to ${info.job.jobSalaryEnd} ${info.job.jobSalaryCurrency} ${SalaryType}`
   }
 
   let jobHrView;
@@ -143,7 +134,7 @@ const JobDetails = (props) => {
               )}
               {cityView && (
                 <p className="card-text">
-                  <b>City : </b> {cityView}
+                  <b>City : </b>{cityView}
                 </p>
               )}
               {jobSalary && (
@@ -186,27 +177,25 @@ const JobDetails = (props) => {
       <div className="card-body">
         {skillView && (
           <p className="card-text">
-            <b>Skill :</b> {skillView}
+            <b>Skill :</b>{skillView}
           </p>
         )}
         {indView && (
           <p className="card-text">
-            <b>Industry :</b> {indView}
+            <b>Industry :</b>{indView}
           </p>
         )}
         {langView && (
           <p className="card-text">
-            <b>Language :</b> {langView}
+            <b>Language :</b>{langView}
           </p>
         )}
         {workView && (
-          <p className="card-text">
-            <b>Work Type :</b> {workView}
-          </p>
+          <p className="card-text"><b>Work Type :</b>{workView}</p>
         )}
         {info.job.jobDate && (
           <p className="card-text">
-            <b>Job Post Date :</b> {new Date(info.job.jobDate.replace(/-/g, '/')).toLocaleDateString()}
+            <b>Job Post Date :</b>{new Date(info.job.jobDate.replace(/-/g, '/')).toLocaleDateString()}
           </p>
         )}
       </div>

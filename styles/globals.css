@@ -26,6 +26,9 @@ svg:hover {
 .no-underline {
   text-decoration: none;
 }
+svg {
+  margin-right: 8px;
+}
 
 
 @media only screen and (max-width: 600px) {

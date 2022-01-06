@@ -29,7 +29,6 @@ function About(props) {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("user result--", result);
           setUserObj(result);
         },
         (error) => {

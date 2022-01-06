@@ -218,7 +218,7 @@ function Postjob(props) {
                   </ul>
                 </div>
               </div>
-              <div className="form-group">
+              <div className="form-group mt-2">
                 <label>Job Description * </label>
                 <QuillNoSSRWrapper
                   modules={modules}

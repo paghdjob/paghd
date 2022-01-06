@@ -15,6 +15,7 @@ const ProfileResume = (props) => {
           <iframe
             src={resumeUpload}
             title="Resume Upload!"
+            height="100"
           ></iframe>
         </div>
       </div>
