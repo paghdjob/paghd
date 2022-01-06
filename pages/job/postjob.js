@@ -88,7 +88,7 @@ function Postjob(props) {
   let userView;
   if (!userID) {
     userView = (
-      <div className="rows">
+      <div className="rows mt-2">
         <div className="row">
           <div className="col-md-4">
             <label>User Name *</label>

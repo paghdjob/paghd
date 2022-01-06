@@ -35,7 +35,6 @@ const PeoplePrivate = (props) => {
       userID: 258,
       userSkype: userSkype,
     };
-    console.log("users handleSubmit", users);
 
     fetch("/v2/people/aboutSet.php?type=PRIVATEUPDATE", {
       method: "POST",
@@ -47,8 +46,8 @@ const PeoplePrivate = (props) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("result--", result);
           setMessage(result.msg);
+          setEditMode(true);
         },
         (error) => {
           // setMessage(error);

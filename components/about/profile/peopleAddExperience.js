@@ -3,10 +3,8 @@ import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
 
 const PeopleAddExperience = (props) => {
-  console.log("---PeopleAddExperience---", props.isVisible)
   const [userExp, setUserExp] = useState(props.userExp);
   const [isVisible, setIsVisible] = useState(props.isVisible);
-  console.log("---PeopleAddExperience ====---", isVisible)
   const [expDesignation, setExpDesignation] = useState(
     props.userExp.expDesignation
   );
@@ -236,7 +234,6 @@ const PeopleAddExperience = (props) => {
     </div>
   );
 
-  console.log("isVisible====>>>>>", isVisible)
   return (
     <>{isVisible && <div className="card mb-1"> {boxModelForEdit}</div>}</>
   );

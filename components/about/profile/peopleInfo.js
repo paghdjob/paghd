@@ -48,7 +48,7 @@ const ProfileInfo = (props) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("result--", result);
+          setEditMode(true);
           setMessage(result.msg);
         },
         (error) => {
