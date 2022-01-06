@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
@@ -7,7 +7,6 @@ import Cookies from "universal-cookie";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import useDebounce from "../../components/jobs/use-debounce";
-
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -51,7 +50,7 @@ function Postjob(props) {
         .then((res) => res.json())
         .then(
           (result) => {
-            router.push('/job/about/'+ result.jobID)
+            router.push("/job/about/" + result.jobID);
             setMassage(result);
           },
           (error) => {
@@ -176,7 +175,10 @@ function Postjob(props) {
       <div className="container">
         <div className="card">
           <div className="card-header">
-            <h1 className="h5"> Post New Job - Hire the right fit for your business. </h1>
+            <h1 className="h5">
+              {" "}
+              Post New Job - Hire the right fit for your business.{" "}
+            </h1>
           </div>
           <div className="card-body">
             <form className="form-group">

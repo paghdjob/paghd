@@ -34,7 +34,7 @@ function JobDetail(props) {
       );
     //  }
     if (jobList.length === 0 && jobObj && jobObj.job) {
-      fetch("/v2/jobs/jobListNew.php?title="+ jobObj.job.jobTitle)
+      fetch("/v2/jobs/jobListNew.php?title=" + jobObj.job.jobTitle)
         .then((res) => res.json())
         .then(
           (result) => {
@@ -92,7 +92,9 @@ export async function getServerSideProps(context) {
     )
   ) {
     const { jobSlug } = context.query;
-    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug=" + jobSlug);
+    const res = await fetch(
+      "https://www.paghd.com/v2/jobs/about.php?jobSlug=" + jobSlug
+    );
     data = await res.json();
     if (data.job === null) {
       data.error = 200;

@@ -104,7 +104,9 @@ function JobSkill(props) {
             name="addSkill"
             placeholder="Type to search skill..."
             className="autocomplete form-control p-2"
-            onChange={(e) => {setIsAutoSearch(true), setAddSkill(e.target.value)}}
+            onChange={(e) => {
+              setIsAutoSearch(true), setAddSkill(e.target.value);
+            }}
             type="text"
             value={addSkill}
           />

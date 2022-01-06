@@ -3,17 +3,35 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Cookies from "universal-cookie";
-const HeaderNav = dynamic(() => import('../../components/common/headerNav'))
-const FooterNav = dynamic(() => import('../../components/common/footerNav'))
-const ProfileInfo = dynamic(() => import('../../components/about/profile/peopleInfo'))
-const PeoplePrivate = dynamic(() => import('../../components/about/profile/peoplePrivate'))
-const PeopleProfile = dynamic(() => import('../../components/about/profile/peopleProfile'))
-const PeopleExperienceNew = dynamic(() => import('../../components/about/profile/peopleExperienceNew'))
-const PeopleWorkType = dynamic(() => import('../../components/about/profile/peopleWorkType'))
-const PeopleLanguage = dynamic(() => import('../../components/about/profile/peopleLanguage'))
-const PeopleSkill = dynamic(() => import('../../components/about/profile/peopleSkill'))
-const PeopleIndustry = dynamic(() => import('../../components/about/profile/peopleIndustry'))
-const ProfileResume = dynamic(() => import('../../components/about/profile/peopleResume'))
+const HeaderNav = dynamic(() => import("../../components/common/headerNav"));
+const FooterNav = dynamic(() => import("../../components/common/footerNav"));
+const ProfileInfo = dynamic(() =>
+  import("../../components/about/profile/peopleInfo")
+);
+const PeoplePrivate = dynamic(() =>
+  import("../../components/about/profile/peoplePrivate")
+);
+const PeopleProfile = dynamic(() =>
+  import("../../components/about/profile/peopleProfile")
+);
+const PeopleExperienceNew = dynamic(() =>
+  import("../../components/about/profile/peopleExperienceNew")
+);
+const PeopleWorkType = dynamic(() =>
+  import("../../components/about/profile/peopleWorkType")
+);
+const PeopleLanguage = dynamic(() =>
+  import("../../components/about/profile/peopleLanguage")
+);
+const PeopleSkill = dynamic(() =>
+  import("../../components/about/profile/peopleSkill")
+);
+const PeopleIndustry = dynamic(() =>
+  import("../../components/about/profile/peopleIndustry")
+);
+const ProfileResume = dynamic(() =>
+  import("../../components/about/profile/peopleResume")
+);
 
 function About(props) {
   const [userObj, setUserObj] = useState(props);

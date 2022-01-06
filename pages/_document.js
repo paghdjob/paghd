@@ -51,7 +51,11 @@ class MyDocument extends Document {
         })(window,document,'script','dataLayer','GTM-P6STXZL');`,
             }}
           ></script>
-          <script data-ad-client="ca-pub-8360812427478707" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <script
+            data-ad-client="ca-pub-8360812427478707"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
         </Head>
         <body>
           <noscript

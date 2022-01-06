@@ -7,44 +7,56 @@ import JobList from "../../components/jobs/jobList";
 import JobFilter from "../../components/jobs/jobFilter";
 import JobSearch from "../../components/jobs/jobSearch";
 
-
 function JobsIn(props) {
   const [jobList, setJobList] = useState(props.list.jobs);
   const [jobTotal, setJobTotal] = useState("");
   const [filt, setFilt] = useState("");
   const [pages, setPages] = useState(0);
   const router = useRouter();
-  const checkTitle = router.query.title ? router.query.title : '';
+  const checkTitle = router.query.title ? router.query.title : "";
   const [titleSearch, setTitleSearch] = useState(checkTitle);
-  const checkLoc = (router.query.loc).replace('jobs-in-', '');
-  const [locSearch, setLocSearch] = useState(checkLoc.replace('-', ' '));
+  const checkLoc = router.query.loc.replace("jobs-in-", "");
+  const [locSearch, setLocSearch] = useState(checkLoc.replace("-", " "));
 
   useEffect(() => {
     if (!jobList) {
       handleData({ sorts: 0, page: 0 });
     }
     if (!filt) {
-      filterJob()
+      filterJob();
     }
-    if (props.list && props.list.total) { setJobTotal(props.list.total) };
+    if (props.list && props.list.total) {
+      setJobTotal(props.list.total);
+    }
     if (locSearch) {
-      fetch("/v2/autopost/careerjet/careerjet.php?title="+ titleSearch +"&loc="+ locSearch)
-      fetch("/v2/jobs/stackoverflowPostJob.php?q="+ titleSearch +"&l="+ locSearch +"&u=Km&d=100")
+      fetch(
+        "/v2/autopost/careerjet/careerjet.php?title=" +
+          titleSearch +
+          "&loc=" +
+          locSearch
+      );
+      fetch(
+        "/v2/jobs/stackoverflowPostJob.php?q=" +
+          titleSearch +
+          "&l=" +
+          locSearch +
+          "&u=Km&d=100"
+      );
     }
   }, [props]);
 
   const filterJob = () => {
     fetch("/v2/jobs/filterJob.php?title=" + titleSearch + "&loc=" + locSearch)
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setFilt(result);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
-  }
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setFilt(result);
+        },
+        (error) => {
+          console.log("error--", error);
+        }
+      );
+  };
   const handleData = (moredata) => {
     let newParam = "?title=" + titleSearch + "&loc=" + locSearch;
     if (moredata && (moredata.title || moredata.loc)) {
@@ -92,7 +104,8 @@ function JobsIn(props) {
           <div className="col">
             <div className="float-start col-8">
               <h1 className="h5 pt-3">
-                {jobTotal && jobTotal + " jobs"} {titleSearch && titleSearch + " in "}
+                {jobTotal && jobTotal + " jobs"}{" "}
+                {titleSearch && titleSearch + " in "}
                 {locSearch}
               </h1>
             </div>
@@ -130,11 +143,12 @@ export async function getServerSideProps(context) {
     )
   ) {
     // console.log("---context.req.headers--", context.req.headers["user-agent"]);
-    const { loc = '', title ='' } = context.query;
+    const { loc = "", title = "" } = context.query;
     let jobListReq = "https://www.paghd.com/v2/jobs/jobListNew.php";
     if (loc || title) {
-      let cityName = loc.replace('jobs-in-','');
-      jobListReq = jobListReq + "?title=" + title + "&loc=" + cityName.replace('-',' ');
+      let cityName = loc.replace("jobs-in-", "");
+      jobListReq =
+        jobListReq + "?title=" + title + "&loc=" + cityName.replace("-", " ");
     }
     const res = await fetch(jobListReq);
     list = await res.json();

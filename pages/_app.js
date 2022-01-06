@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
         src="https://www.googletagmanager.com/gtag/js?id=UA-140663137-1"
         strategy="lazyOnload"
       />      
-      </Head> */}   
+      </Head> */}
       <Component {...pageProps} />
     </>
   );

@@ -40,7 +40,11 @@ const ReportJobApply = (props) => {
             </a>
           </td>
           <td className="">{item.jobApplyText}</td>
-          <td>{new Date(item.jobApplyDate.replace(/-/g, '/')).toLocaleDateString()}</td>
+          <td>
+            {new Date(
+              item.jobApplyDate.replace(/-/g, "/")
+            ).toLocaleDateString()}
+          </td>
         </tr>
       );
     });

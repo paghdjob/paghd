@@ -47,19 +47,18 @@ const PeopleAddExperience = (props) => {
       );
   };
 
-
   const handleSubmit = (event) => {
     let users = {
       expID: props.userExp.expID,
       userID: props.userExp.userID,
       expDesignation: expDesignation,
-      expStart:  expStart,
+      expStart: expStart,
       expEnd: expEnd,
       expDescribe: expDescribe,
       expNotice: 0,
       expRes: expRes,
       comName: comName,
-      jobFor: (props.userExp.jobFor).toString(), // jobFor.toString()
+      jobFor: props.userExp.jobFor.toString(), // jobFor.toString()
     };
 
     fetch("/v2/people/aboutSet.php?type=EMPUPDATE", {
@@ -157,19 +156,19 @@ const PeopleAddExperience = (props) => {
                   required
                 />
                 <ul className="list-group autocomplete-items">
-            {autoCompany &&
-              autoCompany.map((langName) => {
-                return (
-                  <li
-                    onClick={(e) => selectCompany(langName.label)}
-                    className="list-group-item text-start"
-                    key={langName.label}
-                  >
-                    {langName.label}
-                  </li>
-                );
-              })}
-          </ul>
+                  {autoCompany &&
+                    autoCompany.map((langName) => {
+                      return (
+                        <li
+                          onClick={(e) => selectCompany(langName.label)}
+                          className="list-group-item text-start"
+                          key={langName.label}
+                        >
+                          {langName.label}
+                        </li>
+                      );
+                    })}
+                </ul>
               </div>
             </div>
             <div className="form-group">

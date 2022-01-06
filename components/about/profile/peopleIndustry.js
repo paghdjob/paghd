@@ -99,13 +99,9 @@ const PeopleIndustry = (props) => {
         </select>
       </div>
       <div className="col-md-3">
-      <button
-        type="button"
-        onClick={addIndustries}
-        className="btn btn-info"
-      >
-        Add Industry
-      </button>
+        <button type="button" onClick={addIndustries} className="btn btn-info">
+          Add Industry
+        </button>
       </div>
     </form>
   );

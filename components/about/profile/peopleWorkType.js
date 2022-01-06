@@ -65,9 +65,7 @@ const PeopleWorkType = (props) => {
   let addWorkTypeForm = (
     <form className="mb-12 row">
       <div className="col-md-2 mb-3 mt-1 row">
-        <label className="col-form-label">
-          Job Type
-        </label>
+        <label className="col-form-label">Job Type</label>
       </div>
       <div className="col-md-6">
         <select

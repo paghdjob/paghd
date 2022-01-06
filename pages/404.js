@@ -1,12 +1,12 @@
 import HeaderNav from "../components/common/headerNav";
 import FooterNav from "../components/common/footerNav";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export default function Custom404() {
   const router = useRouter();
   setTimeout(() => {
-    router.push('/');
-  }, 1000)
+    router.push("/");
+  }, 1000);
   return (
     <>
       <HeaderNav />

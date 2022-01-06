@@ -25,20 +25,29 @@ const JobReportView = (props) => {
           console.log("error--", error);
         }
       );
-    });
+  });
 
-
-  let reportView = jobView && jobView.map((item) => {
-        let jobViewDate = new Date(item.jobViewDate).toDateString("yyyy-MM-dd");
-        return (
-          <tr key={item.userID}>
-            <td>{item.userID}</td>
-            <td><a className="text-info" rel="noopener noreferrer" target="_blank" href={'/about/'+ item.userSlug}>{item.userName} </a></td>
-            <td>{jobViewDate}</td>
-          </tr>
-        );
-      }
+  let reportView =
+    jobView &&
+    jobView.map((item) => {
+      let jobViewDate = new Date(item.jobViewDate).toDateString("yyyy-MM-dd");
+      return (
+        <tr key={item.userID}>
+          <td>{item.userID}</td>
+          <td>
+            <a
+              className="text-info"
+              rel="noopener noreferrer"
+              target="_blank"
+              href={"/about/" + item.userSlug}
+            >
+              {item.userName}{" "}
+            </a>
+          </td>
+          <td>{jobViewDate}</td>
+        </tr>
       );
+    });
 
   return (
     <div className="rows">

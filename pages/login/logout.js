@@ -14,7 +14,7 @@ function Login() {
       />
       <HeaderNav />
       <div className="container">
-          <LogoutPage />
+        <LogoutPage />
       </div>
       <FooterNav />
     </div>

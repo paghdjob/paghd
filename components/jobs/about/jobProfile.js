@@ -153,7 +153,9 @@ const JobProfile = (props) => {
               <input
                 type="text"
                 className="autocomplete form-control"
-                onChange={(e) => {setIsAutoSearch(true), setComName(e.target.value)}}
+                onChange={(e) => {
+                  setIsAutoSearch(true), setComName(e.target.value);
+                }}
                 name="comName"
                 value={comName}
                 required

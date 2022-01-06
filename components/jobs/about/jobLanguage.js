@@ -19,17 +19,17 @@ function JobLanguage(props) {
   }, [addLanguage]);
 
   const searchLanguage = (language) => {
-    if(language){
+    if (language) {
       fetch("/v2/auto.php?type=LANGUAGES&name=" + language)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAutoLanguage(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setAutoLanguage(result);
+          },
+          (error) => {
+            console.log("error--", error);
+          }
+        );
     }
   };
 
@@ -77,7 +77,7 @@ function JobLanguage(props) {
   const selectLanguage = (langName) => {
     setAddLanguage(langName);
     setAutoLanguage("");
-    setIsAutoSearch(false)
+    setIsAutoSearch(false);
   };
 
   let skillView, addLanguageForm;
@@ -93,7 +93,9 @@ function JobLanguage(props) {
             name="addLanguage"
             placeholder="Type to search language..."
             className="autocomplete form-control p-2"
-            onChange={(e) => {setIsAutoSearch(true), setAddLanguage(e.target.value)}}
+            onChange={(e) => {
+              setIsAutoSearch(true), setAddLanguage(e.target.value);
+            }}
             type="text"
             value={addLanguage}
           />

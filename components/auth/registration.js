@@ -12,17 +12,19 @@ const Registration = () => {
     let userDetails = {
       name: name,
       email: email,
-      pwd: pwd
-    }  
+      pwd: pwd,
+    };
     console.log(userDetails);
     userIdentify(userDetails);
     event.preventDefault();
   };
 
   const regEmail = (userID) => {
-    fetch("v2/auth/EmailTemplate.php?type=REGISTRATION&userID="+ userID).then((res) => res.json());
-  }
-  
+    fetch("v2/auth/EmailTemplate.php?type=REGISTRATION&userID=" + userID).then(
+      (res) => res.json()
+    );
+  };
+
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("https://www.paghd.com/v2/auth/registration.php", {
@@ -78,7 +80,14 @@ const Registration = () => {
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input type="password" className="form-control" onChange={(e) => setPwd(e.target.value)} name="pwd" value={pwd} required />
+              <input
+                type="password"
+                className="form-control"
+                onChange={(e) => setPwd(e.target.value)}
+                name="pwd"
+                value={pwd}
+                required
+              />
             </div>
             {message}
             <div className="text-center">

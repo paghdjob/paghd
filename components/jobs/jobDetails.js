@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
-import ProfileResume from '../about/profile/peopleResume';
+import ProfileResume from "../about/profile/peopleResume";
 
 const JobDetails = (props) => {
   const [info, setInfo] = useState(props.jobObj);
@@ -73,7 +73,7 @@ const JobDetails = (props) => {
   }
   let jobSalary = null;
   if (info && info.job && info.job.jobSalaryStart && info.job.jobSalaryEnd) {
-    jobSalary = `${info.job.jobSalaryStart} ${info.job.jobSalaryCurrency} to ${info.job.jobSalaryEnd} ${info.job.jobSalaryCurrency} ${SalaryType}`
+    jobSalary = `${info.job.jobSalaryStart} ${info.job.jobSalaryCurrency} to ${info.job.jobSalaryEnd} ${info.job.jobSalaryCurrency} ${SalaryType}`;
   }
 
   let jobHrView;
@@ -105,7 +105,11 @@ const JobDetails = (props) => {
             setJobApplyText(result.jobApplyText);
             if (result.valid === "false") {
               setIsProfileResume(true);
-            } else if (result.valid === "true" && userID && info.job.jobRefURL) {
+            } else if (
+              result.valid === "true" &&
+              userID &&
+              info.job.jobRefURL
+            ) {
               window.open(info.job.jobRefURL, "_blank");
             }
           },
@@ -117,7 +121,7 @@ const JobDetails = (props) => {
       router.push("/login?url=" + router.asPath);
     }
   };
-  let resume = isProfileResume ?  <ProfileResume /> : '';
+  let resume = isProfileResume ? <ProfileResume /> : "";
   return (
     <div className="text-left">
       <div className="card">
@@ -129,12 +133,14 @@ const JobDetails = (props) => {
               {info && info.job && info.job.jobYearStart && (
                 <p className="card-text">
                   <b>Experience : </b>
-                  {info && info.job && info.job.jobYearStart} to {info && info.job && info.job.jobYearEnd} Years
+                  {info && info.job && info.job.jobYearStart} to{" "}
+                  {info && info.job && info.job.jobYearEnd} Years
                 </p>
               )}
               {cityView && (
                 <p className="card-text">
-                  <b>City : </b>{cityView}
+                  <b>City : </b>
+                  {cityView}
                 </p>
               )}
               {jobSalary && (
@@ -144,7 +150,8 @@ const JobDetails = (props) => {
               )}
               {info && info.job && info.job.jobPosition && (
                 <p className="card-text">
-                  <b>Position : </b> {info && info.job && info.job.jobPosition} Position
+                  <b>Position : </b> {info && info.job && info.job.jobPosition}{" "}
+                  Position
                 </p>
               )}
               {jobHrView && (
@@ -177,38 +184,48 @@ const JobDetails = (props) => {
       <div className="card-body">
         {skillView && (
           <p className="card-text">
-            <b>Skill :</b>{skillView}
+            <b>Skill :</b>
+            {skillView}
           </p>
         )}
         {indView && (
           <p className="card-text">
-            <b>Industry :</b>{indView}
+            <b>Industry :</b>
+            {indView}
           </p>
         )}
         {langView && (
           <p className="card-text">
-            <b>Language :</b>{langView}
+            <b>Language :</b>
+            {langView}
           </p>
         )}
         {workView && (
-          <p className="card-text"><b>Work Type :</b>{workView}</p>
+          <p className="card-text">
+            <b>Work Type :</b>
+            {workView}
+          </p>
         )}
         {info.job.jobDate && (
           <p className="card-text">
-            <b>Job Post Date :</b>{new Date(info.job.jobDate.replace(/-/g, '/')).toLocaleDateString()}
+            <b>Job Post Date :</b>
+            {new Date(info.job.jobDate.replace(/-/g, "/")).toLocaleDateString()}
           </p>
         )}
       </div>
 
       <div className="rows">
         <ul className="nav">
-          {info && info.allCity  &&
+          {info &&
+            info.allCity &&
             info.allCity.map((city) => {
               return (
                 <li className="float-start m-2" key={city.cityID}>
-                  <Link href={'/jobs/jobs-in-' + (city.cityName).replace(' ','-')}>
-                  <a className="p-1 no-underline">
-                       {'Job In '+ city.cityName + ' ('+ city.jobCount +')'}
+                  <Link
+                    href={"/jobs/jobs-in-" + city.cityName.replace(" ", "-")}
+                  >
+                    <a className="p-1 no-underline">
+                      {"Job In " + city.cityName + " (" + city.jobCount + ")"}
                     </a>
                   </Link>
                 </li>

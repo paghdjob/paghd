@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import Cookies from "universal-cookie";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -26,35 +26,37 @@ const LoginPage = () => {
         name: response.profileObj.name,
         email: response.profileObj.email,
         profile: response.profileObj.imageUrl,
-        web: 2
-      }
+        web: 2,
+      };
       userIdentify(userDetails);
     }
-  }
+  };
   const responseFacebook = (response) => {
     if (response.email) {
-      localStorage.setItem('facebook_access_token', response.accessToken);
+      localStorage.setItem("facebook_access_token", response.accessToken);
       let userDetails = {
         name: response.name,
         email: response.email,
-        profile: '',
-        web: 2
-      }
+        profile: "",
+        web: 2,
+      };
       userIdentify(userDetails);
     } else {
       console.log(response);
     }
-  }
+  };
 
   const userWebSetting = (userID, auth) => {
     const cookies = new Cookies();
     cookies.set("userID", userID, { path: "/", maxAge: 25929999 });
     cookies.set("auth", auth, { path: "/", maxAge: 25929999 });
-    router.push(router.query.url ? router.query.url : '/')
+    router.push(router.query.url ? router.query.url : "/");
   };
   const verifyEmail = (userID) => {
-    fetch("v2/auth/EmailTemplate.php?type=EMAILVERIFY&userID="+ userID).then((res) => res.json());
-  }
+    fetch("v2/auth/EmailTemplate.php?type=EMAILVERIFY&userID=" + userID).then(
+      (res) => res.json()
+    );
+  };
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
       fetch("/v2/auth/login.php", {
@@ -69,7 +71,7 @@ const LoginPage = () => {
             if (result.userID && result.auth) {
               userWebSetting(result.userID, result.auth);
             }
-            if(result.valid === false && result.userID) {
+            if (result.valid === false && result.userID) {
               verifyEmail(result.userID);
             }
           },

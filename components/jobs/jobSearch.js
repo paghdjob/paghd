@@ -40,7 +40,12 @@ const JobSearch = (props) => {
   //     router.push(jobUrl);
   //   };
   const handleFilterChange = (event) => {
-    props.handlerFromParant({ sorts: 0, page: 0, loc: jobLocSearch, title: jobTitleSearch });
+    props.handlerFromParant({
+      sorts: 0,
+      page: 0,
+      loc: jobLocSearch,
+      title: jobTitleSearch,
+    });
   };
 
   return (
@@ -76,7 +81,12 @@ const JobSearch = (props) => {
                     className="list-group-item text-start"
                     key={city.value}
                   >
-                    {city.cityName +', '+ city.countryName +' ('+ city.jobCount +')'}
+                    {city.cityName +
+                      ", " +
+                      city.countryName +
+                      " (" +
+                      city.jobCount +
+                      ")"}
                   </li>
                 );
               })}

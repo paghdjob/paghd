@@ -24,7 +24,6 @@ const PeopleExperienceNew = (props) => {
     jobFor: "4",
   });
 
-
   useEffect(() => {
     console.log("props refresh");
   }, [props]);
@@ -100,7 +99,7 @@ const PeopleExperienceNew = (props) => {
               className="m-1 badge bg-info text-dark float-end"
             >
               Delete
-            </button> 
+            </button>
             <button
               name="key"
               value={detail.expID}
@@ -148,7 +147,7 @@ const PeopleExperienceNew = (props) => {
                 onClick={popup.bind(this, 1, detail.expID)}
                 type="button"
                 className="m-1 badge bg-info text-dark float-end"
-                >
+              >
                 Edit
               </button>
             </div>
@@ -210,7 +209,7 @@ const PeopleExperienceNew = (props) => {
     console.log("---handleData -data obj----", obj);
     setUserExp(obj);
     setIsVisible(false);
-  }
+  };
 
   return (
     <div className="card mb-1">
@@ -228,7 +227,13 @@ const PeopleExperienceNew = (props) => {
         </button>
       </div>
       <div className="card-body">
-        {isAddExp && <PeopleAddExperience userExp={newObj} isVisible={isVisible} handlerFromParant={handleData} />}
+        {isAddExp && (
+          <PeopleAddExperience
+            userExp={newObj}
+            isVisible={isVisible}
+            handlerFromParant={handleData}
+          />
+        )}
         {empView}
       </div>
       <div className="card-header">
@@ -245,7 +250,13 @@ const PeopleExperienceNew = (props) => {
         </button>
       </div>
       <div className="card-body">
-        {isAddEdu && <PeopleAddExperience userExp={newObj} isVisible={isVisible} handlerFromParant={handleData} />}
+        {isAddEdu && (
+          <PeopleAddExperience
+            userExp={newObj}
+            isVisible={isVisible}
+            handlerFromParant={handleData}
+          />
+        )}
         {eduView}
       </div>
       <div className="card-header">
@@ -262,7 +273,13 @@ const PeopleExperienceNew = (props) => {
         </button>
       </div>
       <div className="card-body">
-        {isAddPro && <PeopleAddExperience userExp={newObj} isVisible={isVisible} handlerFromParant={handleData} />}
+        {isAddPro && (
+          <PeopleAddExperience
+            userExp={newObj}
+            isVisible={isVisible}
+            handlerFromParant={handleData}
+          />
+        )}
         {proView}
       </div>
     </div>
