@@ -35,7 +35,7 @@ function Verify() {
           console.log("error--", error);
         }
       );
-  }, []);
+  });
 
   return (
     <div>

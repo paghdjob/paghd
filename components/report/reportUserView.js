@@ -23,7 +23,7 @@ const ReportUserView = (props) => {
           console.log("user error--", error);
         }
       );
-  }, []);
+  });
 
     let View;
     if (userView) {

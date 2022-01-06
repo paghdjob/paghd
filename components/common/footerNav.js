@@ -25,7 +25,7 @@ function FooterNav() {
       fetch("/v2/autopost/fb/postJobFacebook.php").then((res) => res.json());
       fetch("/v2/autopost/twitter/tweet.php").then((res) => res.json());
     }
-  }, []);
+  });
 
   return (
     <footer className="container mt-3 mb-5">

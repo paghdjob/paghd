@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import Cookies from "universal-cookie";
 const HeaderNav = dynamic(() => import('../../components/common/headerNav'))
 const FooterNav = dynamic(() => import('../../components/common/footerNav'))

@@ -19,7 +19,7 @@ const PeopleWorkType = (props) => {
           console.log("user error--", error);
         }
       );
-  }, []);
+  });
 
   const addWorkType = () => {
     let body = { workTypeID: workTypeID };

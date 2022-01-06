@@ -22,7 +22,7 @@ const ReportJobAccess = (props) => {
           console.log("user error--", error);
         }
       );
-  }, []);
+  });
 
   const onJobVerify = (jobSlug) => {
     let body = '?jobID='+ jobSlug + '&fb='+ localStorage.getItem('facebook_access_token');
