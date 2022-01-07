@@ -23,7 +23,7 @@ const ReportJobApply = (props) => {
           console.log("user error--", error);
         }
       );
-  });
+  }, [props]);
   let userView;
   if (jobApply) {
     userView = jobApply.map((item) => {

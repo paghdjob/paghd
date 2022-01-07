@@ -23,7 +23,7 @@ const ReportJobAccess = (props) => {
           console.log("user error--", error);
         }
       );
-  });
+  }, [props]);
 
   const onJobVerify = (jobSlug) => {
     let body =

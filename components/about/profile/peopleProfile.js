@@ -59,14 +59,19 @@ const ProfileInfo = (props) => {
               />
             </div>
             <div className="col-md-6">
-              <label>URL : </label>
-              <input
-                type="text"
-                className="form-control"
-                onChange={(e) => setUserSlug(e.target.value)}
-                name="userSlug"
-                value={userSlug}
-              />
+              <label>Profile URL : </label>
+              <div className="input-group mb-3">
+                <span className="input-group-text">
+                  https://paghd.vercel.app/about/
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => setUserSlug(e.target.value)}
+                  name="userSlug"
+                  value={userSlug}
+                />
+              </div>
             </div>
             {/* <div className="form-group col-md-6">
             <label>Profile Image</label>
@@ -108,7 +113,9 @@ const ProfileInfo = (props) => {
         {editMode && (
           <div className="card-body row">
             <p className="card-text col-md-6">Name : {userName}</p>
-            <p className="card-text col-md-6">Profile URL : {userSlug}</p>
+            <p className="card-text col-md-6">
+              Profile URL : https://paghd.vercel.app/about/{userSlug}
+            </p>
           </div>
         )}
       </div>

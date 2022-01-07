@@ -34,7 +34,7 @@ function UserDetail(props) {
           }
         );
     }
-  }, []); */
+  }, [props]); */
 
   return (
     <div>
@@ -66,7 +66,7 @@ export async function getServerSideProps(context) {
   const { userSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
   const res = await fetch(
-    "https://www.paghd.com/v2/people/aboutNew.php?userSlug=" + userSlug
+    `https://www.paghd.com/v2/people/aboutNew.php?userSlug=${userSlug}`
   );
   data = await res.json();
   // }

@@ -5,7 +5,7 @@ import HeadSeo from "../../components/headSeo";
 import Link from "next/link";
 import Cookies from "universal-cookie";
 
-function Verify() {
+function Verify(props) {
   const [res, setRes] = useState("");
   const [isValid, setIsValid] = useState("");
 
@@ -35,7 +35,7 @@ function Verify() {
           console.log("error--", error);
         }
       );
-  });
+  }, [props]);
 
   return (
     <div>

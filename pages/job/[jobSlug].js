@@ -93,7 +93,7 @@ export async function getServerSideProps(context) {
   ) {
     const { jobSlug } = context.query;
     const res = await fetch(
-      "https://www.paghd.com/v2/jobs/about.php?jobSlug=" + jobSlug
+      `https://www.paghd.com/v2/jobs/about.php?jobSlug=${jobSlug}`
     );
     data = await res.json();
     if (data.job === null) {

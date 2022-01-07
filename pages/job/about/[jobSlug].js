@@ -42,7 +42,7 @@ function JobAbout(props) {
           }
         );
     }
-  });
+  }, [props]);
   // let a = jobObj && jobObj.jobAccess.find(u => u.userID === userIds);
   return (
     <div>

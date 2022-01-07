@@ -14,7 +14,7 @@ const InstallPWA = () => {
     window.addEventListener("beforeinstallprompt", handler);
 
     return () => window.removeEventListener("transitionend", handler);
-  });
+  }, []);
 
   const onClick = (evt) => {
     evt.preventDefault();

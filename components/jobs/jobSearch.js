@@ -81,12 +81,7 @@ const JobSearch = (props) => {
                     className="list-group-item text-start"
                     key={city.value}
                   >
-                    {city.cityName +
-                      ", " +
-                      city.countryName +
-                      " (" +
-                      city.jobCount +
-                      ")"}
+                    {`${city.cityName}, ${city.countryName} (${city.jobCount})`}
                   </li>
                 );
               })}

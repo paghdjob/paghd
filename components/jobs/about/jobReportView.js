@@ -25,7 +25,7 @@ const JobReportView = (props) => {
           console.log("error--", error);
         }
       );
-  });
+  }, [props]);
 
   let reportView =
     jobView &&

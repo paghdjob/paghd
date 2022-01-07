@@ -7,6 +7,10 @@ https://github.com/paghdjob/paghd
 demo : https://paghd.herokuapp.com/
 demo : https://paghd.vercel.app/
 
+npx prettier --write .
+
+https://iconmonstr.com/location-1-svg/
+
 First, run the development server:
 
 ```bash
