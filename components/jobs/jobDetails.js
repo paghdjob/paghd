@@ -133,7 +133,7 @@ const JobDetails = (props) => {
               {info && info.job && info.job.jobYearStart && (
                 <p className="card-text">
                   <b>Experience : </b>
-                  {info && info.job && info.job.jobYearStart} to{" "}
+                  {info && info.job && info.job.jobYearStart} to
                   {info && info.job && info.job.jobYearEnd} Years
                 </p>
               )}
@@ -150,8 +150,7 @@ const JobDetails = (props) => {
               )}
               {info && info.job && info.job.jobPosition && (
                 <p className="card-text">
-                  <b>Position : </b> {info && info.job && info.job.jobPosition}{" "}
-                  Position
+                  <b>Position : </b> {info && info.job && info.job.jobPosition} Position
                 </p>
               )}
               {jobHrView && (

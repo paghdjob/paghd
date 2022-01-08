@@ -27,7 +27,7 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <div className="col">
+     
       <button
         className="btn link-info float-end"
         id="setup_button"
@@ -37,7 +37,7 @@ const InstallPWA = () => {
       >
         Click here to install Lite App
       </button>
-    </div>
+     
   );
 };
 

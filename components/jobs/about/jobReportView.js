@@ -41,7 +41,7 @@ const JobReportView = (props) => {
               target="_blank"
               href={"/about/" + item.userSlug}
             >
-              {item.userName}{" "}
+              {item.userName}
             </a>
           </td>
           <td>{jobViewDate}</td>

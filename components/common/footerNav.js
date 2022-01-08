@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 
-//const InstallPWA = React.lazy(() => import('../installapp/installPWA'));
+// const InstallPWA = React.lazy(() => import("../installapp/installPWA"));
 
 const InstallPWA = dynamic(() => import("../installapp/installPWA"), {
   ssr: false,
@@ -30,7 +30,6 @@ function FooterNav() {
   return (
     <footer className="container mt-3 mb-5">
       <div className="row">
-        <div className="col-9">
           <p>
             &copy; 2020–2021 Paghd jobs. &nbsp;
             <Link href="/legal/privacy-policy">
@@ -78,9 +77,8 @@ function FooterNav() {
                 </svg>
               </a>
             </Link>
+            <InstallPWA />
           </p>
-        </div>
-        <InstallPWA />
       </div>
     </footer>
   );

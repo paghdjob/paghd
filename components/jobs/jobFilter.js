@@ -139,7 +139,7 @@ const JobFilter = (props) => {
             name="language"
             value={data.langID}
           />
-          &nbsp;{data.langName} ({data.tot}){" "}
+          &nbsp;{data.langName} ({data.tot})
         </label>
       </div>
     );

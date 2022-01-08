@@ -65,10 +65,10 @@ function About(props) {
       <HeaderNav />
       <div className="container">
         <div className="row m-0 p-0">
-          <h1>Profile</h1>
+          <h1>Profile / Resume</h1>
           <div className="float-end">
             {userObj.users && (
-              <Link href={"/about/" + userObj.users.userSlug}>
+              <Link href={`/about/${userObj.users.userSlug}`}>
                 <a className="float-end btn btn-info">Preview Resume</a>
               </Link>
             )}

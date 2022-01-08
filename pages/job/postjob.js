@@ -176,8 +176,7 @@ function Postjob(props) {
         <div className="card">
           <div className="card-header">
             <h1 className="h5">
-              {" "}
-              Post New Job - Hire the right fit for your business.{" "}
+              Post New Job - Hire the right fit for your business.
             </h1>
           </div>
           <div className="card-body">

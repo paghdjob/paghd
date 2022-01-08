@@ -36,7 +36,6 @@ const UserDetails = (props) => {
             {item.expDesignation} at {item.comName}
           </h5>
           <p className="text-muted">
-            {" "}
             {expStart} to {expEnd}
           </p>
           <p className="card-text">{item.expDescribe} </p>
@@ -119,8 +118,8 @@ const UserDetails = (props) => {
           {user && user.userInfo && user.userInfo.userAddress && (
             <div className="rows">
               <p className="text-left">
-                <b>Location :</b>{" "}
-                {user && user.userInfo && user.userInfo.cityName},{" "}
+                <b>Location :</b>
+                {user && user.userInfo && user.userInfo.cityName},
                 {user && user.userInfo && user.userInfo.countryCode}
               </p>
             </div>
@@ -140,12 +139,12 @@ const UserDetails = (props) => {
           <div className="card-body">
             {skillView && (
               <p className="card-text">
-                <b>Skill :</b> {skillView}{" "}
+                <b>Skill :</b> {skillView}
               </p>
             )}
             {indView && (
               <p className="card-text">
-                <b>Industry :</b> {indView}{" "}
+                <b>Industry :</b> {indView}
               </p>
             )}
             {langView && (
