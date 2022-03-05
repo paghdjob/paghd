@@ -27,17 +27,15 @@ const InstallPWA = () => {
     return null;
   }
   return (
-     
-      <button
-        className="btn link-info float-end"
-        id="setup_button"
-        aria-label="Install app"
-        title="Install app"
-        onClick={onClick}
-      >
-        Click here to install Lite App
-      </button>
-     
+    <button
+      className="btn link-info float-end"
+      id="setup_button"
+      aria-label="Install app"
+      title="Install app"
+      onClick={onClick}
+    >
+      Click here to install Lite App
+    </button>
   );
 };
 

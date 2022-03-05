@@ -7,7 +7,7 @@ const PeopleExperienceNew = (props) => {
   const [isAddExp, setIsAddExp] = useState(false);
   const [isAddEdu, setIsAddEdu] = useState(false);
   const [isAddPro, setIsAddPro] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  // const [isVisible, setIsVisible] = useState(true);
   const cookies = new Cookies();
   const auth = cookies.get("auth");
 
@@ -52,6 +52,7 @@ const PeopleExperienceNew = (props) => {
   // console.log("props.userExp", props.userExp);
 
   const popup = (jobFor, expID) => {
+    setUserExp(props.userExp);
     if (jobFor === 0) {
       newObj.jobFor = jobFor;
       setIsAddExp(true);
@@ -70,12 +71,12 @@ const PeopleExperienceNew = (props) => {
     }
     if (expID) {
       let a = userExp.filter((detail) => detail.expID === expID);
-      a[0].jobFor = jobFor;
+      // a[0].jobFor = jobFor;
       setNewObj(a[0]);
     } else {
       setNewObj(newObj);
     }
-    console.log("jobFor --", jobFor, "expID --", expID);
+    // console.log("jobFor --", jobFor, "expID --", expID,  "userExp --", userExp);
   };
 
   /* view  */
@@ -208,7 +209,10 @@ const PeopleExperienceNew = (props) => {
   const handleData = (obj) => {
     console.log("---handleData -data obj----", obj);
     setUserExp(obj);
-    setIsVisible(false);
+    // setIsVisible(false);
+    setIsAddPro(false);
+    setIsAddEdu(false);
+    setIsAddExp(false);
   };
 
   return (
@@ -230,7 +234,7 @@ const PeopleExperienceNew = (props) => {
         {isAddExp && (
           <PeopleAddExperience
             userExp={newObj}
-            isVisible={isVisible}
+            isVisible={isAddExp}
             handlerFromParant={handleData}
           />
         )}
@@ -253,7 +257,7 @@ const PeopleExperienceNew = (props) => {
         {isAddEdu && (
           <PeopleAddExperience
             userExp={newObj}
-            isVisible={isVisible}
+            isVisible={isAddEdu}
             handlerFromParant={handleData}
           />
         )}
@@ -276,7 +280,7 @@ const PeopleExperienceNew = (props) => {
         {isAddPro && (
           <PeopleAddExperience
             userExp={newObj}
-            isVisible={isVisible}
+            isVisible={isAddPro}
             handlerFromParant={handleData}
           />
         )}

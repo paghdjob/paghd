@@ -29,6 +29,10 @@ svg:hover {
 svg {
   margin-right: 8px;
 }
+ul.autocomplete-items {
+  position: absolute;
+  z-index: 999;
+}
 
 @media only screen and (max-width: 600px) {
   .nav-pills {

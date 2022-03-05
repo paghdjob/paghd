@@ -29,8 +29,12 @@ function JobsIn(props) {
       setJobTotal(props.list.total);
     }
     if (locSearch) {
-      fetch(`/v2/autopost/careerjet/careerjet.php?title=${titleSearch}&loc=${locSearch}`);
-      fetch(`/v2/jobs/stackoverflowPostJob.php?q=${titleSearch}&l=${locSearch}&u=Km&d=100`);
+      fetch(
+        `/v2/autopost/careerjet/careerjet.php?title=${titleSearch}&loc=${locSearch}`
+      );
+      fetch(
+        `/v2/jobs/stackoverflowPostJob.php?q=${titleSearch}&l=${locSearch}&u=Km&d=100`
+      );
     }
   }, [props]);
 
@@ -93,7 +97,7 @@ function JobsIn(props) {
           <div className="col">
             <div className="float-start col-8">
               <h1 className="h5 pt-3">
-                {`${jobTotal} jobs ${titleSearch} in ${locSearch}`}                
+                {`${jobTotal} jobs ${titleSearch} in ${locSearch}`}
               </h1>
             </div>
             {jobList && (

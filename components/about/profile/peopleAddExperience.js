@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+// import Calendar from "react-calendar";
+// import "react-calendar/dist/Calendar.css";
 
 const PeopleAddExperience = (props) => {
+  // console.log("props.userExp ---", props.userExp);
   const [userExp, setUserExp] = useState(props.userExp);
   const [isVisible, setIsVisible] = useState(props.isVisible);
   const [expDesignation, setExpDesignation] = useState(
@@ -16,15 +19,18 @@ const PeopleAddExperience = (props) => {
   const [expEnd, setExpEnd] = useState(props.userExp.expEnd);
   const [message, setMessage] = useState("");
   const debouncedSearchTerm = useDebounce(comName, 750);
+  const [isAutoSearch, setIsAutoSearch] = useState(false);
   const cookies = new Cookies();
   const auth = cookies.get("auth");
+  const [aaa, setAaa] = useState(new Date());
+  const [bbb, setBbb] = useState(new Date());
 
   useEffect(() => {
     setIsVisible(props.isVisible);
   }, [props]);
 
   useEffect(() => {
-    if (debouncedSearchTerm) {
+    if (debouncedSearchTerm && isAutoSearch) {
       searchCompany(comName);
     }
   }, [debouncedSearchTerm]);
@@ -32,6 +38,7 @@ const PeopleAddExperience = (props) => {
   const selectCompany = (com) => {
     setComName(com);
     setAutoCompany("");
+    setIsAutoSearch(false);
   };
 
   const searchCompany = (skill) => {
@@ -150,7 +157,9 @@ const PeopleAddExperience = (props) => {
                 <input
                   type="text"
                   className="form-control"
-                  onChange={(e) => setComName(e.target.value)}
+                  onChange={(e) => {
+                    setIsAutoSearch(true), setComName(e.target.value);
+                  }}
                   name="comName"
                   value={comName}
                   required
@@ -194,6 +203,15 @@ const PeopleAddExperience = (props) => {
             <div className="row">
               <div className="form-group col-md-5">
                 <label>Starting Date</label>
+               
+
+                {/* <Calendar
+                  onChange={(e) => {setAaa(e), setExpStart(e)} }
+                   onClick={(e) => {setAaa(e), setExpStart(e)} }
+                  value={aaa}
+                  defaultValue={aaa}
+                  formatLongDate={(locale, date) => console.log(locale, date) } // formatDate(date, 'dd MMM YYYY')
+                />  */}
                 <input
                   type="date"
                   className="form-control"
@@ -205,6 +223,12 @@ const PeopleAddExperience = (props) => {
               </div>
               <div className="form-group col-md-5">
                 <label>Ending Date</label>
+                {/* <Calendar
+                  onChange={(e) => console.log("end end -->", e)}
+                  onClick={(e) => console.log("e end -->", e)}
+                  value={bbb}
+                  defaultValue={bbb}
+                /> */}
                 <input
                   type="date"
                   className="form-control"

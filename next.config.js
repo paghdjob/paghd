@@ -16,6 +16,11 @@ module.exports = withPWA({
     // disable: process.env.NODE_ENV === 'development',
     runtimeCaching,
   },
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+    localeDetection: false,
+  }
 });
 
 /*
