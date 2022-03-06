@@ -19,10 +19,6 @@ function JobDetail(props) {
   }
 
   useEffect(() => {
-<<<<<<< HEAD
-    if (!jobObj) {
-      fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
-=======
     // if (!jobObj) {
     fetch(
       "/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", "")
@@ -39,7 +35,6 @@ function JobDetail(props) {
     //  }
     if (jobList.length === 0 && jobObj && jobObj.job) {
       fetch("/v2/jobs/jobListNew.php?title=" + jobObj.job.jobTitle)
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
         .then((res) => res.json())
         .then(
           (result) => {
@@ -81,15 +76,6 @@ function JobDetail(props) {
 }
 
 export async function getServerSideProps(context) {
-<<<<<<< HEAD
-
-  let data = {};
-  const { jobSlug } = context.query;
-  // if (req.headers["user-agent"].match("Chrome")) {
-    const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug="+jobSlug); 
-    data = await res.json();
-    if (data.job === null) { data.error = 200; }
-=======
   let data = {};
   if (
     context.req.headers["user-agent"].match(
@@ -114,7 +100,6 @@ export async function getServerSideProps(context) {
       data.error = 200;
     }
   }
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   return { props: data };
 }
 

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useRouter } from 'next/router';
-=======
 import { useRouter } from "next/router";
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
@@ -55,11 +51,7 @@ function Postjob(props) {
         .then((res) => res.json())
         .then(
           (result) => {
-<<<<<<< HEAD
-            router.push('/job/about/'+ result.jobID)
-=======
             router.push("/job/about/" + result.jobID);
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
             setMassage(result);
           },
           (error) => {

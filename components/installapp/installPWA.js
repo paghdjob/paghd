@@ -34,11 +34,7 @@ const InstallPWA = () => {
       title="Install app"
       onClick={onClick}
     >
-<<<<<<< HEAD
-      Install Lite App at Paghd Jobs
-=======
       Click here to install Lite App
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
     </button>
   );
 };

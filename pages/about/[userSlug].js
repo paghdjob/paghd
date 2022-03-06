@@ -60,22 +60,14 @@ function UserDetail(props) {
   );
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 export async function getServerSideProps(context) {
   // Fetch data from external API
   let data = {};
   const { userSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
-<<<<<<< HEAD
-  const res = await fetch("https://www.paghd.com/v2/people/aboutNew.php?userSlug="+userSlug);
-=======
   const res = await fetch(
     `https://www.paghd.com/v2/people/aboutNew.php?userSlug=${userSlug}`
   );
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   data = await res.json();
   // }
   return { props: data };

@@ -1,14 +1,6 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
-<<<<<<< HEAD
-import { useRouter } from 'next/router';
-
-
-const JobDetails = (jobs) => {
-  const [info, setInfo] = useState(jobs.jobObj);
-  const [jobApplyText, setJobApplyText] = useState("");
-=======
 import { useRouter } from "next/router";
 import ProfileResume from "../about/profile/peopleResume";
 
@@ -16,36 +8,24 @@ const JobDetails = (props) => {
   const [info, setInfo] = useState(props.jobObj);
   const [jobApplyText, setJobApplyText] = useState("");
   const [isProfileResume, setIsProfileResume] = useState(false);
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   const cookies = new Cookies();
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
   const router = useRouter();
 
   useEffect(() => {
-<<<<<<< HEAD
-    if(auth){
-      let body = { jobID: info.job.jobID};
-=======
     if (auth) {
       let body = { jobID: info.job.jobID };
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       fetch("/v2/jobs/aboutSet.php?type=VIEWJOB", {
         method: "POST",
         headers: {
           Authorization: auth,
         },
         body: JSON.stringify(body),
-<<<<<<< HEAD
-      })  
-    }
-  });
-=======
       });
     }
     setInfo(props.jobObj);
   }, [props]);
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 
   let skillView, indView, langView, workView, cityView;
   if (info && info.jobSkill && info.jobSkill.length !== 0) {
@@ -110,78 +90,14 @@ const JobDetails = (props) => {
   }
 
   const onApply = () => {
-<<<<<<< HEAD
-     if(userID) {
-      let body = { jobID: info.job.jobID};
-=======
     if (userID) {
       let body = { jobID: info.job.jobID };
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       fetch("/v2/jobs/aboutSet.php?type=APPLYJOB", {
         method: "POST",
         headers: {
           Authorization: auth,
         },
         body: JSON.stringify(body),
-<<<<<<< HEAD
-      }).then((res) => res.json())
-      .then(
-        (result) => {
-          setJobApplyText(result.jobApplyText);
-          console.log("result--", result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-    } else { 
-      router.push('/login')
-     }
-    if (info.job.jobRefURL) {
-      window.open(info.job.jobRefURL, '_blank');
-    }
-  };
-
-
-  return (
-    <div className="text-left">
-      <div className="card">
-        <div className="card-header text-center">
-          <h1>{info && info.job.jobTitle}</h1>
-          <p className="card-text">{info && info.job.comName}</p>
-          <p className="card-text">{jobApplyText}</p>
-          <p><button type="submit" className="btn btn-info ml-1 float-right" onClick={onApply}>Job Apply </button></p>
-         </div>
-      </div>
-      <div className="card-body">
-        {info && info.job && info.job.jobYearStart && (
-          <p className="card-text">
-            <b>Experience :</b> {info && info.job && info.job.jobYearStart} to
-            {info && info.job && info.job.jobYearEnd} Years
-          </p>
-        )}
-        {cityView && (
-          <p className="card-text">
-            <b>City :</b> {cityView}
-          </p>
-        )}
-        {jobSalary && (
-          <p className="card-text">
-            <b>Salary :</b> {jobSalary}
-          </p>
-        )}
-        {info && info.job && info.job.jobPosition && (
-          <p className="card-text">
-            <b>Position :</b> {info && info.job && info.job.jobPosition}
-            Position
-          </p>
-        )}
-        {jobHrView && (
-          <p className="card-text">
-            <b>Post By :</b> {jobHrView}
-          </p>
-        )}
-=======
       })
         .then((res) => res.json())
         .then(
@@ -256,7 +172,6 @@ const JobDetails = (props) => {
             </div>
           </div>
         </div>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       </div>
       {resume}
       {info && info.job && (

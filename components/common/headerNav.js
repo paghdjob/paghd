@@ -1,11 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-<<<<<<< HEAD
-import Logo from "../../public/icons/logo.png";
-=======
 import Logo from "../../public/icons/icon-32x32.png";
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 import Cookies from "universal-cookie";
 
 function HeaderNav() {
@@ -16,16 +12,10 @@ function HeaderNav() {
       <header className="d-flex flex-wrap d-flex flex-column flex-md-row align-items-center  mb-1 mt-1 border-bottom">
         <div className="d-flex align-items-center mb-md-0 me-md-auto text-dark text-decoration-none">
           <Link href="/" passHref>
-<<<<<<< HEAD
-            <span className="fs-4">
-              <Image src={Logo} alt="paghd jobs" width="250px" height="48px" />
-            </span>
-=======
             <a className="d-flex align-items-center text-dark text-decoration-none">
               <Image className="logo" src={Logo} alt="paghd jobs" />
               <span className="fs-4 paghd">Paghd Jobs</span>
             </a>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
           </Link>
         </div>
 
@@ -52,9 +42,6 @@ function HeaderNav() {
           </li> */}
           <li className="nav-item">
             <Link href="/job/postjob">
-<<<<<<< HEAD
-              <a className="nav-link">Post Job</a>
-=======
               <a className="nav-link">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -66,16 +53,12 @@ function HeaderNav() {
                 </svg>
                 <span className="menuLabel">Post Job</span>
               </a>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
             </Link>
           </li>
           {userID ? (
             <>
               <li className="nav-item">
                 <Link href="/report">
-<<<<<<< HEAD
-                  <a className="nav-link">Report</a>
-=======
                   <a className="nav-link">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -87,14 +70,10 @@ function HeaderNav() {
                     </svg>
                     <span className="menuLabel">Report</span>
                   </a>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
                 </Link>
               </li>
               <li className="nav-item">
                 <Link href="/about">
-<<<<<<< HEAD
-                  <a className="nav-link">Resume</a>
-=======
                   <a className="nav-link">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -106,14 +85,10 @@ function HeaderNav() {
                     </svg>
                     <span className="menuLabel">Resume</span>
                   </a>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
                 </Link>
               </li>
               <li className="nav-item">
                 <Link href="/login/logout">
-<<<<<<< HEAD
-                  <a className="nav-link">Log Out</a>
-=======
                   <a className="nav-link">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -125,16 +100,12 @@ function HeaderNav() {
                     </svg>
                     <span className="menuLabel">Logout</span>
                   </a>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
                 </Link>
               </li>
             </>
           ) : (
             <li className="nav-item">
               <Link href="/login">
-<<<<<<< HEAD
-                <a className="nav-link">Log In</a>
-=======
                 <a className="nav-link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +117,6 @@ function HeaderNav() {
                   </svg>
                   <span className="menuLabel">Log In</span>
                 </a>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
               </Link>
             </li>
           )}

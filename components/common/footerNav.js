@@ -1,16 +1,10 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
-
-=======
 import React, { useEffect } from "react";
 import Cookies from "universal-cookie";
 
 // const InstallPWA = React.lazy(() => import("../installapp/installPWA"));
 
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 const InstallPWA = dynamic(() => import("../installapp/installPWA"), {
   ssr: false,
 });
@@ -22,29 +16,6 @@ function FooterNav() {
   // console.log("autoPost start -  ", rndInt1);
   useEffect(() => {
     if (!isSocial) {
-<<<<<<< HEAD
-      const rndInt = Math.floor(Math.random() * 400);
-      console.log("autoPost start -  ", rndInt);
-      cookies.set("socialPostSend", 1, { path: "/", maxAge: rndInt });
-      fetch("/v2/autopost/linkedin/postJobLinkedin.php")
-      .then((res) => res.json())
-      fetch("/v2/autopost/twitter/tweet.php")
-      .then((res) => res.json())
-      }
-  }, []);
-
-  return (
-    <footer className="container">
-      <p>
-        &copy; 2020–2021 Paghd jobs. &nbsp;
-        <Link href="/legal/privacy-policy">
-          <a>Privacy Policy</a>
-        </Link>
-        <Link href="/legal/terms-conditions">
-          <a> Terms & Conditions</a>
-        </Link>
-      </p>
-=======
       const rndInt = Math.floor(Math.random() * 300);
       console.log("autoPost start -  ", rndInt);
       cookies.set("socialPostSend", 1, { path: "/", maxAge: rndInt });
@@ -109,7 +80,6 @@ function FooterNav() {
           <InstallPWA />
         </p>
       </div>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
     </footer>
   );
 }

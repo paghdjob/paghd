@@ -118,11 +118,7 @@ const JobCity = (props) => {
 
   const addcityForm = (
     <form className="row">
-<<<<<<< HEAD
-       <div className="form-group col-4">
-=======
       <div className="form-group col-4">
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
         <label className="text-left pl-0">Country &nbsp;</label>
         <select
           className="form-control col-4"
@@ -141,37 +137,6 @@ const JobCity = (props) => {
             ))}
         </select>
       </div>
-<<<<<<< HEAD
-        <div className="col-6">
-          <label className="text-left pl-0">&nbsp;City</label>
-          <input
-            name="cityName"
-            placeholder="Type to search city name..."
-            className="autocomplete form-control p-2"
-            onChange={(e) => {
-              setIsAutoSearch(true), setCityName(e.target.value);
-            }}
-            type="text"
-            value={cityName}
-          />
-          <ul className="list-group autocomplete-items">
-            {cityList &&
-              cityList.map((langName) => {
-                return (
-                  <li
-                    onClick={(e) => {
-                      setCityName(langName.label), setCityList("");
-                    }}
-                    className="list-group-item text-start"
-                    key={langName.label}
-                  >
-                    {langName.label}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-=======
       <div className="col-6">
         <label className="text-left pl-0">&nbsp;City</label>
         <input
@@ -201,7 +166,6 @@ const JobCity = (props) => {
             })}
         </ul>
       </div>
->>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       <div className="col-2 mt-4">
         <button type="button" onClick={addLocation} className="btn btn-info">
           Add City
