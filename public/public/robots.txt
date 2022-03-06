@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://www.paghd.com/zw-country.xml.gz
-Sitemap: https://www.paghd.com/zw-country.xml.gz.gz
