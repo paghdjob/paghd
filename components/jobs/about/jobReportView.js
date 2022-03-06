@@ -25,6 +25,7 @@ const JobReportView = (props) => {
           console.log("error--", error);
         }
       );
+<<<<<<< HEAD
     }, []);
 
 
@@ -38,7 +39,31 @@ const JobReportView = (props) => {
           </tr>
         );
       }
+=======
+  }, [props]);
+
+  let reportView =
+    jobView &&
+    jobView.map((item) => {
+      let jobViewDate = new Date(item.jobViewDate).toDateString("yyyy-MM-dd");
+      return (
+        <tr key={item.userID}>
+          <td>{item.userID}</td>
+          <td>
+            <a
+              className="text-info"
+              rel="noopener noreferrer"
+              target="_blank"
+              href={"/about/" + item.userSlug}
+            >
+              {item.userName}
+            </a>
+          </td>
+          <td>{jobViewDate}</td>
+        </tr>
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       );
+    });
 
   return (
     <div className="rows">

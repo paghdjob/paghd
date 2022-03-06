@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
+<<<<<<< HEAD
 import HeadSeo from "../../components/headSeo";
 import JobList from "../../components/jobs/jobList";
 import JobFilter from "../../components/jobs/jobFilter";
@@ -113,11 +114,20 @@ if(loc) {
           </div>
         </div>
       </div>
+=======
+
+function Job(props) {
+  return (
+    <div>
+      <HeaderNav />
+      <div className="container">Job Search again</div>
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       <FooterNav />
     </div>
   );
 }
 
+<<<<<<< HEAD
 export async function getServerSideProps(context) {
   let list = {};
   let filterRes = {};
@@ -131,4 +141,6 @@ export async function getServerSideProps(context) {
   return { props: { list, filterRes } };
 }
 
+=======
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 export default Job;

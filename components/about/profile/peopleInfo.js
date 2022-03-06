@@ -14,12 +14,22 @@ const ProfileInfo = (props) => {
   const auth = cookies.get("auth");
 
   useEffect(() => {
-    if (user && editMode && user.userAddress) { setUserAddress(user.userAddress) }
-    if (user && editMode && user.userAbout) { setUserAbout(user.userAbout) }
-    if (user && editMode && user.userHeadline) { setUserHeadline(user.userHeadline) }
-    if (user && editMode && user.cityName) { setCityName(user.cityName) }
-    if (user && editMode && user.countryCode) { setCountryCode(user.countryCode) }
-  })
+    if (user && editMode && user.userAddress) {
+      setUserAddress(user.userAddress);
+    }
+    if (user && editMode && user.userAbout) {
+      setUserAbout(user.userAbout);
+    }
+    if (user && editMode && user.userHeadline) {
+      setUserHeadline(user.userHeadline);
+    }
+    if (user && editMode && user.cityName) {
+      setCityName(user.cityName);
+    }
+    if (user && editMode && user.countryCode) {
+      setCountryCode(user.countryCode);
+    }
+  });
 
   const editProfile = (event) => {
     setEditMode(false);
@@ -48,7 +58,7 @@ const ProfileInfo = (props) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("result--", result);
+          setEditMode(true);
           setMessage(result.msg);
         },
         (error) => {

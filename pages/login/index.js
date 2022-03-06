@@ -13,7 +13,7 @@ function Login(props) {
     if (event && event.target && event.target.value) {
       setPage(event.target.value);
     }
-  }
+  };
 
   return (
     <div>
@@ -24,15 +24,47 @@ function Login(props) {
       />
       <HeaderNav />
       <div className="container mb-4">
-       {page === "ChangePassword" && <ChangePassword />}
-       {page === "Registration" && <Registration />}
-       {page === "ForgotPassword" && <ForgotPassword />}
-       {page === "LoginPage" && <LoginPage />}
+        {page === "ChangePassword" && <ChangePassword />}
+        {page === "Registration" && <Registration />}
+        {page === "ForgotPassword" && <ForgotPassword />}
+        {page === "LoginPage" && <LoginPage />}
         <ul className="nav justify-content-center">
-          {page !== "Registration" && <button className="btn btn-link" value="Registration" onClick={pageChange}>Registration</button>}
-          {page !== "ChangePassword" && <button className="btn btn-link" value="ChangePassword" onClick={pageChange}>Change Password</button>}
-          {page !== "ForgotPassword" && <button className="btn btn-link" value="ForgotPassword" onClick={pageChange}>Forgot Password</button>}
-          {page !== "LoginPage" && <button className="btn btn-link" value="LoginPage" onClick={pageChange}>Login</button>} 
+          {page !== "Registration" && (
+            <button
+              className="btn btn-link"
+              value="Registration"
+              onClick={pageChange}
+            >
+              Registration
+            </button>
+          )}
+          {page !== "ChangePassword" && (
+            <button
+              className="btn btn-link"
+              value="ChangePassword"
+              onClick={pageChange}
+            >
+              Change Password
+            </button>
+          )}
+          {page !== "ForgotPassword" && (
+            <button
+              className="btn btn-link"
+              value="ForgotPassword"
+              onClick={pageChange}
+            >
+              Forgot Password
+            </button>
+          )}
+          {page !== "LoginPage" && (
+            <button
+              className="btn btn-link"
+              value="LoginPage"
+              onClick={pageChange}
+            >
+              Login
+            </button>
+          )}
         </ul>
       </div>
       <FooterNav />

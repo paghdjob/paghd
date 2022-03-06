@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useRouter } from 'next/router';
+=======
+import { useRouter } from "next/router";
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
@@ -51,7 +55,11 @@ function Postjob(props) {
         .then((res) => res.json())
         .then(
           (result) => {
+<<<<<<< HEAD
             router.push('/job/about/'+ result.jobID)
+=======
+            router.push("/job/about/" + result.jobID);
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
             setMassage(result);
           },
           (error) => {
@@ -88,7 +96,7 @@ function Postjob(props) {
   let userView;
   if (!userID) {
     userView = (
-      <div className="rows">
+      <div className="rows mt-2">
         <div className="row">
           <div className="col-md-4">
             <label>User Name *</label>
@@ -174,9 +182,11 @@ function Postjob(props) {
       />
       <HeaderNav />
       <div className="container">
-        <div className="card m-2">
+        <div className="card">
           <div className="card-header">
-            <h1> Post New Job - Hire the right fit for your business. </h1>
+            <h1 className="h5">
+              Post New Job - Hire the right fit for your business.
+            </h1>
           </div>
           <div className="card-body">
             <form className="form-group">
@@ -207,18 +217,18 @@ function Postjob(props) {
                       comList.map((city) => {
                         return (
                           <li
-                            onClick={(e) => selectCompany(city.label)}
+                            onClick={(e) => selectCompany(city.cityName)}
                             className="list-group-item text-start"
                             key={city.value}
                           >
-                            {city.label}
+                            {city.cityName}
                           </li>
                         );
                       })}
                   </ul>
                 </div>
               </div>
-              <div className="form-group">
+              <div className="form-group mt-2">
                 <label>Job Description * </label>
                 <QuillNoSSRWrapper
                   modules={modules}
@@ -236,7 +246,7 @@ function Postjob(props) {
                 <button
                   type="button"
                   onClick={handleData}
-                  className="btn btn-primary"
+                  className="btn btn-info mt-2"
                 >
                   Post Job
                 </button>
@@ -244,7 +254,7 @@ function Postjob(props) {
             </form>
           </div>
           <div className="card-body">
-            <h2>Better candidates. Better hires.</h2>
+            <h2 className="h5">Better candidates. Better hires.</h2>
             <p className="card-text">
               Job seekers make better decisions about where to work. That means
               better results for employers

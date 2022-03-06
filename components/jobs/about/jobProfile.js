@@ -153,7 +153,13 @@ const JobProfile = (props) => {
               <input
                 type="text"
                 className="autocomplete form-control"
+<<<<<<< HEAD
                 onChange={(e) => {setIsAutoSearch(true), setComName(e.target.value)}}
+=======
+                onChange={(e) => {
+                  setIsAutoSearch(true), setComName(e.target.value);
+                }}
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
                 name="comName"
                 value={comName}
                 required
@@ -163,11 +169,11 @@ const JobProfile = (props) => {
                   comList.map((city) => {
                     return (
                       <li
-                        onClick={(e) => selectCompany(city.label)}
+                        onClick={(e) => selectCompany(city.cityName)}
                         className="list-group-item text-start"
                         key={city.value}
                       >
-                        {city.label}
+                        {city.cityName}
                       </li>
                     );
                   })}
@@ -290,7 +296,7 @@ const JobProfile = (props) => {
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    className="mt-4 btn btn-primary"
+                    className="mt-4 btn btn-info"
                   >
                     Save
                   </button>

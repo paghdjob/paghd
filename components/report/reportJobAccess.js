@@ -13,7 +13,8 @@ const ReportJobAccess = (props) => {
       headers: {
         Authorization: auth,
       },
-    }).then((res) => res.json())
+    })
+      .then((res) => res.json())
       .then(
         (result) => {
           setJobAccess(result.jobAccess);
@@ -22,17 +23,21 @@ const ReportJobAccess = (props) => {
           console.log("user error--", error);
         }
       );
-  }, []);
+  }, [props]);
 
   const onJobVerify = (jobSlug) => {
-    let body = '?jobID='+ jobSlug + '&fb='+ localStorage.getItem('facebook_access_token');
+    let body =
+      "?jobID=" +
+      jobSlug +
+      "&fb=" +
+      localStorage.getItem("facebook_access_token");
 
     //https://www.paghd.com/v2/autopost/fb/postJobFb.php?jobID=2955&fb=EAACwleCpshEBAFYIZCdcviIRZCnX2Oif7f92kgQe6iAJIl5ABy7MR2o9tucnu011exi8ALNZAVMVEUpUEu8nuJivmOHQH3nYTqKh5XZBsevRArdVCh4g1QaVI8VqjqZCNAte84WKelIthv9DWl1mZBG7pxxfnRmtN42EZBKMHKo1A71a9okRZAiStIA2n5kwRyLtrZACwPqn9rp20ntp4spii
     fetch("v2/autopost/fb/postJobFb.php?" + body, {
       method: "GET",
       headers: {
         Authorization: auth,
-      }
+      },
     })
       .then((res) => res.json())
       .then(
@@ -45,12 +50,9 @@ const ReportJobAccess = (props) => {
       );
   };
 
- 
-
   let userView;
   if (jobAccess) {
     userView = jobAccess.map((item) => {
-      let jobDate = new Date(item.jobDate).toDateString("yyyy-MM-dd");
       return (
         <tr key={item.jobAccessID}>
           <td>
@@ -84,33 +86,8 @@ const ReportJobAccess = (props) => {
             </a>
           </td>
           <td>{item.jobStatus === "2" ? "Closed" : "Open"}</td>
-          <td>{jobDate}</td>
-          <td
-            className={
-              item.jobVerify === "0" ? "alert-danger" : "alert-success"
-            }
-          >
-            {item.jobVerify === "0" ? (
-              <a
-                className="text-info"
-                rel="noopener noreferrer"
-                target="_blank"
-                href={
-                  "job/" +
-                  item.jobSlug +
-                  "?-" +
-                  item.userpin +
-                  "-J-" +
-                  item.userID +
-                  "-" +
-                  item.jobID
-                }
-              >
-                Verify your job
-              </a>
-            ) : (
-              "Verified"
-            )}
+          <td>
+            {new Date(item.jobDate.replace(/-/g, "/")).toLocaleDateString()}
           </td>
           {userID === "258" && (
             <td>
@@ -140,7 +117,6 @@ const ReportJobAccess = (props) => {
               <th scope="col">View</th>
               <th scope="col">Status</th>
               <th scope="col">Date</th>
-              <th scope="col">Verify</th>
               {userID === "258" && <th scope="col">FB post</th>}
             </tr>
           </thead>

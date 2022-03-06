@@ -23,11 +23,10 @@ const ReportJobApply = (props) => {
           console.log("user error--", error);
         }
       );
-  }, []);
+  }, [props]);
   let userView;
   if (jobApply) {
     userView = jobApply.map((item) => {
-      let jobApplyDate = new Date(item.jobApplyDate).toDateString("yyyy-MM-dd");
       return (
         <tr key={item.jobApplyID}>
           <td>
@@ -41,7 +40,11 @@ const ReportJobApply = (props) => {
             </a>
           </td>
           <td className="">{item.jobApplyText}</td>
-          <td>{jobApplyDate}</td>
+          <td>
+            {new Date(
+              item.jobApplyDate.replace(/-/g, "/")
+            ).toLocaleDateString()}
+          </td>
         </tr>
       );
     });

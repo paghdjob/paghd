@@ -20,7 +20,7 @@ const JobIndustry = (props) => {
           console.log("user error--", error);
         }
       );
-  }, []);
+  }, [props]);
 
   const addIndustries = () => {
     let body = { IndID: indID, jobID: props.jobID, userID: userID };

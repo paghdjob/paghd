@@ -12,11 +12,17 @@ const Registration = () => {
     let userDetails = {
       name: name,
       email: email,
-      pwd: pwd
-    }  
+      pwd: pwd,
+    };
     console.log(userDetails);
     userIdentify(userDetails);
     event.preventDefault();
+  };
+
+  const regEmail = (userID) => {
+    fetch("v2/auth/EmailTemplate.php?type=REGISTRATION&userID=" + userID).then(
+      (res) => res.json()
+    );
   };
 
   const userIdentify = (userDetails) => {
@@ -30,6 +36,7 @@ const Registration = () => {
           (result) => {
             // console.log("result--", result);
             setMessage(result.msg);
+            regEmail(result.userID);
           },
           (error) => {
             setMessage(error);
@@ -73,7 +80,14 @@ const Registration = () => {
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input type="password" className="form-control" onChange={(e) => setPwd(e.target.value)} name="pwd" value={pwd} required />
+              <input
+                type="password"
+                className="form-control"
+                onChange={(e) => setPwd(e.target.value)}
+                name="pwd"
+                value={pwd}
+                required
+              />
             </div>
             {message}
             <div className="text-center">

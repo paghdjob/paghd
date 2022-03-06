@@ -20,7 +20,7 @@ const JobWorkType = (props) => {
           console.log("WORKTYPE error--", error);
         }
       );
-  }, []);
+  }, [props]);
 
   const addWorkType = () => {
     let body = { workTypeID: workTypeID, jobID: props.jobID, userID: userID };

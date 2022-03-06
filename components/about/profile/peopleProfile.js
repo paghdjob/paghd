@@ -7,7 +7,7 @@ const ProfileInfo = (props) => {
   const [message, setMessage] = useState("");
   const cookies = new Cookies();
   const auth = cookies.get("auth");
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(true);
 
   const editProfile = (event) => {
     setEditMode(false);
@@ -21,8 +21,6 @@ const ProfileInfo = (props) => {
       userName: userName,
       userStatus: 2,
     };
-    console.log("users handleSubmit", users);
-
     fetch("/v2/people/aboutSet.php?type=PROFILEUPDATE", {
       method: "POST",
       headers: {
@@ -33,7 +31,6 @@ const ProfileInfo = (props) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("result--", result);
           setMessage(result.msg);
         },
         (error) => {
@@ -62,14 +59,19 @@ const ProfileInfo = (props) => {
               />
             </div>
             <div className="col-md-6">
-              <label>URL : </label>
-              <input
-                type="text"
-                className="form-control"
-                onChange={(e) => setUserSlug(e.target.value)}
-                name="userSlug"
-                value={userSlug}
-              />
+              <label>Profile URL : </label>
+              <div className="input-group mb-3">
+                <span className="input-group-text">
+                  https://paghd.vercel.app/about/
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => setUserSlug(e.target.value)}
+                  name="userSlug"
+                  value={userSlug}
+                />
+              </div>
             </div>
             {/* <div className="form-group col-md-6">
             <label>Profile Image</label>
@@ -110,11 +112,9 @@ const ProfileInfo = (props) => {
         {profileView}
         {editMode && (
           <div className="card-body row">
+            <p className="card-text col-md-6">Name : {userName}</p>
             <p className="card-text col-md-6">
-              Name : {props.userInfo.userName}
-            </p>
-            <p className="card-text col-md-6">
-              Profile URL : {props.userInfo.userSlug}
+              Profile URL : https://paghd.vercel.app/about/{userSlug}
             </p>
           </div>
         )}

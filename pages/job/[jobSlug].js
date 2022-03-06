@@ -1,53 +1,87 @@
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../../components/common/headerNav";
-import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
 import JobDetails from "../../components/jobs/jobDetails";
+import JobList from "../../components/jobs/jobList";
+import FooterNav from "../../components/common/footerNav";
 
 function JobDetail(props) {
   const [jobError, setJobError] = useState(props.error);
   const [jobObj, setJobObj] = useState(props);
+  const [jobList, setJobList] = useState("");
 
   let jobdesc;
-  if(jobObj.job && jobObj.job.jobDesc) {
+  if (jobObj.job && jobObj.job.jobDesc) {
     let desc = jobObj.job.jobDesc.replace(/(<([^>]+)>)/gi, "");
-    jobdesc = desc.substring(0, 155);  
+    jobdesc = desc.substring(0, 155);
   }
 
   useEffect(() => {
+<<<<<<< HEAD
     if (!jobObj) {
       fetch("/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", ""))
+=======
+    // if (!jobObj) {
+    fetch(
+      "/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", "")
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setJobObj(result);
+        },
+        (error) => {
+          console.log("error--", error);
+        }
+      );
+    //  }
+    if (jobList.length === 0 && jobObj && jobObj.job) {
+      fetch("/v2/jobs/jobListNew.php?title=" + jobObj.job.jobTitle)
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
         .then((res) => res.json())
         .then(
           (result) => {
-            setJobObj(result);
+            setJobList(result.jobs);
           },
           (error) => {
             console.log("error--", error);
           }
         );
     }
-  }, []);
+  }, [props]);
 
   return (
     <div>
-      {!jobError &&
-      <HeadSeo
-        title={jobObj.job.jobTitle}
-        description={jobdesc}
-        keywords={jobObj.job.comName}
-      /> }
+      {!jobError && jobObj.job && (
+        <HeadSeo
+          title={jobObj.job.jobTitle}
+          description={jobdesc}
+          keywords={jobObj.job.comName}
+          structuredData={jobObj.googleObj}
+        />
+      )}
       <HeaderNav />
-      {jobError ? 'No record found' : <div className="container">
-        <JobDetails jobObj={jobObj} />
-      </div>}
+      {jobError ? (
+        "No record found"
+      ) : (
+        <div className="container">
+          {jobObj.job && <JobDetails jobObj={jobObj} />}
+        </div>
+      )}
+      {jobList && (
+        <div className="container">
+          <JobList pages={0} list={jobList} isFeature={false} />
+        </div>
+      )}
       <FooterNav />
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< HEAD
 
   let data = {};
   const { jobSlug } = context.query;
@@ -55,6 +89,32 @@ export async function getServerSideProps(context) {
     const res = await fetch("https://www.paghd.com/v2/jobs/about.php?jobSlug="+jobSlug); 
     data = await res.json();
     if (data.job === null) { data.error = 200; }
+=======
+  let data = {};
+  if (
+    context.req.headers["user-agent"].match(
+      "Chrome",
+      "Googlebot",
+      "Bingbot",
+      "Slurp",
+      "DuckDuckBot",
+      "Baiduspider",
+      "YandexBot",
+      "Sogou",
+      "facebot",
+      "ia_archiver"
+    )
+  ) {
+    const { jobSlug } = context.query;
+    const res = await fetch(
+      `https://www.paghd.com/v2/jobs/about.php?jobSlug=${jobSlug}`
+    );
+    data = await res.json();
+    if (data.job === null) {
+      data.error = 200;
+    }
+  }
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   return { props: data };
 }
 

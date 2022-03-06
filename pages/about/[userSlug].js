@@ -9,10 +9,10 @@ import Cookies from "universal-cookie";
 function UserDetail(props) {
   // console.log("about ", props);
   const [userObj, setUserObj] = useState(props);
-   
-//   const [description, setDescription] = useState("");
 
- /* let jobdesc;
+  //   const [description, setDescription] = useState("");
+
+  /* let jobdesc;
   if(jobObj.job && jobObj.job.jobDesc) {
     let desc = jobObj.job.jobDesc.replace(/(<([^>]+)>)/gi, "");
     jobdesc = desc.substring(0, 155);  
@@ -34,34 +34,51 @@ function UserDetail(props) {
           }
         );
     }
-  }, []); */
+  }, [props]); */
 
   return (
     <div>
       <HeadSeo
         title={userObj.users.userName}
-        description={userObj.userInfo !== null ? userObj.userInfo.userAbout : userObj.users.userName}
-        keywords={userObj.userInfo !== null ? userObj.userInfo.userHeadline : userObj.users.userName}
+        description={
+          userObj.userInfo !== null
+            ? userObj.userInfo.userAbout
+            : userObj.users.userName
+        }
+        keywords={
+          userObj.userInfo !== null
+            ? userObj.userInfo.userHeadline
+            : userObj.users.userName
+        }
       />
       <HeaderNav />
       <div className="container">
-         <UserDetails userObj={userObj} />
+        <UserDetails userObj={userObj} />
       </div>
       <FooterNav />
     </div>
   );
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 export async function getServerSideProps(context) {
   // Fetch data from external API
   let data = {};
   const { userSlug } = context.query;
   // if (req.headers["user-agent"].match("Chrome")) {
+<<<<<<< HEAD
   const res = await fetch("https://www.paghd.com/v2/people/aboutNew.php?userSlug="+userSlug);
+=======
+  const res = await fetch(
+    `https://www.paghd.com/v2/people/aboutNew.php?userSlug=${userSlug}`
+  );
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   data = await res.json();
   // }
   return { props: data };
-} 
+}
 
 export default UserDetail;

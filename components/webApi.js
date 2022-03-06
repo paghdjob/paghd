@@ -23,9 +23,9 @@ export default class WebApi {
       method: "POST",
       body: JSON.stringify(data),
       headers: new Headers({
-        Authorization: 'asdasdasdasd'
+        Authorization: "asdasdasdasd",
       }),
-    })
+    });
     //.then(response => response.json())
     // .then(data => {
     //   ppp = data;
@@ -33,7 +33,7 @@ export default class WebApi {
     // })
     // .catch((error) => {
     //   console.error('Error:', error);
-    // }); 
+    // });
     // return ppp;
   }
 }

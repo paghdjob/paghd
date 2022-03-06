@@ -1,10 +1,9 @@
 import dynamic from "next/dynamic";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import HeaderNav from "../components/common/headerNav";
 import FooterNav from "../components/common/footerNav";
 import useDebounce from "../components/jobs/use-debounce";
-
 import HeadSeo from "../components/headSeo";
 
 //const HeadSeo = dynamic(() => import("../components/headSeo"), { ssr: true });
@@ -16,7 +15,7 @@ export default function Home() {
   const debouncedSearchTerm = useDebounce(jobLocSearch, 750);
 
   const searchLocation = (location) => {
-    fetch("/v2/auto.php?type=CITY&name=" + location)
+    fetch(`/v2/auto.php?type=CITY&name=${location}`)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -40,7 +39,7 @@ export default function Home() {
   };
   const router = useRouter();
   const handleFilterChange = () => {
-    const jobUrl = '/job?title=' + jobTitleSearch + '&loc=' + jobLocSearch;
+    const jobUrl = `/jobs/jobs-in-${jobLocSearch}?title=${jobTitleSearch}`;
     router.push(jobUrl);
   };
 
@@ -64,56 +63,57 @@ export default function Home() {
           <div className="pricing-header p-3 pb-md-4 mx-auto text-center">
             <h1>World Largest Job Platform & Professional Network</h1>
             <p className="fs-5 text-muted">
-            Paghd is a popular professional networking site and is not a typical job portal, hence it works a bit differently than the traditional job portals.
+              Paghd is a popular professional networking site and is not a
+              typical job portal, hence it works a bit differently than the
+              traditional job portals.
             </p>
           </div>
-            <div className="row">
-              <div className="col-md-5 col-sm-12 col-lg-5 form-group mb-2">
-                <input
-                  name="jobTitleSearch"
-                  placeholder="Job Title or Keyword"
-                  className="form-control p-3"
-                  onChange={(e) => setJobTitleSearch(e.target.value)}
-                  type="text"
-                  value={jobTitleSearch}
-                />
-              </div>
-              <div className="col-md-5 col-sm-12 col-lg-5 form-group mb-2">
-                <input
-                  name="jobLocSearch"
-                  placeholder="Job Location"
-                  className="autocomplete form-control p-3"
-                  onChange={(e) => setJobLocSearch(e.target.value)}
-                  type="text"
-                  value={jobLocSearch}
-                />
-                <ul className="list-group autocomplete-items">
-                  {cities &&
-                    cities.map((city) => {
-                      return (
-                        <li
-                          onClick={(e) => selectCity(city.label)}
-                          className="list-group-item text-start"
-                          key={city.value}
-                        >
-                          {city.label}
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
-              <div className="col-md-2 col-sm-12 col-lg-2 form-group">
-                <button
-                  title="Search"
-                  className="btn btn-info pt-3 pb-3"
-                  onClick={handleFilterChange}
-                  href={"/job?title=" + jobTitleSearch + "&loc=" + jobLocSearch}
-                >
-                  Find jobs
-                </button>
-              </div>
+          <div className="row">
+            <div className="col-md-5 col-sm-12 col-lg-5 form-group mb-2">
+              <input
+                name="jobTitleSearch"
+                placeholder="Job Title or Keyword"
+                className="form-control p-3"
+                onChange={(e) => setJobTitleSearch(e.target.value)}
+                type="text"
+                value={jobTitleSearch}
+              />
+            </div>
+            <div className="col-md-5 col-sm-12 col-lg-5 form-group mb-2">
+              <input
+                name="jobLocSearch"
+                placeholder="Job Location"
+                className="autocomplete form-control p-3"
+                onChange={(e) => setJobLocSearch(e.target.value)}
+                type="text"
+                value={jobLocSearch}
+              />
+              <ul className="list-group autocomplete-items">
+                {cities &&
+                  cities.map((city) => {
+                    return (
+                      <li
+                        onClick={(e) => selectCity(city.cityName)}
+                        className="list-group-item text-start"
+                        key={city.value}
+                      >
+                        {`${city.cityName}, ${city.countryName} (${city.jobCount})`}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+            <div className="col-md-2 col-sm-12 col-lg-2 form-group">
+              <button
+                title="Search"
+                className="btn btn-info pt-3 pb-3"
+                onClick={handleFilterChange}
+              >
+                Search
+              </button>
             </div>
           </div>
+        </div>
       </main>
       <FooterNav />
     </div>

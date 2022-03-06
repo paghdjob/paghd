@@ -5,7 +5,11 @@ const ProfileResume = (props) => {
   const cookies = new Cookies();
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
-  const resumeUpload = "https://www.paghd.com/v2/resumeUpload.php?userID=" +userID+ "&auth="+auth;
+  const resumeUpload =
+    "https://www.paghd.com/v2/resumeUpload.php?userID=" +
+    userID +
+    "&auth=" +
+    auth;
 
   return (
     <div className="rows">
@@ -15,6 +19,7 @@ const ProfileResume = (props) => {
           <iframe
             src={resumeUpload}
             title="Resume Upload!"
+            height="100"
           ></iframe>
         </div>
       </div>

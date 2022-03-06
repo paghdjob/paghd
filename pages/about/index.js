@@ -1,4 +1,8 @@
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 import dynamic from 'next/dynamic'
 const HeaderNav = dynamic(() => import('../../components/common/headerNav'))
 const FooterNav = dynamic(() => import('../../components/common/footerNav'))
@@ -11,14 +15,49 @@ const PeopleLanguage = dynamic(() => import('../../components/about/profile/peop
 const PeopleSkill = dynamic(() => import('../../components/about/profile/peopleSkill'))
 const PeopleIndustry = dynamic(() => import('../../components/about/profile/peopleIndustry'))
 const ProfileResume = dynamic(() => import('../../components/about/profile/peopleResume'))
+=======
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 import Cookies from "universal-cookie";
+const HeaderNav = dynamic(() => import("../../components/common/headerNav"));
+const FooterNav = dynamic(() => import("../../components/common/footerNav"));
+const ProfileInfo = dynamic(() =>
+  import("../../components/about/profile/peopleInfo")
+);
+const PeoplePrivate = dynamic(() =>
+  import("../../components/about/profile/peoplePrivate")
+);
+const PeopleProfile = dynamic(() =>
+  import("../../components/about/profile/peopleProfile")
+);
+const PeopleExperienceNew = dynamic(() =>
+  import("../../components/about/profile/peopleExperienceNew")
+);
+const PeopleWorkType = dynamic(() =>
+  import("../../components/about/profile/peopleWorkType")
+);
+const PeopleLanguage = dynamic(() =>
+  import("../../components/about/profile/peopleLanguage")
+);
+const PeopleSkill = dynamic(() =>
+  import("../../components/about/profile/peopleSkill")
+);
+const PeopleIndustry = dynamic(() =>
+  import("../../components/about/profile/peopleIndustry")
+);
+const ProfileResume = dynamic(() =>
+  import("../../components/about/profile/peopleResume")
+);
 
 function About(props) {
   const [userObj, setUserObj] = useState(props);
+  const router = useRouter();
 
   useEffect(() => {
     const cookies = new Cookies();
     const auth = cookies.get("auth");
+    if (!cookies.get("userID")) {
+      router.push("/login");
+    }
     fetch("/v2/people/about.php?userSlug=" + cookies.get("userID"), {
       method: "GET",
       headers: {
@@ -28,7 +67,6 @@ function About(props) {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("user result--", result);
           setUserObj(result);
         },
         (error) => {
@@ -42,7 +80,14 @@ function About(props) {
       <HeaderNav />
       <div className="container">
         <div className="row m-0 p-0">
-          <h1>Profile</h1>
+          <h1>Profile / Resume</h1>
+          <div className="float-end">
+            {userObj.users && (
+              <Link href={`/about/${userObj.users.userSlug}`}>
+                <a className="float-end btn btn-info">Preview Resume</a>
+              </Link>
+            )}
+          </div>
         </div>
 
         {userObj.users && (

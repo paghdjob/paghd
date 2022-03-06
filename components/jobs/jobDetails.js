@@ -1,28 +1,51 @@
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+<<<<<<< HEAD
 import { useRouter } from 'next/router';
 
 
 const JobDetails = (jobs) => {
   const [info, setInfo] = useState(jobs.jobObj);
   const [jobApplyText, setJobApplyText] = useState("");
+=======
+import { useRouter } from "next/router";
+import ProfileResume from "../about/profile/peopleResume";
+
+const JobDetails = (props) => {
+  const [info, setInfo] = useState(props.jobObj);
+  const [jobApplyText, setJobApplyText] = useState("");
+  const [isProfileResume, setIsProfileResume] = useState(false);
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   const cookies = new Cookies();
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
   const router = useRouter();
 
   useEffect(() => {
+<<<<<<< HEAD
     if(auth){
       let body = { jobID: info.job.jobID};
+=======
+    if (auth) {
+      let body = { jobID: info.job.jobID };
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       fetch("/v2/jobs/aboutSet.php?type=VIEWJOB", {
         method: "POST",
         headers: {
           Authorization: auth,
         },
         body: JSON.stringify(body),
+<<<<<<< HEAD
       })  
     }
   });
+=======
+      });
+    }
+    setInfo(props.jobObj);
+  }, [props]);
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 
   let skillView, indView, langView, workView, cityView;
   if (info && info.jobSkill && info.jobSkill.length !== 0) {
@@ -54,10 +77,6 @@ const JobDetails = (jobs) => {
       );
     });
   }
-  let jobDate;
-  if (info && info.job && info.job.jobDate != null) {
-    jobDate = new Date(info.job.jobDate).toDateString("yyyy-MM-dd");
-  }
   let SalaryType;
   if (info && info.job && info.job.jobSalaryType === "1") {
     SalaryType = "Per Year";
@@ -74,7 +93,7 @@ const JobDetails = (jobs) => {
   }
   let jobSalary = null;
   if (info && info.job && info.job.jobSalaryStart && info.job.jobSalaryEnd) {
-    jobSalary = info.job.jobSalaryStart + " " + info.job.jobSalaryCurrency + " to " + info.job.jobSalaryEnd + " " + info.job.jobSalaryCurrency + " " + SalaryType;
+    jobSalary = `${info.job.jobSalaryStart} ${info.job.jobSalaryCurrency} to ${info.job.jobSalaryEnd} ${info.job.jobSalaryCurrency} ${SalaryType}`;
   }
 
   let jobHrView;
@@ -82,7 +101,7 @@ const JobDetails = (jobs) => {
     jobHrView = info.jobAccess.map((item) => {
       return (
         <span key={item.jobAccessID} className="mr-3 badge badge-secondary">
-          <a className="text-white1" href={'/about/' + item.userSlug}>
+          <a className="text-white1" href={"/about/" + item.userSlug}>
             {item.userName}
           </a>
         </span>
@@ -91,14 +110,20 @@ const JobDetails = (jobs) => {
   }
 
   const onApply = () => {
+<<<<<<< HEAD
      if(userID) {
       let body = { jobID: info.job.jobID};
+=======
+    if (userID) {
+      let body = { jobID: info.job.jobID };
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       fetch("/v2/jobs/aboutSet.php?type=APPLYJOB", {
         method: "POST",
         headers: {
           Authorization: auth,
         },
         body: JSON.stringify(body),
+<<<<<<< HEAD
       }).then((res) => res.json())
       .then(
         (result) => {
@@ -156,43 +181,144 @@ const JobDetails = (jobs) => {
             <b>Post By :</b> {jobHrView}
           </p>
         )}
+=======
+      })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setJobApplyText(result.jobApplyText);
+            if (result.valid === "false") {
+              setIsProfileResume(true);
+            } else if (
+              result.valid === "true" &&
+              userID &&
+              info.job.jobRefURL
+            ) {
+              window.open(info.job.jobRefURL, "_blank");
+            }
+          },
+          (error) => {
+            console.log("error--", error);
+          }
+        );
+    } else {
+      router.push("/login?url=" + router.asPath);
+    }
+  };
+  let resume = isProfileResume ? <ProfileResume /> : "";
+  return (
+    <div className="text-left">
+      <div className="card">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-8">
+              <h1 className="h4">{info && info.job.jobTitle}</h1>
+              <p className="card-text">{info && info.job.comName}</p>
+              {info && info.job && info.job.jobYearStart && (
+                <p className="card-text">
+                  <b>Experience : </b>
+                  {info && info.job && info.job.jobYearStart} to
+                  {info && info.job && info.job.jobYearEnd} Years
+                </p>
+              )}
+              {cityView && (
+                <p className="card-text">
+                  <b>City : </b>
+                  {cityView}
+                </p>
+              )}
+              {jobSalary && (
+                <p className="card-text">
+                  <b>Salary : </b> {jobSalary}
+                </p>
+              )}
+              {info && info.job && info.job.jobPosition && (
+                <p className="card-text">
+                  <b>Position : </b> {info && info.job && info.job.jobPosition}
+                  Position
+                </p>
+              )}
+              {jobHrView && (
+                <p className="card-text">
+                  <b>Post By : </b> {jobHrView}
+                </p>
+              )}
+            </div>
+            <div className="col-4">
+              <button
+                type="submit"
+                className="btn btn-info ml-1 float-end"
+                onClick={onApply}
+              >
+                Job Apply
+              </button>
+              <p className="card-text float-end">{jobApplyText}</p>
+            </div>
+          </div>
+        </div>
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       </div>
+      {resume}
       {info && info.job && (
         <div className="card-body">
           <p className="card-text">Job Description</p>
           <div dangerouslySetInnerHTML={{ __html: info.job.jobDesc }} />
         </div>
       )}
-      
+
       <div className="card-body">
         {skillView && (
           <p className="card-text">
-            <b>Skill :</b> {skillView}
+            <b>Skill :</b>
+            {skillView}
           </p>
         )}
         {indView && (
           <p className="card-text">
-            <b>Industry :</b> {indView}
+            <b>Industry :</b>
+            {indView}
           </p>
         )}
         {langView && (
           <p className="card-text">
-            <b>Language :</b> {langView}
+            <b>Language :</b>
+            {langView}
           </p>
         )}
         {workView && (
           <p className="card-text">
-            <b>Work Type :</b> {workView}
+            <b>Work Type :</b>
+            {workView}
           </p>
         )}
-        {jobDate && (
+        {info.job.jobDate && (
           <p className="card-text">
-            <b>Job Post Date :</b> {jobDate}
+            <b>Job Post Date :</b>
+            {new Date(info.job.jobDate.replace(/-/g, "/")).toLocaleDateString()}
           </p>
         )}
       </div>
 
-     
+      <div className="rows">
+        <ul className="nav">
+          {info &&
+            info.allCity &&
+            info.allCity.map((city) => {
+              return (
+                <li className="float-start m-2" key={city.cityID}>
+                  <Link
+                    href={"/jobs/jobs-in-" + city.cityName.replace(" ", "-")}
+                  >
+                    <a className="p-1 no-underline">
+                      {"Job In " + city.cityName + " (" + city.jobCount + ")"}
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+
       <div className="card-body">
         <h3>Safety Tips</h3>
         <ul>

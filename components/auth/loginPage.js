@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import Cookies from "universal-cookie";
+<<<<<<< HEAD
+=======
+import { useRouter } from "next/router";
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [message, setMessage] = useState("");
+<<<<<<< HEAD
+=======
+  const router = useRouter();
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 
   const handleSubmit = (event) => {
     let userDetails = {
@@ -24,6 +32,7 @@ const LoginPage = () => {
         name: response.profileObj.name,
         email: response.profileObj.email,
         profile: response.profileObj.imageUrl,
+<<<<<<< HEAD
         web: 2
       }
       userIdentify(userDetails);
@@ -38,17 +47,46 @@ const LoginPage = () => {
         profile: '',
         web: 2
       }
+=======
+        web: 2,
+      };
+      userIdentify(userDetails);
+    }
+  };
+  const responseFacebook = (response) => {
+    if (response.email) {
+      localStorage.setItem("facebook_access_token", response.accessToken);
+      let userDetails = {
+        name: response.name,
+        email: response.email,
+        profile: "",
+        web: 2,
+      };
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
       userIdentify(userDetails);
     } else {
       console.log(response);
     }
+<<<<<<< HEAD
   }
+=======
+  };
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
 
   const userWebSetting = (userID, auth) => {
     const cookies = new Cookies();
     cookies.set("userID", userID, { path: "/", maxAge: 25929999 });
     cookies.set("auth", auth, { path: "/", maxAge: 25929999 });
+<<<<<<< HEAD
     window.location.href = "/";
+=======
+    router.push(router.query.url ? router.query.url : "/");
+  };
+  const verifyEmail = (userID) => {
+    fetch("v2/auth/EmailTemplate.php?type=EMAILVERIFY&userID=" + userID).then(
+      (res) => res.json()
+    );
+>>>>>>> 7885e9ba8abc3ddb50b7fe527e5208bcb46ee879
   };
   const userIdentify = (userDetails) => {
     if (userDetails.email !== "") {
@@ -63,6 +101,9 @@ const LoginPage = () => {
             setMessage(result.msg);
             if (result.userID && result.auth) {
               userWebSetting(result.userID, result.auth);
+            }
+            if (result.valid === false && result.userID) {
+              verifyEmail(result.userID);
             }
           },
           (error) => {
