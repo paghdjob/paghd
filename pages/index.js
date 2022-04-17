@@ -5,6 +5,7 @@ import HeaderNav from "../components/common/headerNav";
 import FooterNav from "../components/common/footerNav";
 import useDebounce from "../components/jobs/use-debounce";
 import HeadSeo from "../components/headSeo";
+import GetApi from "../components/webApi";
 
 //const HeadSeo = dynamic(() => import("../components/headSeo"), { ssr: true });
 
@@ -14,8 +15,12 @@ export default function Home() {
   const [cities, setCities] = useState();
   const debouncedSearchTerm = useDebounce(jobLocSearch, 750);
 
-  const searchLocation = (location) => {
-    fetch(`/v2/auto.php?type=CITY&name=${location}`)
+  const searchLocation = (async (location) => {
+    console.log('location', location)
+    const res = await GetApi(`/v2/auto.php?type=CITY&name=${location}`)
+    console.log('res', res)
+    setCities(res);
+    /* fetch(`/v2/auto.php?type=CITY&name=${location}`)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -24,8 +29,8 @@ export default function Home() {
         (error) => {
           console.log("error--", error);
         }
-      );
-  };
+      );*/
+  });
 
   useEffect(() => {
     if (debouncedSearchTerm) {
