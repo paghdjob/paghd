@@ -122,6 +122,7 @@ function HeaderNav() {
           )}
         </ul>
       </header>
+      <div id="toast-body" className="alert-success"></div>
     </div>
   );
 }

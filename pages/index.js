@@ -5,7 +5,7 @@ import HeaderNav from "../components/common/headerNav";
 import FooterNav from "../components/common/footerNav";
 import useDebounce from "../components/jobs/use-debounce";
 import HeadSeo from "../components/headSeo";
-import GetApi from "../components/webApi";
+import { GetApi } from "../components/webApi";
 
 //const HeadSeo = dynamic(() => import("../components/headSeo"), { ssr: true });
 
