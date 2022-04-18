@@ -6,6 +6,7 @@ import HeadSeo from "../../components/headSeo";
 import JobDetails from "../../components/jobs/jobDetails";
 import JobList from "../../components/jobs/jobList";
 import FooterNav from "../../components/common/footerNav";
+import { GetApi } from "../../components/webApi";
 
 function JobDetail(props) {
   const [jobError, setJobError] = useState(props.error);
@@ -18,32 +19,16 @@ function JobDetail(props) {
     jobdesc = desc.substring(0, 155);
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     // if (!jobObj) {
-    fetch(
-      "/v2/jobs/about.php?jobSlug=" + location.pathname.replace("/job/", "")
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setJobObj(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await GetApi(
+      `/v2/jobs/about.php?jobSlug=${location.pathname.replace("/job/", "")}`
+    );
+    setJobObj(res);
     //  }
     if (jobList.length === 0 && jobObj && jobObj.job) {
-      fetch("/v2/jobs/jobListNew.php?title=" + jobObj.job.jobTitle)
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setJobList(result.jobs);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const result = await GetApi(`/v2/jobs/jobListNew.php?title=${jobObj.job.jobTitle}`)
+      setJobList(result.jobs);
     }
   }, [props]);
 
