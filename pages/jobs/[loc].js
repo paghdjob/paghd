@@ -6,6 +6,7 @@ import HeadSeo from "../../components/headSeo";
 import JobList from "../../components/jobs/jobList";
 import JobFilter from "../../components/jobs/jobFilter";
 import JobSearch from "../../components/jobs/jobSearch";
+import { GetApi, PostApi } from "../../components/webApi";
 
 function JobsIn(props) {
   const [jobList, setJobList] = useState(props.list.jobs);
@@ -29,28 +30,22 @@ function JobsIn(props) {
       setJobTotal(props.list.total);
     }
     if (locSearch) {
-      fetch(
+      GetApi(
         `/v2/autopost/careerjet/careerjet.php?title=${titleSearch}&loc=${locSearch}`
       );
-      fetch(
+      GetApi(
         `/v2/jobs/stackoverflowPostJob.php?q=${titleSearch}&l=${locSearch}&u=Km&d=100`
       );
     }
   }, [props]);
 
-  const filterJob = () => {
-    fetch(`/v2/jobs/filterJob.php?title=${titleSearch}&loc=${locSearch}`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setFilt(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+  const filterJob = async () => {
+    const res = await GetApi(
+      `/v2/jobs/filterJob.php?title=${titleSearch}&loc=${locSearch}`
+    );
+    setFilt(res);
   };
-  const handleData = (moredata) => {
+  const handleData = async (moredata) => {
     let newParam = "?title=" + titleSearch + "&loc=" + locSearch;
     if (moredata && (moredata.title || moredata.loc)) {
       newParam = "?title=" + moredata.title + "&loc=" + moredata.loc;
@@ -58,26 +53,19 @@ function JobsIn(props) {
       setLocSearch(moredata.loc);
       filterJob();
     }
-    fetch("/v2/jobs/jobListNew.php" + newParam, {
-      method: "POST",
-      body: JSON.stringify(moredata),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setJobTotal(result.total);
-          setPages(moredata.page);
-          if (moredata.page === 0) {
-            setJobList(result.jobs);
-          } else {
-            const data = jobList.concat(result.jobs);
-            setJobList(data);
-          }
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const result = await PostApi(
+      `/v2/jobs/jobListNew.php${newParam}`,
+      moredata
+    );
+
+    setJobTotal(result.total);
+    setPages(moredata.page);
+    if (moredata.page === 0) {
+      setJobList(result.jobs);
+    } else {
+      const data = jobList.concat(result.jobs);
+      setJobList(data);
+    }
   };
 
   return (

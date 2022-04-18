@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";

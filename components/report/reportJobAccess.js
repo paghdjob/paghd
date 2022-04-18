@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { GetApi } from "../webApi";
 
 const ReportJobAccess = (props) => {
   const [jobAccess, setJobAccess] = useState("");
@@ -7,22 +8,9 @@ const ReportJobAccess = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(() => {
-    fetch("/v2/people/reportSet.php?type=JOBACCESS", {
-      method: "GET",
-      headers: {
-        Authorization: auth,
-      },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setJobAccess(result.jobAccess);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi(`/v2/people/reportSet.php?type=JOBACCESS`);
+    setJobAccess(res.jobAccess);
   }, [props]);
 
   const onJobVerify = (jobSlug) => {

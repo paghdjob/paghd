@@ -3,38 +3,17 @@ import HeaderNav from "../../components/common/headerNav";
 import FooterNav from "../../components/common/footerNav";
 import HeadSeo from "../../components/headSeo";
 import Link from "next/link";
-import Cookies from "universal-cookie";
+import { PostApi } from "../../components/webApi";
 
 function Verify(props) {
   const [res, setRes] = useState("");
   const [isValid, setIsValid] = useState("");
 
-  useEffect(() => {
+  useEffect(async () => {
     const id = location.search.replace("?id=", "") + "-U";
-
-    const cookies = new Cookies();
-    //const userIds = cookies.get('userID');
-    const auth = cookies.get("auth");
-
-    fetch("/v2/auth/verify.php", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(id),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setRes(result.res);
-          setIsValid(result.valid);
-
-          console.log("result--", result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi(`/v2/auth/verify.php`, id)
+    setRes(res.res);
+    setIsValid(res.valid);
   }, [props]);
 
   return (

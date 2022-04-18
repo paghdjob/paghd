@@ -1,28 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
-
+import { GetApi } from "../webApi";
 const ReportJobApply = (props) => {
   const [jobApply, setJobApply] = useState("");
-  const cookies = new Cookies();
-  const auth = cookies.get("auth");
-  const userID = cookies.get("userID");
 
-  useEffect(() => {
-    fetch("/v2/people/reportSet.php?type=JOBAPPLY", {
-      method: "GET",
-      headers: {
-        Authorization: auth,
-      },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setJobApply(result.jobStatus);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi(`/v2/people/reportSet.php?type=JOBAPPLY`)
+    setJobApply(res.jobStatus)
   }, [props]);
   let userView;
   if (jobApply) {
@@ -39,7 +22,7 @@ const ReportJobApply = (props) => {
               {item.jobTitle}
             </a>
           </td>
-          <td className="">{item.jobApplyText}</td>
+          <td className="text">{item.jobApplyText}</td>
           <td>
             {new Date(
               item.jobApplyDate.replace(/-/g, "/")

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 const HeaderNav = dynamic(() => import("../../components/common/headerNav"));
 const FooterNav = dynamic(() => import("../../components/common/footerNav"));

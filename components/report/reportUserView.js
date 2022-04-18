@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
+import { GetApi } from "../webApi";
 
 const ReportUserView = (props) => {
   const [userView, setUserView] = useState("");
-  const cookies = new Cookies();
-  const auth = cookies.get("auth");
-  const userID = cookies.get("userID");
 
-  useEffect(() => {
-    fetch("/v2/people/reportSet.php?type=USERVIEW", {
-      method: "GET",
-      headers: {
-        Authorization: auth,
-      },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setUserView(result.userView);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi(`/v2/people/reportSet.php?type=USERVIEW`);
+    setUserView(res.userView);
   }, [props]);
 
   let View;

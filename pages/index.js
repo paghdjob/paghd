@@ -16,20 +16,8 @@ export default function Home() {
   const debouncedSearchTerm = useDebounce(jobLocSearch, 750);
 
   const searchLocation = (async (location) => {
-    console.log('location', location)
     const res = await GetApi(`/v2/auto.php?type=CITY&name=${location}`)
-    console.log('res', res)
     setCities(res);
-    /* fetch(`/v2/auto.php?type=CITY&name=${location}`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setCities(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );*/
   });
 
   useEffect(() => {
