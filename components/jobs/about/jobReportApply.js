@@ -9,15 +9,19 @@ const JobReportApply = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!jobApplyUser) {
+      (async () => {
       let body = { jobID: props.jobID };
       const res = await PostApi("/v2/jobs/aboutSet.php?type=FETCHAPPLYJOB", body)
       setJobApplyUser(result.jobApply);
+      })()
     }
     if (!jobApplyStatusList) {
+      (async () => {
       const res = await GetApi("/v2/auto.php?type=JOBAPPLYSTATUS")
       setJobApplyStatusList(res);
+      })()
     }
   }, [props]);
 

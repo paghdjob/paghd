@@ -3,9 +3,11 @@ import { GetApi } from "../webApi";
 const ReportJobApply = (props) => {
   const [jobApply, setJobApply] = useState("");
 
-  useEffect(async () => {
-    const res = await GetApi(`/v2/people/reportSet.php?type=JOBAPPLY`)
-    setJobApply(res.jobStatus)
+  useEffect(() => {
+    (async () => {
+      const res = await GetApi(`/v2/people/reportSet.php?type=JOBAPPLY`)
+      setJobApply(res.jobStatus)
+    })()
   }, [props]);
   let userView;
   if (jobApply) {

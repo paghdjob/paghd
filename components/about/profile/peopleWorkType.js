@@ -6,9 +6,11 @@ const PeopleWorkType = (props) => {
   const [worktypeList, setWorktypeList] = useState("");
   const [workTypeID, setWorkTypeID] = useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     const res = await GetApi("/v2/auto.php?type=WORKTYPE");
     setWorktypeList(res);
+    })()
   }, [props]);
 
   const addWorkType = async () => {

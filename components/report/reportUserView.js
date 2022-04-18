@@ -4,9 +4,11 @@ import { GetApi } from "../webApi";
 const ReportUserView = (props) => {
   const [userView, setUserView] = useState("");
 
-  useEffect(async () => {
-    const res = await GetApi(`/v2/people/reportSet.php?type=USERVIEW`);
-    setUserView(res.userView);
+  useEffect(() => {
+    (async () => {
+      const res = await GetApi(`/v2/people/reportSet.php?type=USERVIEW`);
+      setUserView(res.userView);
+    })()
   }, [props]);
 
   let View;

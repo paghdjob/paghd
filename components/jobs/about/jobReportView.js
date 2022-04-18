@@ -4,10 +4,12 @@ import { PostApi } from "../../webApi";
 const JobReportView = (props) => {
   const [jobView, setJobView] = useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     let body = { jobID: props.jobID };
     const res = await PostApi("/v2/jobs/aboutSet.php?type=FETCHVIEWJOB", body)
     setJobView(res.jobView);
+    })()
   }, [props]);
 
   let reportView =

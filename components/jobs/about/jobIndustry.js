@@ -10,9 +10,11 @@ const JobIndustry = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     const res = await GetApi("/v2/auto.php?type=INDUSTRY")
     setIndustryList(res);
+    })()
   }, [props]);
 
   const addIndustries = async () => {

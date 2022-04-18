@@ -10,9 +10,11 @@ const JobWorkType = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     const res = await GetApi("/v2/auto.php?type=WORKTYPE")
     setWorktypeList(res);
+    })()
   }, [props]);
 
   const addWorkType = async () => {

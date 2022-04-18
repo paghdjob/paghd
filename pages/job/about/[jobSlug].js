@@ -22,8 +22,9 @@ function JobAbout(props) {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(async () => {
+  useEffect( () => {
     if (!jobObj) {
+      (async () => {
       const res = await GetApi(
         `/v2/jobs/about.php?jobSlug=${location.pathname.replace(
           "/job/about/",
@@ -36,6 +37,7 @@ function JobAbout(props) {
       } else {
         setNoAccess(true);
       }
+    })()
     }
   }, [props]);
   // let a = jobObj && jobObj.jobAccess.find(u => u.userID === userIds);

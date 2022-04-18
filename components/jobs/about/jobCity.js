@@ -15,13 +15,15 @@ const JobCity = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(async () => {
+  useEffect(() => {
     if (debouncedSearchTerm && setIsAutoSearch) {
       searchCityName(cityName);
     }
     if (!countryList) {
+      (async () => {
       const res = await GetApi("/v2/auto.php?type=COUNTRY")
       setCountryList(res);
+      })()
     }
   }, [debouncedSearchTerm]);
 

@@ -9,9 +9,11 @@ const PeopleIndustry = (props) => {
   const cookies = new Cookies();
   const auth = cookies.get("auth");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     const res = await GetApi(`/v2/auto.php?type=INDUSTRY`)
     setIndustryList(res);
+    })()
   }, [props]);
 
   const addIndustries = (async () => {

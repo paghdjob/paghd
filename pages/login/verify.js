@@ -9,11 +9,13 @@ function Verify(props) {
   const [res, setRes] = useState("");
   const [isValid, setIsValid] = useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     const id = location.search.replace("?id=", "") + "-U";
     const res = await PostApi(`/v2/auth/verify.php`, id)
     setRes(res.res);
     setIsValid(res.valid);
+    })()
   }, [props]);
 
   return (

@@ -8,9 +8,11 @@ const ReportJobAccess = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     const res = await GetApi(`/v2/people/reportSet.php?type=JOBACCESS`);
     setJobAccess(res.jobAccess);
+    })()
   }, [props]);
 
   const onJobVerify = (jobSlug) => {

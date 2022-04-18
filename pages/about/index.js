@@ -39,13 +39,15 @@ function About(props) {
   const [userObj, setUserObj] = useState(props);
   const router = useRouter();
 
-  useEffect(async () => {
+  useEffect(() => {
     const cookies = new Cookies();
     if (!cookies.get("userID")) {
       router.push("/login");
     }
+    (async () => {
     const res = await GetApi("/v2/people/about.php?userSlug="+ cookies.get("userID"))
     setUserObj(res);
+    })()
   }, [props]);
 
   return (

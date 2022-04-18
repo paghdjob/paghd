@@ -19,17 +19,20 @@ function JobDetail(props) {
     jobdesc = desc.substring(0, 155);
   }
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async () => {
     // if (!jobObj) {
     const res = await GetApi(
       `/v2/jobs/about.php?jobSlug=${location.pathname.replace("/job/", "")}`
     );
     setJobObj(res);
+    
     //  }
     if (jobList.length === 0 && jobObj && jobObj.job) {
       const result = await GetApi(`/v2/jobs/jobListNew.php?title=${jobObj.job.jobTitle}`)
       setJobList(result.jobs);
     }
+  })()
   }, [props]);
 
   return (
