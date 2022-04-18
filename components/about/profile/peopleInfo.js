@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { PostApi } from "../../webApi";
 
 const ProfileInfo = (props) => {
   const [user, setUser] = useState(props.userInfo);
@@ -36,7 +37,7 @@ const ProfileInfo = (props) => {
     event.preventDefault();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (async (event) => {
     let users = {
       userAddress: userAddress,
       cityName: cityName,
@@ -46,28 +47,14 @@ const ProfileInfo = (props) => {
       userAbout: userAbout,
       userHeadline: userHeadline,
     };
-    console.log("users handleSubmit", users);
-
-    fetch("/v2/people/aboutSet.php?type=USERINFOUPDATE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(users),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setEditMode(true);
-          setMessage(result.msg);
-        },
-        (error) => {
-          // setMessage(error);
-          console.log("error--", error);
-        }
-      );
     event.preventDefault();
-  };
+    const res = await PostApi(
+      "/v2/people/aboutSet.php?type=USERINFOUPDATE",
+      users
+    );
+    setEditMode(true);
+    setMessage(res.msg);
+  });
   let profileView;
   if (editMode === false) {
     profileView = (

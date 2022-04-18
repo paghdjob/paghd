@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { PostApi } from "../webApi";
 
 const UserDetails = (props) => {
   const [user, setUser] = useState(props.userObj);
@@ -9,13 +10,7 @@ const UserDetails = (props) => {
   useEffect(() => {
     if (auth) {
       let body = { userID: user.users.userID };
-      fetch("/v2/people/aboutSet.php?type=VIEWJOB", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-        },
-        body: JSON.stringify(body),
-      });
+      PostApi(`/v2/people/aboutSet.php?type=VIEWJOB`, body)
     }
   });
 

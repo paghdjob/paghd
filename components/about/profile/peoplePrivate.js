@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Cookies from "universal-cookie";
+import { PostApi } from "../../webApi";
 
 const PeoplePrivate = (props) => {
   const [userPrimaryEmail, setUserPrimaryEmail] = useState(
@@ -26,7 +27,7 @@ const PeoplePrivate = (props) => {
     event.preventDefault();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     let users = {
       userPrimaryEmail: userPrimaryEmail,
       userPrimaryNumber: userPrimaryNumber,
@@ -35,26 +36,13 @@ const PeoplePrivate = (props) => {
       userID: 258,
       userSkype: userSkype,
     };
-
-    fetch("/v2/people/aboutSet.php?type=PRIVATEUPDATE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(users),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setMessage(result.msg);
-          setEditMode(true);
-        },
-        (error) => {
-          // setMessage(error);
-          console.log("error--", error);
-        }
-      );
     event.preventDefault();
+    const res = await PostApi(
+      "/v2/people/aboutSet.php?type=PRIVATEUPDATE",
+      users
+    );
+    setMessage(res.msg);
+    setEditMode(true);
   };
 
   let profileView;

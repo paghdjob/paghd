@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 // import Calendar from "react-calendar";
 // import "react-calendar/dist/Calendar.css";
 
@@ -41,20 +42,12 @@ const PeopleAddExperience = (props) => {
     setIsAutoSearch(false);
   };
 
-  const searchCompany = (skill) => {
-    fetch("/v2/auto.php?type=COMPANY&name=" + skill)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAutoCompany(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-  };
+  const searchCompany = (async (skill) => {
+    const res = await GetApi(`/v2/auto.php?type=COMPANY&name=${skill}`)
+    setAutoCompany(res);
+  });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (async (event) => {
     let users = {
       expID: props.userExp.expID,
       userID: props.userExp.userID,
@@ -67,28 +60,11 @@ const PeopleAddExperience = (props) => {
       comName: comName,
       jobFor: props.userExp.jobFor.toString(), // jobFor.toString()
     };
-
-    fetch("/v2/people/aboutSet.php?type=EMPUPDATE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(users),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          props.handlerFromParant(result.employment);
-          console.log("result--", result);
-          setMessage(result.msg);
-        },
-        (error) => {
-          // setMessage(error);
-          console.log("error--", error);
-        }
-      );
     event.preventDefault();
-  };
+    const res = await PostApi(`/v2/people/aboutSet.php?type=EMPUPDATE`, users)
+    props.handlerFromParant(res.employment);
+    setMessage(res.msg);
+  });
 
   let item = {
     expID: "",

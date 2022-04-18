@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const JobAccess = (props) => {
   const [access, setAccess] = useState(props.jobAccess);
@@ -11,48 +12,20 @@ const JobAccess = (props) => {
   const userID = cookies.get("userID");
   const debouncedSearchTerm = useDebounce(addAccess, 750);
 
-  const removeHrAcess = (jobAccessID, id) => {
+  const removeHrAcess = async (jobAccessID, id) => {
     let body = {
       jobAccessID: jobAccessID,
       jobID: props.jobAccess[0].jobID,
       userID: id,
     };
-    fetch("/v2/jobs/aboutSet.php?type=DELETEACCESS", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAccess(result.jobAccess);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=DELETEACCESS", body)
+    setAccess(res.jobAccess);
   };
-  const addHrAccess = () => {
+  const addHrAccess = async () => {
     let body = { jobID: props.jobAccess[0].jobID, userID: addAccess };
-    fetch("/v2/jobs/aboutSet.php?type=ADDACCESS", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAddAccess("");
-          setAccess(result.jobAccess);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=ADDACCESS", body)
+    setAddAccess("");
+    setAccess(res.jobAccess);
   };
   const selectSkill = (skillName) => {
     setAddAccess(skillName);
@@ -65,17 +38,9 @@ const JobAccess = (props) => {
     }
   }, [debouncedSearchTerm]);
 
-  const searchUsers = (skill) => {
-    fetch("/v2/auto.php?type=USER&name=" + skill)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAutoUser(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+  const searchUsers = async (skill) => {
+    const res = await GetApi(`/v2/auto.php?type=USER&name=${skill}`)
+    setAutoUser(res);
   };
 
   let jobHrView =

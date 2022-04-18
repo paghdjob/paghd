@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PeopleAddExperience from "../profile/peopleAddExperience";
 import Cookies from "universal-cookie";
+import { PostApi } from "../../webApi";
 
 const PeopleExperienceNew = (props) => {
   const [userExp, setUserExp] = useState(props.userExp);
@@ -28,28 +29,11 @@ const PeopleExperienceNew = (props) => {
     console.log("props refresh");
   }, [props]);
 
-  const removeEmp = (expID) => {
-    let users = { expID: expID };
-    fetch("/v2/people/aboutSet.php?type=EMPDELETE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(users),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log("result--", result);
-          setUserExp(result.employment);
-        },
-        (error) => {
-          // setMessage(error);
-          console.log("error--", error);
-        }
-      );
-  };
-  // console.log("props.userExp", props.userExp);
+  const removeEmp = (async (expID) => {
+    const users = { expID: expID };
+    const res = await PostApi(`/v2/people/aboutSet.php?type=EMPDELETE`, users)
+    setUserExp(res.employment);
+  });
 
   const popup = (jobFor, expID) => {
     setUserExp(props.userExp);

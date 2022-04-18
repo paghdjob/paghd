@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 function PeopleLanguage(props) {
   const [languages, setLanguages] = useState(props.languages);
   const [addLanguage, setAddLanguage] = useState("");
   const [autoLanguage, setAutoLanguage] = useState("");
-  const cookies = new Cookies();
-  const auth = cookies.get("auth");
   const debouncedSearchTerm = useDebounce(addLanguage, 750);
 
   useEffect(() => {
@@ -16,59 +15,27 @@ function PeopleLanguage(props) {
     }
   }, [debouncedSearchTerm]);
 
-  const searchLanguage = (language) => {
-    fetch("/v2/auto.php?type=LANGUAGES&name=" + language)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAutoLanguage(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+  const searchLanguage = async (language) => {
+    const res = await GetApi(`/v2/auto.php?type=LANGUAGES&name=${language}`);
+    setAutoLanguage(res);
   };
 
-  const addLanguages = (lanID) => {
+  const addLanguages = async (lanID) => {
     let body = { skillName: addLanguage };
-
-    fetch("/v2/people/aboutSet.php?type=LANGUAGEUPDATE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAddLanguage("");
-          setLanguages(result.language);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi(
+      "/v2/people/aboutSet.php?type=LANGUAGEUPDATE",
+      body
+    );
+    setAddLanguage("");
+    setLanguages(result.language);
   };
-  const removeSkill = (lanID) => {
+  const removeSkill = async (lanID) => {
     let body = { lanID: lanID };
-
-    fetch("/v2/people/aboutSet.php?type=LANGUAGEDELETE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setLanguages(result.language);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi(
+      "/v2/people/aboutSet.php?type=LANGUAGEDELETE",
+      body
+    );
+    setLanguages(res.language);
   };
   const selectLanguage = (langName) => {
     setAddLanguage(langName);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const JobReportApply = (props) => {
   const [jobApplyUser, setJobApplyUser] = useState("");
@@ -8,37 +9,15 @@ const JobReportApply = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!jobApplyUser) {
       let body = { jobID: props.jobID };
-      fetch("/v2/jobs/aboutSet.php?type=FETCHAPPLYJOB", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-        },
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setJobApplyUser(result.jobApply);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi("/v2/jobs/aboutSet.php?type=FETCHAPPLYJOB", body)
+      setJobApplyUser(result.jobApply);
     }
     if (!jobApplyStatusList) {
-      fetch("/v2/auto.php?type=JOBAPPLYSTATUS")
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setJobApplyStatusList(result);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await GetApi("/v2/auto.php?type=JOBAPPLYSTATUS")
+      setJobApplyStatusList(res);
     }
   }, [props]);
 
@@ -50,22 +29,7 @@ const JobReportApply = (props) => {
       jobID: props.jobID,
       userID: userID,
     };
-    fetch("/v2/jobs/aboutSet.php?type=APPLYJOBUPDATE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log("result--", result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    PostApi("/v2/jobs/aboutSet.php?type=APPLYJOBUPDATE", body)
   };
   let reportApply =
     jobApplyUser &&

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../webApi";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -14,28 +15,13 @@ const ForgotPassword = () => {
     event.preventDefault();
   };
   const forgotPwd = (userID) => {
-    fetch(
-      "v2/auth/EmailTemplate.php?type=FORGOTPASSWORD&userID=" + userID
-    ).then((res) => res.json());
+    GetApi(`v2/auth/EmailTemplate.php?type=FORGOTPASSWORD&userID=${userID}`)
   };
-  const userIdentify = (userDetails) => {
+  const userIdentify = async (userDetails) => {
     if (userDetails.email !== "") {
-      fetch("https://www.paghd.com/v2/auth/forgot-password.php", {
-        method: "POST",
-        body: JSON.stringify(userDetails),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            // console.log("result--", result);
-            setMessage(result.msg);
-            forgotPwd(result.userID);
-          },
-          (error) => {
-            setMessage(error);
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi("https://www.paghd.com/v2/auth/forgot-password.php", userDetails)
+      setMessage(res.msg);
+      forgotPwd(res.userID);
     }
   };
 

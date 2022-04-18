@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Cookies from "universal-cookie";
-import Link from "next/link";
+import { GetApi, PostApi } from "../webApi";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -20,29 +19,14 @@ const Registration = () => {
   };
 
   const regEmail = (userID) => {
-    fetch("v2/auth/EmailTemplate.php?type=REGISTRATION&userID=" + userID).then(
-      (res) => res.json()
-    );
+    GetApi(`v2/auth/EmailTemplate.php?type=REGISTRATION&userID=${userID}`);
   };
 
-  const userIdentify = (userDetails) => {
+  const userIdentify = async (userDetails) => {
     if (userDetails.email !== "") {
-      fetch("https://www.paghd.com/v2/auth/registration.php", {
-        method: "POST",
-        body: JSON.stringify(userDetails),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            // console.log("result--", result);
-            setMessage(result.msg);
-            regEmail(result.userID);
-          },
-          (error) => {
-            setMessage(error);
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi("/v2/auth/registration.php", userDetails);
+      setMessage(res.msg);
+      regEmail(res.userID);
     }
   };
 

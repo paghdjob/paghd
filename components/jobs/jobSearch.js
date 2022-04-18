@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import useDebounce from "./use-debounce";
+import { GetApi } from "../webApi";
 
 const JobSearch = (props) => {
   const [jobTitleSearch, setJobTitleSearch] = useState("");
@@ -10,17 +11,9 @@ const JobSearch = (props) => {
   const debouncedSearchTerm = useDebounce(jobLocSearch, 750);
   const [isAutoSearch, setIsAutoSearch] = useState(false);
 
-  const searchLocation = (location) => {
-    fetch("/v2/auto.php?type=CITY&name=" + location)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setCities(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+  const searchLocation = async (location) => {
+    const res = await GetApi(`/v2/auto.php?type=CITY&name=${location}`)
+    setCities(res);
   };
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+import { GetApi } from "../../webApi";
 
 function JobLanguage(props) {
   const [languages, setLanguages] = useState(props.languages);
@@ -18,61 +19,23 @@ function JobLanguage(props) {
     }
   }, [addLanguage]);
 
-  const searchLanguage = (language) => {
+  const searchLanguage = async (language) => {
     if (language) {
-      fetch("/v2/auto.php?type=LANGUAGES&name=" + language)
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setAutoLanguage(result);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await GetApi(`/v2/auto.php?type=LANGUAGES&name=${language}`)
+      setAutoLanguage(res);
     }
   };
 
-  const addLanguages = () => {
+  const addLanguages = async () => {
     let body = { skillName: addLanguage, jobID: props.jobID, userID: userID };
-
-    fetch("/v2/jobs/aboutSet.php?type=LANGUAGEUPDATE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAddLanguage("");
-          setLanguages(result.language);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=LANGUAGEUPDATE", body)
+    setAddLanguage("");
+    setLanguages(res.language);
   };
-  const removeSkill = (langID) => {
+  const removeSkill = async (langID) => {
     let body = { jobLangID: langID, jobID: props.jobID, userID: userID };
-
-    fetch("/v2/jobs/aboutSet.php?type=LANGUAGEDELETE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setLanguages(result.language);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=LANGUAGEDELETE", body)
+    setLanguages(res.language);
   };
   const selectLanguage = (langName) => {
     setAddLanguage(langName);

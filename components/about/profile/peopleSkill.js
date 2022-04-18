@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 function PeopleSkill(props) {
   const [skill, setSkill] = useState(props.skill);
@@ -21,60 +22,23 @@ function PeopleSkill(props) {
     }
   }, [debouncedSearchTerm]);
 
-  const searchSkill = (skill) => {
-    fetch("/v2/auto.php?type=SKILL&name=" + skill)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setAutoSkill(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-  };
+  const searchSkill = (async (skill) => {
+    const res = await GetApi(`/v2/auto.php?type=SKILL&name=${skill}`)
+    setAutoSkill(res);
+  });
 
-  const addSkills = () => {
+  const addSkills = async () => {
     let body = { skillName: addSkill };
 
-    fetch("/v2/people/aboutSet.php?type=ADDSKILL", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
+    const res = await PostApi("/v2/people/aboutSet.php?type=ADDSKILL", body)
           setAddSkill("");
-          setSkill(result.skill);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+          setSkill(res.skill);
   };
 
-  const removeSkill = (skiID) => {
+  const removeSkill = async (skiID) => {
     let body = { skiID: skiID };
-
-    fetch("/v2/people/aboutSet.php?type=DELETESKILL", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setSkill(result.skill);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/people/aboutSet.php?type=DELETESKILL",body) 
+    setSkill(res.skill);
   };
 
   let skillView = skill.map((item) => {

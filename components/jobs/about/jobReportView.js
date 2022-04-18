@@ -1,30 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
+import { PostApi } from "../../webApi";
 
 const JobReportView = (props) => {
   const [jobView, setJobView] = useState("");
-  const cookies = new Cookies();
-  const auth = cookies.get("auth");
-  const userID = cookies.get("userID");
 
-  useEffect(() => {
+  useEffect(async () => {
     let body = { jobID: props.jobID };
-    fetch("/v2/jobs/aboutSet.php?type=FETCHVIEWJOB", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setJobView(result.jobView);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=FETCHVIEWJOB", body)
+    setJobView(res.jobView);
   }, [props]);
 
   let reportView =

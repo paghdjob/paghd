@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
 import ProfileResume from "../about/profile/peopleResume";
+import { PostApi } from "../webApi";
 
 const JobDetails = (props) => {
   const [info, setInfo] = useState(props.jobObj);
@@ -16,13 +17,7 @@ const JobDetails = (props) => {
   useEffect(() => {
     if (auth) {
       let body = { jobID: info.job.jobID };
-      fetch("/v2/jobs/aboutSet.php?type=VIEWJOB", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-        },
-        body: JSON.stringify(body),
-      });
+      PostApi("/v2/jobs/aboutSet.php?type=VIEWJOB", body);
     }
     setInfo(props.jobObj);
   }, [props]);
@@ -89,34 +84,16 @@ const JobDetails = (props) => {
     });
   }
 
-  const onApply = () => {
+  const onApply = async () => {
     if (userID) {
       let body = { jobID: info.job.jobID };
-      fetch("/v2/jobs/aboutSet.php?type=APPLYJOB", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-        },
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setJobApplyText(result.jobApplyText);
-            if (result.valid === "false") {
-              setIsProfileResume(true);
-            } else if (
-              result.valid === "true" &&
-              userID &&
-              info.job.jobRefURL
-            ) {
-              window.open(info.job.jobRefURL, "_blank");
-            }
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const result = await PostApi("/v2/jobs/aboutSet.php?type=APPLYJOB", body);
+      setJobApplyText(result.jobApplyText);
+      if (result.valid === "false") {
+        setIsProfileResume(true);
+      } else if (result.valid === "true" && userID && info.job.jobRefURL) {
+        window.open(info.job.jobRefURL, "_blank");
+      }
     } else {
       router.push("/login?url=" + router.asPath);
     }

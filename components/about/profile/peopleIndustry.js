@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const PeopleIndustry = (props) => {
   const [industry, setIndustry] = useState(props.industry);
@@ -8,59 +9,22 @@ const PeopleIndustry = (props) => {
   const cookies = new Cookies();
   const auth = cookies.get("auth");
 
-  useEffect(() => {
-    fetch("/v2/auto.php?type=INDUSTRY")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIndustryList(result);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi(`/v2/auto.php?type=INDUSTRY`)
+    setIndustryList(res);
   }, [props]);
 
-  const addIndustries = () => {
-    let body = { IndID: indID };
-    fetch("/v2/people/aboutSet.php?type=ADDINDUSTRY", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIndustry(result.industry);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-  };
+  const addIndustries = (async () => {
+    const body = { IndID: indID };
+    const res = await PostApi(`/v2/people/aboutSet.php?type=ADDINDUSTRY`, body)
+    setIndustry(res.industry);
+  });
 
-  const removeIndustry = (IndID) => {
-    let body = { IndID: IndID };
-
-    fetch("/v2/people/aboutSet.php?type=DELETEINDUSTRY", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIndustry(result.industry);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-  };
+  const removeIndustry = (async (IndID) => {
+    const body = { IndID: IndID };
+    const res = await PostApi(`/v2/people/aboutSet.php?type=DELETEINDUSTRY`, body)
+    setIndustry(res.industry);
+  });
 
   let industryView = industry.map((item) => {
     return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const JobWorkType = (props) => {
   const [workType, setWorkType] = useState(props.workType);
@@ -9,62 +10,25 @@ const JobWorkType = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(() => {
-    fetch("/v2/auto.php?type=WORKTYPE")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWorktypeList(result);
-        },
-        (error) => {
-          console.log("WORKTYPE error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi("/v2/auto.php?type=WORKTYPE")
+    setWorktypeList(res);
   }, [props]);
 
-  const addWorkType = () => {
+  const addWorkType = async () => {
     let body = { workTypeID: workTypeID, jobID: props.jobID, userID: userID };
-    fetch("/v2/jobs/aboutSet.php?type=ADDWORKTYPE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWorkType(result.workType);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=ADDWORKTYPE", body)
+    setWorkType(res.workType);
   };
 
-  const removeWorkType = (jobWorkTypeID) => {
+  const removeWorkType = async (jobWorkTypeID) => {
     let body = {
       jobWorkTypeID: jobWorkTypeID,
       jobID: props.jobID,
       userID: userID,
     };
-
-    fetch("/v2/jobs/aboutSet.php?type=DELETEWORKTYPE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWorkType(result.workType);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=DELETEWORKTYPE", body)
+    setWorkType(res.workType);
   };
 
   let addWorkTypeForm = (

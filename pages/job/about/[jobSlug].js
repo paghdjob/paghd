@@ -13,6 +13,7 @@ import JobReportView from "../../../components/jobs/about/jobReportView";
 import JobReportApply from "../../../components/jobs/about/jobReportApply";
 import JobCity from "../../../components/jobs/about/jobCity";
 import Cookies from "universal-cookie";
+import { GetApi } from "../../../components/webApi";
 
 function JobAbout(props) {
   const [jobObj, setJobObj] = useState("");
@@ -21,26 +22,20 @@ function JobAbout(props) {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!jobObj) {
-      fetch(
-        "/v2/jobs/about.php?jobSlug=" +
-          location.pathname.replace("/job/about/", "")
-      )
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            const access = result.jobAccess.find((u) => u.userID === userID);
-            if (access && access.userID === userID) {
-              setJobObj(result);
-            } else {
-              setNoAccess(true);
-            }
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await GetApi(
+        `/v2/jobs/about.php?jobSlug=${location.pathname.replace(
+          "/job/about/",
+          ""
+        )}`
+      );
+      const access = res.jobAccess.find((u) => u.userID === userID);
+      if (access && access.userID === userID) {
+        setJobObj(res);
+      } else {
+        setNoAccess(true);
+      }
     }
   }, [props]);
   // let a = jobObj && jobObj.jobAccess.find(u => u.userID === userIds);

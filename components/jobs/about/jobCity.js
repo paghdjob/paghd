@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "../../jobs/use-debounce";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const JobCity = (props) => {
   const [countryList, setCountryList] = useState("");
@@ -14,86 +15,40 @@ const JobCity = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(() => {
+  useEffect(async () => {
     if (debouncedSearchTerm && setIsAutoSearch) {
       searchCityName(cityName);
     }
     if (!countryList) {
-      fetch("/v2/auto.php?type=COUNTRY")
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setCountryList(result);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await GetApi("/v2/auto.php?type=COUNTRY")
+      setCountryList(res);
     }
   }, [debouncedSearchTerm]);
 
-  const searchCityName = (cityName) => {
+  const searchCityName = async (cityName) => {
     if (cityName) {
-      fetch("/v2/auto.php?type=CITY&name=" + cityName)
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setCityList(result);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi(`/v2/auto.php?type=CITY&name=${cityName}`)
+      setCityList(res);
     }
   };
 
-  const removeCity = (jobCityID) => {
+  const removeCity = async (jobCityID) => {
     const body = { jobCityID: jobCityID, userID: userID, jobID: props.jobID };
-
-    fetch("/v2/jobs/aboutSet.php?type=DELETECITY", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setCity(result.city);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=DELETECITY", body)
+    setCity(res.city);
   };
 
-  const addLocation = () => {
+  const addLocation = async () => {
     const body = {
       cityName: cityName,
       countryCode: countryCode,
       jobID: props.jobID,
       userID: userID,
     };
-
-    fetch("/v2/jobs/aboutSet.php?type=ADDCITY", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setCityList("");
-          setCityName("");
-          setCity(result.city);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=ADDCITY", body)
+    setCityList("");
+    setCityName("");
+    setCity(res.city);
   };
 
   const cityView =
@@ -187,133 +142,3 @@ const JobCity = (props) => {
   );
 };
 export default JobCity;
-
-/*
-class JobCity extends Component {
-  constructor(props) {
-    super(props);
-    const cookies = new Cookies();
-    let userIds = cookies.get('userID');
-    this.state = {
-      error: null,
-      isLoaded: true,
-      access: true,
-      userIds: userIds,
-      selectedOption: null,
-      countryCode: 'in'
-    };
-    this.addCity = this.addCity.bind(this);
-  }
-  componentWillMount() {
-    this.props.onFetchCountry();
-  }
-  fieldChange = (x) => {
-    this.setState({ countryCode: x.target.value });
-  }
-
-  filterColors = (inputValue) => {
-    if (inputValue) {
-      this.props.onfetchCity(inputValue);
-      return this.props.cityAll;
-    }
-  };
-  promiseOptions = inputValue =>
-    new Promise(resolve => {
-      resolve(this.filterColors(inputValue));
-    });
-
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-  }
-  removeCity(event) {
-    let body = { jobCityID: event, userID: this.state.userIds, jobID: this.props.jobID };
-    this.props.onDeleteCity(body);
-  }
-  addCity(event) {
-    let body = { cityName: this.state.selectedOption.label, countryCode: this.state.countryCode, jobID: this.props.jobID, userID: this.state.userIds };
-    this.props.onAddCity(body);
-    this.setState({ selectedOption: '' });
-    event.preventDefault();
-  }
-  render() {
-    const { error, isLoaded, userIds, selectedOption, countryCode } = this.state;
-    const { city, country, userID } = this.props;
-    let access = false;
-    if (userID === userIds) {
-      access = true;
-    }
-    let cityView;
-    if (city) {
-      cityView = city.map((item) => {
-        return (
-          <span key={item.jobCityID} className="badge m-1 badge-secondary"><label className="p-2">{item.cityName}, {item.countryCode}</label>
-            {access === true ?
-              <button onClick={this.removeCity.bind(this, item.jobCityID)} type="button" className="close" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
-              : ''}
-          </span>
-        );
-      }
-      );
-    }
-
-    let addcityForm;
-    if (access === true) {
-      addcityForm = <form method="POST" className="form-inline row mt-2" onSubmit={this.addCity} >
-        <div className="form-group section col-sm-12">
-          <label className="text-left pl-0">Country &nbsp;</label>
-          <select className="form-control col-sm-4" onChange={this.fieldChange} name="countryCode" value={countryCode} required >
-            <option value="">Please select country</option>
-            {country && country.map((item) => (
-              <option key={item.countryCode} value={item.countryCode}>{item.countryName}</option>
-            ))}
-          </select>
-          <label className="text-left pl-0">&nbsp;City</label>
-          <AsyncCreatableSelect
-            isClearable
-            cacheOptions
-            defaultOptions
-            loadOptions={this.promiseOptions}
-            onChange={this.handleChange}
-            value={selectedOption}
-            className="col"
-          />
-          <button type="submit" className="btn btn-info my-1">Add City</button>
-        </div>
-      </form>
-    }
-
-
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
-        <div className="rows">
-          <div className="card mb-1">
-            <div className="card-header">Opening Location</div>
-            <div className="card-body">
-              {cityView}
-              {addcityForm}
-            </div>
-          </div>
-        </div>
-      );
-    }
-  }
-}
-const mapStatetoProps = (state) => {
-  if (state.profileReducer.info) {
-    return { city: state.profileReducer.info.jobCity, cityAll: state.headerReducer.city, country: state.headerReducer.country, error: state.profileReducer.error }
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDeleteCity: (body) => dispatch(deleteCity(body)),
-    onAddCity: (body) => dispatch(addCity(body)),
-    onfetchCity: (q) => dispatch(fetchCity(q)),
-    onFetchCountry: () => dispatch(fetchCountry())
-  }
-}
-export default connect(mapStatetoProps, mapDispatchToProps)(JobCity);
-*/

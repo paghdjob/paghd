@@ -6,6 +6,7 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
 });
 import "react-quill/dist/quill.snow.css";
+import { GetApi, PostApi } from "../../webApi";
 
 const JobProfile = (props) => {
   const [jobInfo, setJobInfo] = useState(props.jobObj);
@@ -30,17 +31,9 @@ const JobProfile = (props) => {
   const userID = cookies.get("userID");
   const auth = cookies.get("auth");
 
-  const searchCompany = (name) => {
-    fetch("/v2/auto.php?type=COMPANY&name=" + name)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setComList(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+  const searchCompany = async (name) => {
+    const res = await GetApi(`/v2/auto.php?type=COMPANY&name=${name}`)
+    setComList(res);
   };
 
   useEffect(() => {
@@ -93,7 +86,7 @@ const JobProfile = (props) => {
     setJobDesc(value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     let jobs = {
       jobID: jobInfo.jobID,
       jobTitle: jobTitle,
@@ -108,28 +101,12 @@ const JobProfile = (props) => {
       jobPosition: jobPosition,
       comName: comName,
     };
-    console.log(jobs);
     if (jobTitle && comName) {
-      fetch("/v2/jobs/aboutSet.php?type=PROFILEUPDATE", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-        },
-        body: JSON.stringify(jobs),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setMessage(result.msg);
-            setJobInfo(result.job);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
-    }
-
-    event.preventDefault();
+      event.preventDefault();
+      const res = await PostApi("/v2/jobs/aboutSet.php?type=PROFILEUPDATE", jobs)
+      setMessage(res.msg);
+      setJobInfo(res.job);
+    }    
   };
 
   return (

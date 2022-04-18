@@ -3,6 +3,7 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
+import { GetApi, PostApi } from "../webApi";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -53,33 +54,18 @@ const LoginPage = () => {
     router.push(router.query.url ? router.query.url : "/");
   };
   const verifyEmail = (userID) => {
-    fetch("v2/auth/EmailTemplate.php?type=EMAILVERIFY&userID=" + userID).then(
-      (res) => res.json()
-    );
+    GetApi(`v2/auth/EmailTemplate.php?type=EMAILVERIFY&userID=${userID}`);
   };
-  const userIdentify = (userDetails) => {
+  const userIdentify = async (userDetails) => {
     if (userDetails.email !== "") {
-      fetch("/v2/auth/login.php", {
-        method: "POST",
-        body: JSON.stringify(userDetails),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            // console.log("result--", result);
-            setMessage(result.msg);
-            if (result.userID && result.auth) {
-              userWebSetting(result.userID, result.auth);
-            }
-            if (result.valid === false && result.userID) {
-              verifyEmail(result.userID);
-            }
-          },
-          (error) => {
-            setMessage(error);
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi("/v2/auth/login.php", userDetails);
+      setMessage(res.msg);
+      if (res.userID && res.auth) {
+        userWebSetting(res.userID, res.auth);
+      }
+      if (res.valid === false && res.userID) {
+        verifyEmail(res.userID);
+      }
     }
   };
 

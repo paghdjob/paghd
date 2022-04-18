@@ -21,21 +21,7 @@ const ReportJobAccess = (props) => {
       localStorage.getItem("facebook_access_token");
 
     //https://www.paghd.com/v2/autopost/fb/postJobFb.php?jobID=2955&fb=EAACwleCpshEBAFYIZCdcviIRZCnX2Oif7f92kgQe6iAJIl5ABy7MR2o9tucnu011exi8ALNZAVMVEUpUEu8nuJivmOHQH3nYTqKh5XZBsevRArdVCh4g1QaVI8VqjqZCNAte84WKelIthv9DWl1mZBG7pxxfnRmtN42EZBKMHKo1A71a9okRZAiStIA2n5kwRyLtrZACwPqn9rp20ntp4spii
-    fetch("v2/autopost/fb/postJobFb.php?" + body, {
-      method: "GET",
-      headers: {
-        Authorization: auth,
-      },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log("result--", result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    GetApi("v2/autopost/fb/postJobFb.php?" + body)
   };
 
   let userView;

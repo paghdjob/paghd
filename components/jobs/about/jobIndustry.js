@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const JobIndustry = (props) => {
   const [industry, setIndustry] = useState(props.industry);
@@ -9,58 +10,21 @@ const JobIndustry = (props) => {
   const auth = cookies.get("auth");
   const userID = cookies.get("userID");
 
-  useEffect(() => {
-    fetch("/v2/auto.php?type=INDUSTRY")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIndustryList(result);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi("/v2/auto.php?type=INDUSTRY")
+    setIndustryList(res);
   }, [props]);
 
-  const addIndustries = () => {
+  const addIndustries = async () => {
     let body = { IndID: indID, jobID: props.jobID, userID: userID };
-    fetch("/v2/jobs/aboutSet.php?type=ADDINDUSTRY", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIndustry(result.industry);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=ADDINDUSTRY", body)
+    setIndustry(res.industry);
   };
 
-  const removeIndustry = (IndID) => {
+  const removeIndustry = async (IndID) => {
     let body = { indId: IndID, jobID: props.jobID, userID: userID };
-
-    fetch("/v2/jobs/aboutSet.php?type=DELETEINDUSTRY", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIndustry(result.industry);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/jobs/aboutSet.php?type=DELETEINDUSTRY", body)
+    setIndustry(res.industry);
   };
 
   let industryView = industry.map((item) => {

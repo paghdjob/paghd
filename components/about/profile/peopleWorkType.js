@@ -1,65 +1,29 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
+import { GetApi, PostApi } from "../../webApi";
 
 const PeopleWorkType = (props) => {
   const [workType, setWorkType] = useState(props.workType);
   const [worktypeList, setWorktypeList] = useState("");
   const [workTypeID, setWorkTypeID] = useState("");
-  const cookies = new Cookies();
-  const auth = cookies.get("auth");
 
-  useEffect(() => {
-    fetch("/v2/auto.php?type=WORKTYPE")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWorktypeList(result);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+  useEffect(async () => {
+    const res = await GetApi("/v2/auto.php?type=WORKTYPE");
+    setWorktypeList(res);
   }, [props]);
 
-  const addWorkType = () => {
+  const addWorkType = async () => {
     let body = { workTypeID: workTypeID };
-    fetch("/v2/people/aboutSet.php?type=ADDWORKTYPE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWorkType(result.workType);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi("/v2/people/aboutSet.php?type=ADDWORKTYPE", body);
+    setWorkType(res.workType);
   };
 
-  const removeWorkType = (userWorkTypeID) => {
+  const removeWorkType = async (userWorkTypeID) => {
     let body = { userWorkTypeID: userWorkTypeID };
-
-    fetch("/v2/people/aboutSet.php?type=DELETEWORKTYPE", {
-      method: "POST",
-      headers: {
-        Authorization: auth,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setWorkType(result.workType);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
+    const res = await PostApi(
+      "/v2/people/aboutSet.php?type=DELETEWORKTYPE",
+      body
+    );
+    setWorkType(res.workType);
   };
 
   let addWorkTypeForm = (

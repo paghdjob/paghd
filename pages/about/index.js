@@ -33,31 +33,19 @@ const ProfileResume = dynamic(() =>
   import("../../components/about/profile/peopleResume")
 );
 
+import { GetApi } from "../../components/webApi";
+
 function About(props) {
   const [userObj, setUserObj] = useState(props);
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(async () => {
     const cookies = new Cookies();
-    const auth = cookies.get("auth");
     if (!cookies.get("userID")) {
       router.push("/login");
     }
-    fetch("/v2/people/about.php?userSlug=" + cookies.get("userID"), {
-      method: "GET",
-      headers: {
-        Authorization: auth,
-      },
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setUserObj(result);
-        },
-        (error) => {
-          console.log("user error--", error);
-        }
-      );
+    const res = await GetApi("/v2/people/about.php?userSlug="+ cookies.get("userID"))
+    setUserObj(res);
   }, [props]);
 
   return (

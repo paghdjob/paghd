@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { GetApi, PostApi } from "../webApi";
 
 const ChangePassword = () => {
   const [oldPwd, setOldPwd] = useState("");
@@ -18,30 +19,15 @@ const ChangePassword = () => {
   };
 
   const pwdEmail = (userID) => {
-    fetch("v2/auth/EmailTemplate.php?type=PASSWORDSET&userID=" + userID).then(
-      (res) => res.json()
-    );
+    GetApi(`v2/auth/EmailTemplate.php?type=PASSWORDSET&userID=${userID}`);
   };
-  const userIdentify = (userDetails) => {
+  const userIdentify = async (userDetails) => {
     if (userDetails.email !== "") {
-      fetch("https://www.paghd.com/v2/auth/change-password.php", {
-        method: "POST",
-        body: JSON.stringify(userDetails),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            // console.log("result--", result);
-            setMessage(result.msg);
-            if (result.valid === true && result.userID) {
-              pwdEmail(result.userID);
-            }
-          },
-          (error) => {
-            setMessage(error);
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi("v2/auth/change-password.php", userDetails);
+      setMessage(res.msg);
+      if (res.valid === true && res.userID) {
+        pwdEmail(res.userID);
+      }
     }
   };
 
