@@ -7,6 +7,7 @@ import Cookies from "universal-cookie";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import useDebounce from "../../components/jobs/use-debounce";
+import {GetApi, PostApi} from "../../components/webApi"
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -28,7 +29,7 @@ function Postjob(props) {
   const userID = cookies.get("userID");
   const auth = cookies.get("auth");
 
-  const handleData = () => {
+  const handleData = (async () => {
     let jobObj = {
       jobTitle: jobTitle,
       jobDesc: jobDesc,
@@ -38,40 +39,17 @@ function Postjob(props) {
       userNumber: userNumber,
       userID: userID,
     };
-    console.log(jobObj);
     if (jobTitle && comName) {
-      fetch("/v2/jobs/aboutSet.php?type=POSTJOB", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-        },
-        body: JSON.stringify(jobObj),
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            router.push("/job/about/" + result.jobID);
-            setMassage(result);
-          },
-          (error) => {
-            console.log("error--", error);
-          }
-        );
+      const res = await PostApi(`/v2/jobs/aboutSet.php?type=POSTJOB`, jobObj)
+      router.push("/job/about/" + res.jobID);
+      setMassage(res);
     }
-  };
+  });
 
-  const searchCompany = (name) => {
-    fetch("/v2/auto.php?type=COMPANY&name=" + name)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setComList(result);
-        },
-        (error) => {
-          console.log("error--", error);
-        }
-      );
-  };
+  const searchCompany = (async (name) => {
+    const res = await GetApi(`/v2/auto.php?type=COMPANY&name=${name}`)
+    setComList(res);
+  });
 
   useEffect(() => {
     if (debouncedSearchTerm) {
@@ -205,14 +183,14 @@ function Postjob(props) {
                   />
                   <ul className="list-group autocomplete-items">
                     {comList &&
-                      comList.map((city) => {
+                      comList.map((city, index) => {
                         return (
                           <li
-                            onClick={(e) => selectCompany(city.cityName)}
+                            onClick={(e) => selectCompany(city.label)}
                             className="list-group-item text-start"
-                            key={city.value}
+                            key={index}
                           >
-                            {city.cityName}
+                            {city.label}
                           </li>
                         );
                       })}
