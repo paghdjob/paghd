@@ -9,7 +9,7 @@ function PageName(props) {
 
   useEffect(() => {
     (async () => {
-      const res = await GetApi(`/mockjson/cms-pages.json`);
+      const res = await GetApi(`/v2/mockjson/cms-pages.json`);
       const result = res.filter((data) => data.id === router.query.pagename);
       result.length > 0 ? setPageData(result) : router.push("/");
     })();
